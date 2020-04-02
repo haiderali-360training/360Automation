@@ -1,0 +1,14 @@
+1 logging - 
+2 async issue - 
+3 centernlize properties - 
+4 debuging
+5 Promise	
+6 promise chaine
+7 Unit testing / mock driver object and objests
+8 common funcations
+9 coverage
+10 reports	
+11 end 2 end manager case
+
+
+https://medium.com/@bmshamsnahid/automated-testing-with-selenium-webdriver-and-node-js-f99f64720352

@@ -1,0 +1,65 @@
+const { Builder} = require('selenium-webdriver');
+const { describe, it } = require('mocha');
+
+
+
+
+
+//Page Objects
+const LmsCommonActionPage = require('../../../../../main/lms/pages/common/lmsCommonActionPage');
+const LmsLoginPage = require('../../../../../main/lms/pages/common/lmsLoginPage');
+//const lmsConstants = require('../test/pagesLms/constantValues/lmsConstants');
+require('module-alias/register');
+const CurrentEnvironment = require('lmsEnvironments');
+const property = require("property");
+const userRole = require("lmsUserRoles");
+const pro = new property();
+
+
+
+
+/* Global Scope Variables */
+var currentEnv;
+
+
+
+var driver = new Builder().forBrowser('chrome').build();
+driver.manage().window().maximize();
+
+
+describe("Login using invalid credentials - Shows Login Error Message", function lmsInvalidLoginTest() {
+    this.timeout(120000);    
+
+    
+    //Page Object Classes    
+    var lmsCommonActionPage = new LmsCommonActionPage(driver);
+    var lmsLoginPage = new LmsLoginPage(driver);
+    var currentEnvironment = new CurrentEnvironment(driver);
+    
+    
+
+    
+
+
+    it("Open LMS Application and Login as Invalid User", function launchLmsAndLoginAsInvalidUser(done)
+    {
+        lmsLoginPage.open();
+        lmsLoginPage.verifyLmsLoginPageTitle(function(){
+            lmsLoginPage.enterLoginCredentials("Invalid", function(){
+                lmsLoginPage.clickLoginButton(done);
+            });
+        });
+    });//1 IT close
+
+
+    
+
+    it("Logout User From LMS", function lmsUserLogout(done)
+    {
+        lmsCommonActionPage.lmsUserLogout(done);
+
+    });//27 IT Close */
+
+
+    
+});//describe block END
