@@ -3,13 +3,9 @@
  * @type {any}
  */
 
-/**
- * Developed By: Haider Ali
- * @type {any}
- */
 
-const bp = require(process.cwd()+'/src/main/lms/pages/BasePage.js');
-const locator = require(process.cwd()+'/src/main/lms/pages/locator.js');
+const bp = require(process.cwd() + "/src/main/lms/pages/BasePage.js");
+const locator = require(process.cwd() + "/src/main/lms/pages/locator.js");
 
 
 class LmsManageUserListPage {
@@ -31,9 +27,25 @@ class LmsManageUserListPage {
      }
 
      async fillSearchDialogBox(){
-       this.driver_.findTextBoxAndWrite_('firstname', bp.faker.name.firstName());
-       this.driver_.findTextBoxAndWrite('lastname', bp.faker.name.firstName());
+       await this.driver_.findTextBoxAndWrite_("firstname", bp.cache.get(locator.cacheKey.firstName));
+       await this.driver_.findTextBoxAndWrite_("lastname", bp.cache.get(locator.cacheKey.lastName));
+       await this.driver_.findTextBoxAndWrite_("emailaddress", bp.cache.get(locator.cacheKey.email));
        await this.driver_.findButtonAndClick_span(locator.ManageUserList.btnSearch);
+       return true;
+     }
+
+    async clickLearnerNameToLaunchProfile() {
+        //await this.driver_.findByIdChecked("chk1");
+        await this.driver_.findButtonAndClick_xpath(locator.ManageUserList.linkFoundFirstLearnerXpath);
+    }
+
+
+     isDesiredResultsDisplay(){
+       let f = bp.cache.get(locator.cacheKey.firstName);
+       let l = bp.cache.get(locator.cacheKey.lastName);
+       this.driver_.findButtonAndClick_href(f);
+       console.info(f);
+       console.info(l);
        return true;
      }
 

@@ -2,7 +2,7 @@
   "name": "jest-selenium-demo",
   "version": "1.0.0",
   "description": "This project shows how to drive your selenium tests with Jest.",
-  "main": "index.test.js",
+  "main": "index.js",
   "jest": {
     "verbose": true,
     "jest-html-reporter": {
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "c_test": "jest --collectCoverage",
-    "test": "jest --collectCoverage"
+    "test": "jest"
   },
   "author": "Haider Ali",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "dotenv": "^8.2.0",
     "faker": "^4.1.0",
     "geckodriver": "^1.19.1",
+    "node-cache": "^5.1.0",
     "properties-reader": "^1.0.0"
   }
 }

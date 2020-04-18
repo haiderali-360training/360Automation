@@ -1,5 +1,5 @@
-const bp = require(process.cwd()+'/src/main/lms/pages/BasePage.js');
-const locator = require(process.cwd()+'/src/main/lms/pages/locator.js');
+const bp = require(process.cwd()+"/src/main/lms/pages/BasePage.js");
+const locator = require(process.cwd()+"/src/main/lms/pages/locator.js");
 
 
 class LmsManageUserConfirmationPage {
@@ -17,4 +17,4 @@ class LmsManageUserConfirmationPage {
 
 }
 
-module.exports = LmsManageUserConfirmationPage
+module.exports = LmsManageUserConfirmationPage;
