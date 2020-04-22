@@ -22,7 +22,7 @@ class BasePage {
         return this.driver_;
     }
 
-   static async logoutMe()  {
+    static async logoutMe()  {
        await this.driver_.findByTitle(locator.guidedTour.title);
        let a = await this.driver_.findByXpath(locator.guidedTour.logOutXpath);
        return a.click();
@@ -36,15 +36,14 @@ class BasePage {
 
    static async formatDate(date)  {
        let d = new Date(date),
-           month = "" + (d.getMonth() + 1),
-           day = "" + (d.getDate()-1),
-           year = d.getFullYear();
+           month = "" + (d.getUTCMonth() + 1),
+           day = "" + (d.getUTCDate()),
+           year = d.getUTCFullYear();
        if (month.length < 2) month = "0" + month;
        if (day.length < 2) day = "0" + day;
        //return [year, month, day].join("-");
        return [month, day, year].join("/");
    }
-
 
 }
 

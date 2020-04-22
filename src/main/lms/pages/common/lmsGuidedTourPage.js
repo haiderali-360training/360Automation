@@ -14,6 +14,10 @@ class LmsGuidedTourPage  {
         return this.driver_.findByTitle(locator.guidedTour.title);
      }
 
+     verifyLearnerPageTitle (){
+        return this.driver_.findByTitle(locator.guidedTour.LearnerModePagetitle);
+     }
+
      async clickToContinue(){
        await this.driver_.findButtonAndClick(locator.guidedTour.btnContinue);
        return true;

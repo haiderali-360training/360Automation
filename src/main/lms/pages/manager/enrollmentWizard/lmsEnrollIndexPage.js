@@ -17,7 +17,7 @@ class LmsEnrollIndexPage {
     }
 
     verifyPageHeading(){
-        return this.driver_.findById("page-icon");
+        return this.driver_.findById(locator.planAndEnroll.pageHeadingClassName);
     }
 
      async clickPlanAndEnrollButton(){

@@ -4,18 +4,20 @@
  */
 
 const
+    env = require(process.cwd() + "/src/main/lms/pages/utils/environment.js"),
     LmsLoginPage = require(process.cwd() + "/src/main/lms/pages/common/lmsLoginPage.js"),
     LmsGuidedTourPage = require(process.cwd() + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
     LmsHeaderIconsPage = require(process.cwd() + "/src/main/lms/pages/common/lmsHeaderIconsPage.js"),
-    LmsManageUserListPage = require(process.cwd() + "/src/main/lms/pages/manager/addLearners/lmsManageUserListPage.js"),
-    LmsManageUserAddPage = require(process.cwd() + "/src/main/lms/pages/manager/addLearners/lmsManageUserAddPage.js"),
-    LmsManageUserGroupPage = require(process.cwd() + "/src/main/lms/pages/manager/addLearners/lmsManageUserGroupPage.js"),
-    LmsManageUserConfirmationPage = require(process.cwd() + "/src/main/lms/pages/manager/addLearners/lmsManageUserConfirmationPage.js"),
+    LmsManageUserListPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserListPage.js"),
+    LmsManageUserAddPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserAddPage.js"),
+    LmsManageUserGroupPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserGroupPage.js"),
+    LmsManageUserConfirmationPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserConfirmationPage.js"),
     LmsEnrollIndexPage = require(process.cwd() + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollIndexPage.js"),
     LmsEnrollmentWizardPage = require(process.cwd() + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollmentWizardPage.js"),
-    env = require(process.cwd() + "/src/main/lms/pages/utils/environment.js");
+    LmsMyCoursePage = require(process.cwd() + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
+    LcmsCoursePlayerPage = require(process.cwd() + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js");
 
-
+-
 describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
 
     let lmsLoginPage = new LmsLoginPage();
@@ -27,6 +29,8 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     let lmsManageUserConfirmationPage = new LmsManageUserConfirmationPage();
     let lmsEnrollIndexPage = new LmsEnrollIndexPage();
     let lmsEnrollmentWizardPage = new LmsEnrollmentWizardPage();
+    let lmsMyCoursePage = new LmsMyCoursePage();
+    let lcmsCoursePlayerPage = new LcmsCoursePlayerPage();
 
     it("Verify login window title", async () => {
         let s = await lmsLoginPage.verifyLmsLoginPageTitle();
@@ -99,11 +103,35 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     it("Verify Searched Result and Launch Learner Profile & and launch Dashboard", async () => {
         await lmsManageUserListPage.clickLearnerNameToLaunchProfile();
         await lmsManageUserAddPage.clickLoginAsLearner();
-        //await lmsManageUserListPage.fillSearchDialgBox();
     });
 
-    it("Verify launch Course", async () => {
-        await lmsManageUserListPage.clickLearnerNameToLaunchProfile();
+    it("Verify Dashboard and Launch course", async () => {
+        await lmsMyCoursePage.verifyPageTitle();
+        await lmsMyCoursePage.clickOnRecentEnrolledCourse();
+    });
+
+    it("Verify Player Screen", async () => {
+        await lcmsCoursePlayerPage.switchToCoursePlayWindow();
+        await lcmsCoursePlayerPage.verifyPageTitle();
+    });
+
+    it("Verify Player Acknowledgment on Player", async () => {
+        await lcmsCoursePlayerPage.checkAcknowledgmentButtonAndNext();
+    });
+
+    it("Verify Player Turn of Use & agreement on Player", async () => {
+        await lcmsCoursePlayerPage.TermsOfUseClick();
+    });
+
+    it("Verify Player Start & complete course on Player", async () => {
+        await lcmsCoursePlayerPage.clickNextCourseStartAndComplete();
+    });
+
+    it("Verify Main LMS window and Launch Course", async () => {
+        //await lmsMyCoursePage.verifyPageTitle();
+        let a = await lmsMyCoursePage.verifyCourseStatus();
+        expect(a).toContain("Completed");
+
     });
 
 

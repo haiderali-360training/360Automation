@@ -40,13 +40,15 @@ class LmsEnrollmentWizardPage {
          //step 3
          await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnSearch);
          await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
+         bp.cache.set(locator.cacheKey.enrolledCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
          await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
+         bp.cache.set(locator.cacheKey.enrolledCourseBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
          await this.driver_.findButtonAndClick_span(locator.enrollmentWizard.btnSearch);
          await this.driver_.findByIdChecked(locator.enrollmentWizard.firstFoundCourse);
          await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
 
          //step 4
-         console.info(bp.formatDate(new Date()));
+
          await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, bp.formatDate(new Date()));
          await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, bp.formatDate(new Date()));
          await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);

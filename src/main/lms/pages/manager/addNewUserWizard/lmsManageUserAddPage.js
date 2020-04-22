@@ -18,13 +18,13 @@ class LmsManageUserAddPage {
         bp.cache.set(locator.cacheKey.lastName, bp.faker.name.lastName());
         let email = bp.faker.internet.email();
         bp.cache.set(locator.cacheKey.email, email);
-        this.driver_.findTextBoxAndWrite("firstName", bp.cache.get(locator.cacheKey.firstName));
-        this.driver_.findTextBoxAndWrite("middleName", "X");
-        this.driver_.findTextBoxAndWrite("lastName", bp.cache.get(locator.cacheKey.lastName));
-        this.driver_.findTextBoxAndWrite("emailAddress", bp.cache.get(locator.cacheKey.email));
-        this.driver_.findTextBoxAndWrite("password", "password1");
-        this.driver_.findTextBoxAndWrite("confirmPassword", "password1");
-        this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
+        await this.driver_.findTextBoxAndWrite("firstName", locator.ManageUserAdd.preFixFirstName+bp.cache.get(locator.cacheKey.firstName));
+        await this.driver_.findTextBoxAndWrite("middleName", locator.ManageUserAdd.preFixMiddleName);
+        await this.driver_.findTextBoxAndWrite("lastName", bp.cache.get(locator.cacheKey.lastName));
+        await this.driver_.findTextBoxAndWrite("emailAddress", locator.ManageUserAdd.preFixEmail+bp.cache.get(locator.cacheKey.email));
+        await this.driver_.findTextBoxAndWrite("password", "password123!@#");
+        await this.driver_.findTextBoxAndWrite("confirmPassword", "password123!@#");
+        await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
         return true;
     }
 

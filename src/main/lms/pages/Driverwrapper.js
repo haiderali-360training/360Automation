@@ -3,131 +3,193 @@
  * @type {any}
  */
 
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Builder, By, until } = require("selenium-webdriver");
 require("selenium-webdriver/chrome");
 require("selenium-webdriver/firefox");
 require("chromedriver");
 require("geckodriver");
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 
-var DriverWrapper = function() {
+const DriverWrapper = function() {
 
-     this.driver = new Builder()
-        .forBrowser("chrome")
-        .build();
+    const driver = new Builder().forBrowser("chrome").build();
+    let elementFindTimeout = 20000;
 
     // visit a webpage
     this.visit = async function(theUrl) {
-        return await this.driver.get(theUrl);
+        return await driver.get(theUrl);
+    };
+
+    this.switchCoursePlayWindow = async function() {
+        try {
+            //const parent = await driver.getWindowHandle();
+            let windows_ = await driver.getAllWindowHandles();
+            let parent = await windows_[0];
+            let coursePlayer = await windows_[1];
+
+            console.info("main window:"+parent);
+            console.info("player window:"+coursePlayer);
+
+            await driver.switchTo().window(coursePlayer);
+
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
+    };
+
+
+    this.switchMainWindow = async function() {
+        try {
+            //const parent = await driver.getWindowHandle();
+            let windows_ = await driver.getAllWindowHandles();
+            let parent = await windows_[0];
+            const coursePlayer = windows_[1];
+            console.info("main window::"+parent);
+            console.info("player window::"+coursePlayer);
+
+            await driver.close();
+            await driver.switchTo().window(parent);
+            await driver.navigate().refresh();
+            let a = driver.wait(until.titleIs("LCMS Course Player"), 10000);
+            console.info(a+".....................");
+            //driver.manage().window().maximize();
+            //driver.switchTo().window(parent);
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
     };
 
     // quit current session
     this.quit = async function() {
-       // return await this.driver.quit();
+        // return await driver.quit();
     };
 
     // wait and find a specific element with it's id
     this.findById = async function(id) {
-        await this.driver.wait(until.elementLocated(By.id(id)), 15000, "Looking for element");
-        return await this.driver.findElement(By.id(id));
+        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.id(id));
     };
 
     this.findByIdChecked = async function(id) {
-        await this.driver.wait(until.elementLocated(By.id(id)), 15000, "Looking for element");
-        return await this.driver.findElement(By.id(id)).click();
+        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.id(id)).click();
     };
 
     // wait and find a specific element with it's title
     this.findByTitle = async function(title) {
-        return  await this.driver.wait(until.titleIs(title), 15000);
+        return  await driver.wait(until.titleIs(title), elementFindTimeout);
     };
 
     // wait and find a specific element with it's name
     this.findByName = async function(name) {
-        await this.driver.wait(until.elementLocated(By.name(name)), 15000, "Looking for element");
-        return await this.driver.findElement(By.name(name));
+        await driver.wait(until.elementLocated(By.name(name)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.name(name));
+    };
+
+    this.findByName = async function(name) {
+        await driver.wait(until.elementLocated(By.name(name)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.name(name));
     };
 
     // wait and find a specific element with it's name
     this.findTextBoxAndWrite = async function(elemId, value) {
-        await this.driver.wait(until.elementLocated(By.id(elemId)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.id(elemId));
+        await driver.wait(until.elementLocated(By.id(elemId)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.id(elemId));
+        driver.wait(until.elementIsVisible(a), elementFindTimeout);
         return await this.write(a, value);
     };
 
     // wait and find a specific element with it's name
     this.findTextBoxAndWrite_ = async function(elemName, value) {
-        await this.driver.wait(until.elementLocated(By.name(elemName)), 15000, "Looking for element");
-        let b = await this.driver.findElement(By.name(elemName));
+        await driver.wait(until.elementLocated(By.name(elemName)), elementFindTimeout, "Looking for element");
+        let b = await driver.findElement(By.name(elemName));
         return await this.write(b, value);
     };
 
     // wait and find a submit and click to submit
     this.findSubmitAndClick = async function(elemId) {
-        await this.driver.wait(until.elementLocated(By.className(elemId)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.className(elemId));
+        await driver.wait(until.elementLocated(By.className(elemId)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.className(elemId));
         return a.click();
     };
 
     // wait and find a button click
     this.findButtonAndClick = async function(buttonTxt) {
         let xp = "//div[text()='"+buttonTxt+"']";
-        await this.driver.wait(until.elementLocated(By.xpath(xp)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.xpath(xp));
+        await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.xpath(xp));
         return a.click();
     };
 
     // wait and find a button click
     this.findButtonAndClick_span = async function(buttonTxt) {
         let xp = "//span[text()='"+buttonTxt+"']";
-        await this.driver.wait(until.elementLocated(By.xpath(xp)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.xpath(xp));
+        await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.xpath(xp));
         return a.click();
     };
 
     // wait and find a button click
     this.findButtonAndClick_href = async function(buttonTxt) {
-            let xp = "//a[text()='"+buttonTxt+"']";
-        await this.driver.wait(until.elementLocated(By.xpath(xp)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.xpath(xp));
+        let xp = "//a[text()='"+buttonTxt+"']";
+        await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.xpath(xp));
         return a.click();
     };
 
     this.findButtonAndClick_xpath = async function(element_xpath) {
-        await this.driver.wait(until.elementLocated(By.xpath(element_xpath)), 15000, "Looking for element");
-        let a = await this.driver.findElement(By.xpath(element_xpath));
+        //driver.sleep(10000);
+        console.info("find: "+element_xpath);
+        await driver.wait(until.elementLocated(By.xpath(element_xpath)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.xpath(element_xpath));
+        driver.wait(until.elementIsVisible(a), 10000);
+        return a.click();
+    };
+
+    this.findButtonAndClick_className = async function(element_className) {
+        await driver.wait(until.elementLocated(By.className(element_className)), elementFindTimeout, "Looking for element");
+        let a = await driver.findElement(By.className(element_className));
         return a.click();
     };
 
     // wait and find a Page Heading text
     this.findPageHeading = async function(text) {
         let xp = "//div[text()='"+text+"']";
-        await this.driver.wait(until.elementLocated(By.xpath(xp)), 15000, "Looking for element");
-        this.driver.findElement(By.xpath(xp)).innerText;
+        await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
+        driver.findElement(By.xpath(xp)).innerText;
     };
 
     // wait and find a Page Heading text
     this.findCheckboxAndClick = async function(id) {
-        await this.driver.wait(until.elementLocated(By.id(id)), 15000, "Looking for element");
-        await this.driver.findElement(By.id(id)).click();
+        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
+        await driver.findElement(By.id(id)).click();
     };
 
     // wait and find a specific element with it's name
     this.findByClassName = async function(name) {
-        await this.driver.wait(until.elementLocated(By.className(name)), 15000, "Looking for element");
-        return await this.driver.findElement(By.className(name));
+        await driver.wait(until.elementLocated(By.className(name)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.className(name));
     };
 
     // wait and find a specific element with it's name
     this.findByXpath = async function(xpath_) {
-        await this.driver.wait(until.elementLocated(By.xpath(xpath_)), 15000, "Looking for element");
-        return await this.driver.findElement(By.xpath(xpath_));
+        await driver.wait(until.elementLocated(By.xpath(xpath_)), elementFindTimeout, "Looking for element");
+        return await driver.findElement(By.xpath(xpath_));
     };
 
     // fill input web elements
     this.write = async function (el, txt) {
         return await el.sendKeys(txt);
     };
+/*
+
+    // fill input web elements
+    this.exec_ = async function () {
+        let js = "arguments[0].setAttribute('value','"+inputText+"')";
+        driver.executeScript(js, element);
+
+    };
+*/
 
 };
 
