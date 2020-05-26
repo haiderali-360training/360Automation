@@ -3,19 +3,20 @@
  * @type {any}
  */
 
+global.__basedir = process.cwd();
 const
-    env = require(process.cwd() + "/src/main/lms/pages/utils/environment.js"),
-    LmsLoginPage = require(process.cwd() + "/src/main/lms/pages/common/lmsLoginPage.js"),
-    LmsGuidedTourPage = require(process.cwd() + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
-    LmsHeaderIconsPage = require(process.cwd() + "/src/main/lms/pages/common/lmsHeaderIconsPage.js"),
-    LmsManageUserListPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserListPage.js"),
-    LmsManageUserAddPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserAddPage.js"),
-    LmsManageUserGroupPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserGroupPage.js"),
-    LmsManageUserConfirmationPage = require(process.cwd() + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserConfirmationPage.js"),
-    LmsEnrollIndexPage = require(process.cwd() + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollIndexPage.js"),
-    LmsEnrollmentWizardPage = require(process.cwd() + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollmentWizardPage.js"),
-    LmsMyCoursePage = require(process.cwd() + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
-    LcmsCoursePlayerPage = require(process.cwd() + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js");
+    env = require(__basedir + "/src/main/lms/pages/utils/environment.js"),
+    LmsLoginPage = require(__basedir + "/src/main/lms/pages/common/lmsLoginPage.js"),
+    LmsGuidedTourPage = require(__basedir + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
+    LmsHeaderIconsPage = require(__basedir + "/src/main/lms/pages/common/lmsHeaderIconsPage.js"),
+    LmsManageUserListPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserListPage.js"),
+    LmsManageUserAddPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserAddPage.js"),
+    LmsManageUserGroupPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserGroupPage.js"),
+    LmsManageUserConfirmationPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserConfirmationPage.js"),
+    LmsEnrollIndexPage = require(__basedir + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollIndexPage.js"),
+    LmsEnrollmentWizardPage = require(__basedir + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollmentWizardPage.js"),
+    LmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
+    LcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js");
 
 -
 describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
@@ -124,20 +125,20 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     });
 
     it("Verify Player Start & complete course on Player", async () => {
-        await lcmsCoursePlayerPage.clickNextCourseStartAndComplete();
+        let a = await lcmsCoursePlayerPage.clickNextCourseStartAndComplete();
+        expect(a);
     });
 
-    it("Verify Main LMS window and Launch Course", async () => {
-        //await lmsMyCoursePage.verifyPageTitle();
-        let a = await lmsMyCoursePage.verifyCourseStatus();
-        expect(a).toContain("Completed");
-
+    it("Verify Player save and close window", async () => {
+        let a = await lcmsCoursePlayerPage.coursePlayerSaveAndClose();
+        expect(a);
     });
 
+    it("Verify to launch certificate", async () => {
+        let a = await lmsMyCoursePage.printCertificate();
+        expect(a);
+    });
 
-    /*it('Click Logout Link', async () => {
-          let a = await lmsLoginPage.logoutMe();
-          expect(a).toBe(null);
-      });*/
 
 });
+

@@ -5,9 +5,9 @@
 
 const fakers = require("faker");
 const NodeCache = require( "node-cache" );
-const driverWrapper = require(process.cwd()+"/src/main/lms/pages/Driverwrapper.js");
-const env = require(process.cwd()+"/src/main/lms/pages/utils/environment.js");
-const locator = require(process.cwd()+"/src/main/lms/pages/locator.js");
+const driverWrapper = require(__basedir+"/src/main/lms/pages/Driverwrapper.js");
+const env = require(__basedir+"/src/main/lms/pages/utils/environment.js");
+const locator = require(__basedir+"/src/main/lms/pages/locator.js");
 const cache = new NodeCache();
 
 
@@ -47,9 +47,6 @@ class BasePage {
 
 }
 
-BasePage.prototype.sayHello = function() {
-    console.log("Hello, my name is ");
-};
 
 module.exports = BasePage;
 module.exports.faker = fakers;

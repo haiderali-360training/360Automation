@@ -3,9 +3,8 @@
  * @type {any}
  */
 
-const bp = require(process.cwd() + "/src/main/lms/pages/BasePage.js");
-const locator = require(process.cwd() + "/src/main/lms/pages/locator.js");
-
+const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
+const locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 class LmsLoginPage {
 
@@ -22,50 +21,6 @@ class LmsLoginPage {
         this.driver_.findButtonAndClick(locator.loginPage.btnLogin);
         return true;
     }
-
-
-
-    /*
-        verifyLmsLoginPageTitle(callback)
-        {
-            page_driver.wait(until.titleIs("Learner-My Courses Login"))
-            .then(function ()
-            {
-                page_driver.getTitle()
-                .then(function (homeTitle)
-                {
-                    expect(homeTitle).to.include("Learner-My Courses Login");
-                    callback();
-                });
-            });
-        }
-    */
-
-/*
-    enterLoginCredentials(callback)
-    {
-        
-
-        console.log(pro.getLmsUserCredentialsProperty("qa","lms.ManagerUserName"));
-        console.log(userRole.ROLE_LEARNER);
-
-        page_driver.findElement(By.id("username")).sendKeys("Lms_Customer_Automation@lms.com")
-        .then(function()
-        {
-            page_driver.findElement(By.id("password")).sendKeys("passw0rd")
-            .then(function()
-            {
-                callback();
-            });            
-        });
-    }
-
-
-    clickLoginButton(done)
-    {
-        page_driver.findElement(By.className("btn_normal")).click();
-        done();
-    }*/
 }
 
 module.exports = LmsLoginPage;

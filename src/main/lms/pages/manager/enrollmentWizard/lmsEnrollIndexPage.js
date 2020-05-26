@@ -4,8 +4,8 @@
  */
 
 
-const bp = require(process.cwd()+"/src/main/lms/pages/BasePage.js");
-const locator = require(process.cwd()+"/src/main/lms/pages/locator.js");
+const bp = require(__basedir+"/src/main/lms/pages/BasePage.js");
+const locator = require(__basedir+"/src/main/lms/pages/locator.js");
 
 
 class LmsEnrollIndexPage {

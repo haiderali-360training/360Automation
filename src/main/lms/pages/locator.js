@@ -93,7 +93,8 @@ module.exports.myCoursePage = {
     pageHeadingClassName: "page-icon",
     enrolledCourseClassName: "bodycourseTitle-ul",
     enrolledCourseXpath: "//*[@id=\"course-list-alt\"]/tbody/tr[2]/td[2]/a",
-    courseStatus: "text-green"
+    courseStatus: "text-green",
+    printCertificateClassName: "print-certificate",
 };
 
 module.exports.coursePlayerPage = {

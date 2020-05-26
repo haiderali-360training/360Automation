@@ -13,7 +13,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 const DriverWrapper = function() {
 
     const driver = new Builder().forBrowser("chrome").build();
-    let elementFindTimeout = 20000;
+    let elementFindTimeout = 200000; //20 sec
 
     // visit a webpage
     this.visit = async function(theUrl) {
@@ -47,13 +47,9 @@ const DriverWrapper = function() {
             console.info("main window::"+parent);
             console.info("player window::"+coursePlayer);
 
-            await driver.close();
+            //await driver.close();
             await driver.switchTo().window(parent);
             await driver.navigate().refresh();
-            let a = driver.wait(until.titleIs("LCMS Course Player"), 10000);
-            console.info(a+".....................");
-            //driver.manage().window().maximize();
-            //driver.switchTo().window(parent);
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
@@ -137,12 +133,12 @@ const DriverWrapper = function() {
         return a.click();
     };
 
+
     this.findButtonAndClick_xpath = async function(element_xpath) {
-        //driver.sleep(10000);
         console.info("find: "+element_xpath);
         await driver.wait(until.elementLocated(By.xpath(element_xpath)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.xpath(element_xpath));
-        driver.wait(until.elementIsVisible(a), 10000);
+        await driver.wait(until.elementIsVisible(a), elementFindTimeout);
         return a.click();
     };
 
@@ -181,15 +177,12 @@ const DriverWrapper = function() {
     this.write = async function (el, txt) {
         return await el.sendKeys(txt);
     };
-/*
 
-    // fill input web elements
-    this.exec_ = async function () {
-        let js = "arguments[0].setAttribute('value','"+inputText+"')";
-        driver.executeScript(js, element);
-
+    this.myexec = async function (scripts) {
+        await driver.executeScript(scripts);
     };
-*/
+
+
 
 };
 

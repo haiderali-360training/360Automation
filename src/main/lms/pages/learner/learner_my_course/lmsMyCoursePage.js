@@ -3,8 +3,8 @@
  * @type {any}
  */
 
-const bp = require(process.cwd() + "/src/main/lms/pages/BasePage.js");
-const locator = require(process.cwd() + "/src/main/lms/pages/locator.js");
+const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
+const locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
 class LmsMyCoursePage {
@@ -25,6 +25,11 @@ class LmsMyCoursePage {
 
     async clickOnRecentEnrolledCourse(){
        await this.driver_.findButtonAndClick_className(locator.myCoursePage.enrolledCourseClassName);
+    }
+
+    async printCertificate() {
+        await this.driver_.findButtonAndClick_className(locator.myCoursePage.printCertificateClassName);
+        return "";
     }
 
 }

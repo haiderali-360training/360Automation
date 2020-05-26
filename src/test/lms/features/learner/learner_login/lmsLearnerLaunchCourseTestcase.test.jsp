@@ -4,11 +4,11 @@
  */
 
 const
-    env = require(process.cwd() + "/src/main/lms/pages/utils/environment.js"),
-    LmsLoginPage = require(process.cwd() + "/src/main/lms/pages/common/lmsLoginPage.js"),
-    LmsGuidedTourPage = require(process.cwd() + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
-    LcmsCoursePlayerPage = require(process.cwd() + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js"),
-    LmsMyCoursePage = require(process.cwd() + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js");
+    env = require(__basedir + "/src/main/lms/pages/utils/environment.js"),
+    LmsLoginPage = require(__basedir + "/src/main/lms/pages/common/lmsLoginPage.js"),
+    LmsGuidedTourPage = require(__basedir + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
+    LcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js"),
+    LmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js");
 
 
 
