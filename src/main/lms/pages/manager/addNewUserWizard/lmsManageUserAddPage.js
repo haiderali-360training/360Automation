@@ -25,7 +25,7 @@ class LmsManageUserAddPage {
         await this.driver_.findElementByIdAndClear(locator.ManageUserAdd.userName);
         await this.driver_.findTextBoxAndWrite("password", "password123!@#");
         await this.driver_.findTextBoxAndWrite("confirmPassword", "password123!@#");
-        //await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
+        await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
         return true;
     }
 

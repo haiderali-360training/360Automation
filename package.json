@@ -15,7 +15,7 @@
   },
   "scripts": {
     "c_test": "jest --collectCoverage",
-    "test": "jest lmsSecond.test"
+    "test": "jest"
   },
   "author": "Haider Ali",
   "license": "ISC",
