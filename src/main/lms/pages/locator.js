@@ -100,8 +100,8 @@ module.exports.myCoursePage = {
 
 module.exports.coursePlayerPage = {
     title: "LCMS Course Player",
-    chkAcknowledge: "Checkbox1",
-    btnNext: "PlaybuttonEnText",
+    chkAcknowledge: ".acknowledgeCheckbox #Checkbox1",
+    btnNext: "#PlaybuttonAcknowledgeName",
     btnContinue: "Continue",
     btnAgree_Continue: "Agree and Continue",
     btnPlayButton:"//*[@id=\"PlaybuttonEnText\"]",

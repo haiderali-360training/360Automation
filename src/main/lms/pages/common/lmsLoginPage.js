@@ -10,6 +10,11 @@ class LmsLoginPage {
 
     constructor(){ this.driver_ = bp.getDriver(); }
 
+    verifyUrl(url){
+        this.driver_.visit(url);
+        return true;
+    }
+
     verifyLmsLoginPageTitle (){
         this.driver_.visit(__lmsUrl);
         return this.driver_.findByTitle(locator.loginPage.title );

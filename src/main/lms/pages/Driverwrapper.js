@@ -1,6 +1,6 @@
 /**
  * Developed By: Haider Ali
- * @type {any}
+ * @type {DriverWrapper}
  */
 
 const { Builder, By, until } = require("selenium-webdriver");
@@ -15,29 +15,25 @@ const DriverWrapper = function() {
     const driver = new Builder().forBrowser("chrome").build();
     let elementFindTimeout = 200000; //20 sec
 
-    // visit a webpage
+    // visit a webPage
     this.visit = async function(theUrl) {
         return await driver.get(theUrl);
     };
 
+    //switch to course play window
     this.switchCoursePlayWindow = async function() {
         try {
             //const parent = await driver.getWindowHandle();
             let windows_ = await driver.getAllWindowHandles();
             let parent = await windows_[0];
             let coursePlayer = await windows_[1];
-
-            console.info("main window:"+parent);
-            console.info("player window:"+coursePlayer);
-
             await driver.switchTo().window(coursePlayer);
-
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
     };
 
-
+    //switch to main lms window
     this.switchMainWindow = async function() {
         try {
             //const parent = await driver.getWindowHandle();
@@ -82,6 +78,7 @@ const DriverWrapper = function() {
         return await driver.findElement(By.name(name));
     };
 
+    //wait and find element by name
     this.findByName = async function(name) {
         await driver.wait(until.elementLocated(By.name(name)), elementFindTimeout, "Looking for element");
         return await driver.findElement(By.name(name));
@@ -133,7 +130,6 @@ const DriverWrapper = function() {
         return a.click();
     };
 
-
     this.findButtonAndClick_xpath = async function(element_xpath) {
         console.info("find: "+element_xpath);
         await driver.wait(until.elementLocated(By.xpath(element_xpath)), elementFindTimeout, "Looking for element");
@@ -142,6 +138,7 @@ const DriverWrapper = function() {
         return a.click();
     };
 
+    //wait and find element by className
     this.findButtonAndClick_className = async function(element_className) {
         await driver.wait(until.elementLocated(By.className(element_className)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.className(element_className));
@@ -155,10 +152,16 @@ const DriverWrapper = function() {
         driver.findElement(By.xpath(xp)).innerText;
     };
 
-    // wait and find a Page Heading text
+    // wait and find checkbox and click
     this.findCheckboxAndClick = async function(id) {
         await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
         await driver.findElement(By.id(id)).click();
+    };
+
+    // wait and find a Element by Css
+    this.findElementAndClick_Css = async function(eCss) {
+        await driver.wait(until.elementLocated(By.css(eCss)), elementFindTimeout, "Looking for element");
+        await driver.findElement(By.css(eCss)).click();
     };
 
     // wait and find a specific element with it's name
@@ -167,7 +170,7 @@ const DriverWrapper = function() {
         return await driver.findElement(By.className(name));
     };
 
-    // wait and find a specific element with it's name
+    // wait and find a specific element with it's xpath
     this.findByXpath = async function(xpath_) {
         await driver.wait(until.elementLocated(By.xpath(xpath_)), elementFindTimeout, "Looking for element");
         return await driver.findElement(By.xpath(xpath_));

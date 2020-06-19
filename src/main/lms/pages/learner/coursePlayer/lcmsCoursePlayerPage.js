@@ -19,13 +19,13 @@ class LcmsCoursePlayerPage {
          return true;
     }
 
-    switchToCoursePlayWindow (){
-        return this.driver_.switchCoursePlayWindow();
+    async switchToCoursePlayWindow (){
+        return await this.driver_.switchCoursePlayWindow();
     }
 
     async checkAcknowledgmentButtonAndNext(){
-        await this.driver_.findCheckboxAndClick(locator.coursePlayerPage.chkAcknowledge);
-        await this.driver_.findButtonAndClick_xpath("/html/body/form/div[8]/div[9]/div/div/div[5]/span[2]/a/span");
+        await this.driver_.findElementAndClick_Css(locator.coursePlayerPage.chkAcknowledge);
+        await this.driver_.findElementAndClick_Css(locator.coursePlayerPage.btnNext);
         return true;
     }
 
