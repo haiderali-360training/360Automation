@@ -5,6 +5,9 @@
   "main": "index.js",
   "jest": {
     "verbose": true,
+    "setupFiles": [
+      "./setupFile.js"
+    ],
     "jest-html-reporter": {
       "outputPath": "./test-report.html",
       "includeFailureMsg": true
@@ -12,7 +15,7 @@
   },
   "scripts": {
     "c_test": "jest --collectCoverage",
-    "test": "jest"
+    "test": "jest lmsSecond.test"
   },
   "author": "Haider Ali",
   "license": "ISC",

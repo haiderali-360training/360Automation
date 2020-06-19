@@ -11,6 +11,10 @@ module.exports = {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
         "__basedir": "writable",
+        "__appProperties": "writable",
+        "__faker": "writable",
+        "__cache": "writable",
+        "__lmsUrl": "writable",
     },
     "parserOptions": {
         "ecmaVersion": 2018,

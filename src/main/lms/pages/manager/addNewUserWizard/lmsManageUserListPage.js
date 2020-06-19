@@ -27,9 +27,9 @@ class LmsManageUserListPage {
      }
 
      async fillSearchDialogBox(){
-       await this.driver_.findTextBoxAndWrite_("firstname", bp.cache.get(locator.cacheKey.firstName));
-       await this.driver_.findTextBoxAndWrite_("lastname", bp.cache.get(locator.cacheKey.lastName));
-       await this.driver_.findTextBoxAndWrite_("emailaddress", bp.cache.get(locator.cacheKey.email));
+       await this.driver_.findTextBoxAndWrite_("firstname", __cache.get(locator.cacheKey.firstName));
+       await this.driver_.findTextBoxAndWrite_("lastname", __cache.get(locator.cacheKey.lastName));
+       await this.driver_.findTextBoxAndWrite_("emailaddress", __cache.get(locator.cacheKey.email));
        await this.driver_.findButtonAndClick_span(locator.ManageUserList.btnSearch);
        return true;
      }
@@ -41,8 +41,8 @@ class LmsManageUserListPage {
 
 
      isDesiredResultsDisplay(){
-       let f = bp.cache.get(locator.cacheKey.firstName);
-       let l = bp.cache.get(locator.cacheKey.lastName);
+       let f = __cache.get(locator.cacheKey.firstName);
+       let l = __cache.get(locator.cacheKey.lastName);
        this.driver_.findButtonAndClick_href(f);
        console.info(f);
        console.info(l);
@@ -51,5 +51,5 @@ class LmsManageUserListPage {
 
 }
 
-module.exports = LmsManageUserListPage;
+module.exports = new LmsManageUserListPage();
 

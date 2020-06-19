@@ -28,4 +28,4 @@ class LmsEnrollIndexPage {
 
 }
 
-module.exports = LmsEnrollIndexPage;
+module.exports = new LmsEnrollIndexPage();

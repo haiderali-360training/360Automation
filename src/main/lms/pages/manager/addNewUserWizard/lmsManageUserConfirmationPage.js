@@ -17,4 +17,4 @@ class LmsManageUserConfirmationPage {
 
 }
 
-module.exports = LmsManageUserConfirmationPage;
+module.exports = new LmsManageUserConfirmationPage();

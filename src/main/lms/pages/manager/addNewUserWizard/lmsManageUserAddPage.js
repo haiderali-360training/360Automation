@@ -14,17 +14,18 @@ class LmsManageUserAddPage {
     }
 
     async fillAddUserForm(){
-        bp.cache.set(locator.cacheKey.firstName, bp.faker.name.firstName());
-        bp.cache.set(locator.cacheKey.lastName, bp.faker.name.lastName());
-        let email = bp.faker.internet.email();
-        bp.cache.set(locator.cacheKey.email, email);
-        await this.driver_.findTextBoxAndWrite("firstName", locator.ManageUserAdd.preFixFirstName+bp.cache.get(locator.cacheKey.firstName));
+        __cache.set(locator.cacheKey.firstName, __faker.name.firstName());
+        __cache.set(locator.cacheKey.lastName, __faker.name.lastName());
+        let email = __faker.internet.email();
+        __cache.set(locator.cacheKey.email, email);
+        await this.driver_.findTextBoxAndWrite("firstName", locator.ManageUserAdd.preFixFirstName+__cache.get(locator.cacheKey.firstName));
         await this.driver_.findTextBoxAndWrite("middleName", locator.ManageUserAdd.preFixMiddleName);
-        await this.driver_.findTextBoxAndWrite("lastName", bp.cache.get(locator.cacheKey.lastName));
-        await this.driver_.findTextBoxAndWrite("emailAddress", locator.ManageUserAdd.preFixEmail+bp.cache.get(locator.cacheKey.email));
+        await this.driver_.findTextBoxAndWrite("lastName", __cache.get(locator.cacheKey.lastName));
+        await this.driver_.findTextBoxAndWrite("emailAddress", locator.ManageUserAdd.preFixEmail+__cache.get(locator.cacheKey.email));
+        await this.driver_.findElementByIdAndClear(locator.ManageUserAdd.userName);
         await this.driver_.findTextBoxAndWrite("password", "password123!@#");
         await this.driver_.findTextBoxAndWrite("confirmPassword", "password123!@#");
-        await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
+        //await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
         return true;
     }
 
@@ -35,4 +36,4 @@ class LmsManageUserAddPage {
 
 }
 
-module.exports = LmsManageUserAddPage;
+module.exports = new LmsManageUserAddPage();

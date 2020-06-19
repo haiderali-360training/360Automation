@@ -42,6 +42,7 @@ module.exports.ManageUserAdd = {
     btnLoginAsLearner: "Login as Learner",
     preFixFirstName: "ATC-",
     preFixMiddleName: "X",
+    userName: "userName",
     preFixEmail: "ATC-M-",
 };
 

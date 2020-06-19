@@ -3,13 +3,8 @@
  * @type {any}
  */
 
-const fakers = require("faker");
-const NodeCache = require( "node-cache" );
 const driverWrapper = require(__basedir+"/src/main/lms/pages/Driverwrapper.js");
-const env = require(__basedir+"/src/main/lms/pages/utils/environment.js");
 const locator = require(__basedir+"/src/main/lms/pages/locator.js");
-const cache = new NodeCache();
-
 
 class BasePage {
 
@@ -17,7 +12,6 @@ class BasePage {
         if(this.driver_== null){
             console.info("driver initialization....");
             this.driver_ = new driverWrapper();
-            this.env = env;
          }
         return this.driver_;
     }
@@ -49,5 +43,5 @@ class BasePage {
 
 
 module.exports = BasePage;
-module.exports.faker = fakers;
-module.exports.cache = cache;
+//module.exports.faker = fakers;
+//module.exports.cache = cache;

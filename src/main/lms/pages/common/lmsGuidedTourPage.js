@@ -27,4 +27,4 @@ class LmsGuidedTourPage  {
 
 
 
-module.exports = LmsGuidedTourPage;
+module.exports = new LmsGuidedTourPage();

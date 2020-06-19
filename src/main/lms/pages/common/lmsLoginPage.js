@@ -11,8 +11,8 @@ class LmsLoginPage {
     constructor(){ this.driver_ = bp.getDriver(); }
 
     verifyLmsLoginPageTitle (){
-        this.driver_.visit(bp.env.getLmsUrl());
-        return this.driver_.findByTitle(locator.loginPage.title);
+        this.driver_.visit(__lmsUrl);
+        return this.driver_.findByTitle(locator.loginPage.title );
     }
 
     enterCredentialsOnLogin (userName, password){
@@ -23,4 +23,4 @@ class LmsLoginPage {
     }
 }
 
-module.exports = LmsLoginPage;
+module.exports = new LmsLoginPage();

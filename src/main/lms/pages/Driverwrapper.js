@@ -47,7 +47,7 @@ const DriverWrapper = function() {
             console.info("main window::"+parent);
             console.info("player window::"+coursePlayer);
 
-            //await driver.close();
+            await driver.close();
             await driver.switchTo().window(parent);
             await driver.navigate().refresh();
         }catch (e) {
@@ -177,6 +177,12 @@ const DriverWrapper = function() {
     this.write = async function (el, txt) {
         return await el.sendKeys(txt);
     };
+
+    this.findElementByIdAndClear = async function(Id) {
+        await driver.wait(until.elementLocated(By.id(Id)), elementFindTimeout, "Looking for element");
+        await driver.findElement(By.id(Id)).clear();
+    };
+
 
     this.myexec = async function (scripts) {
         await driver.executeScript(scripts);

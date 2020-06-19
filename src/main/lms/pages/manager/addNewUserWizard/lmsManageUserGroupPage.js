@@ -19,4 +19,4 @@ class LmsManageUserGroupPage {
 
 }
 
-module.exports = LmsManageUserGroupPage;
+module.exports = new LmsManageUserGroupPage();

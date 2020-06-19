@@ -51,8 +51,10 @@ class LcmsCoursePlayerPage {
         AND WE LEAVING WINDOW UNTIL WE FIND PROPER SOLUTION.
 
          */
+        console.info("coursePlayerSaveAndClose");
+
         //INCASE WE COUSER PLAY ENCOUNTER NETWORK ERROR
-        //await this.driver_.findButtonAndClick_xpath_nm("//*[@id=\"networkErrorContent\"]");
+        await this.driver_.findButtonAndClick_xpath("//*[@id=\"networkErrorContent\"]");
         console.info("Course Completed.......and delay 90000");
 
         await this.driver_.switchMainWindow();
@@ -61,4 +63,4 @@ class LcmsCoursePlayerPage {
 
 }
 
-module.exports = LcmsCoursePlayerPage;
+module.exports = new LcmsCoursePlayerPage();

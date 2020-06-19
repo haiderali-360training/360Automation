@@ -3,6 +3,11 @@
  * @type {any}
  */
 
+/**
+ * Developed By: Haider Ali
+ * @type {any}
+ */
+
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
@@ -25,4 +30,4 @@ class LmsHeaderIconsPage {
 
 
 
-module.exports = LmsHeaderIconsPage;
+module.exports = new LmsHeaderIconsPage();

@@ -1,26 +1,23 @@
-
-/**
+/*
+/!**
  * Developed By: Haider Ali
  * @type {any}
- */
+ *!/
+const PropertiesReader = require("properties-reader");
+const dotenv = require("dotenv").config();
+const env = process.env.APP_ENV;
 
-var PropertiesReader = require("properties-reader");
-var dotenv = require("dotenv").config();
-var env = process.env.APP_ENV;
-var targetUrl = process.env[process.env.APP_ENV];
+const userDataProperties = "src/resources/testdata/" + env + "/lms-test-data-" + env + ".properties";
+const userCredentialDataProperties = "src/resources/testdata/" + env + "/user-credentials-" + env + ".properties";
 
-var property = function () {
-    let properties = PropertiesReader("src/resources/testdata/"+env+"/lms-test-data-"+env+".properties");
-    properties.append("src/resources/testdata/"+env+"/user-credentials-"+env+".properties");
-    return properties;
-};
+const appProperties = PropertiesReader(userDataProperties).append(userCredentialDataProperties);
 
-var property = property ();
 module.exports.getValue =  async function (key){
-    return property.get(key);
+    return appProperties.get(key);
 };
 
 module.exports.getLmsUrl = function (){
-    return targetUrl;
+    return process.env[process.env.APP_ENV];
 };
 
+*/

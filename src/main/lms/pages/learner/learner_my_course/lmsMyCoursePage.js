@@ -34,5 +34,5 @@ class LmsMyCoursePage {
 
 }
 
-module.exports = LmsMyCoursePage;
+module.exports = new LmsMyCoursePage();
 
