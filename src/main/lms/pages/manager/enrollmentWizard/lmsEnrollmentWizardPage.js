@@ -19,46 +19,46 @@ class LmsEnrollmentWizardPage {
         return this.driver_.findById("page-icon");
     }
 
-     async clickEnrollmentByCourse_wizard(){
+    async clickEnrollmentByCourse_wizard(){
 
-         //Enrollment Method Selection
-         await this.driver_.findByIdChecked(locator.enrollmentWizard.enrollmentMethod_learner);
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
+        //Enrollment Method Selection
+        await this.driver_.findByIdChecked(locator.enrollmentWizard.enrollmentMethod_learner);
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
 
-         //Step 1
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnSearch);
-         await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.firstName, __cache.get(locator.cacheKey.firstName));
-         await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.lastName, __cache.get(locator.cacheKey.lastName));
-         await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.emailAddress, __cache.get(locator.cacheKey.email));
-         await this.driver_.findButtonAndClick_span(locator.enrollmentWizard.btnSearch);
+        //Step 1
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnSearch);
+        //await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.firstName, bp.cache.get(locator.cacheKey.firstName));
+        //await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.lastName, bp.cache.get(locator.cacheKey.lastName));
+        await this.driver_.findTextBoxAndWrite_(locator.enrollmentWizard.emailAddress, __cache.get(locator.cacheKey.email));
+        await this.driver_.findButtonAndClick_span(locator.enrollmentWizard.btnSearch);
 
         //sept 2
-         //select first searched learner (assume 1 learner is our recent added learner)
-         await this.driver_.findByIdChecked(locator.enrollmentWizard.firstFoundLearner);
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
+        //select first searched learner (assume 1 learner is our recent added learner)
+        await this.driver_.findByIdChecked(locator.enrollmentWizard.firstFoundLearner);
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
 
-         //step 3
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnSearch);
-         await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
-         __cache.set(locator.cacheKey.enrolledCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
-         await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
-         __cache.set(locator.cacheKey.enrolledCourseBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
-         await this.driver_.findButtonAndClick_span(locator.enrollmentWizard.btnSearch);
-         await this.driver_.findByIdChecked(locator.enrollmentWizard.firstFoundCourse);
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
+        //step 3
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnSearch);
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
+        __cache.set(locator.cacheKey.enrolledCourseName, locator.enrollmentWizard.txtSearchCourseNameValue);
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.txtSearchBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
+        __cache.set(locator.cacheKey.enrolledCourseBusinessKey, locator.enrollmentWizard.txtSearchBusinessKeyValue);
+        await this.driver_.findButtonAndClick_span(locator.enrollmentWizard.btnSearch);
+        await this.driver_.findByIdChecked(locator.enrollmentWizard.firstFoundCourse);
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
 
-         //step 4
+        //step 4
 
-         await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, bp.formatDate(new Date()));
-         await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, bp.formatDate(new Date()));
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
-         //step 5
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnFinish);
-         //step 6
-         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnOK);
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, bp.formatDate(new Date()));
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, bp.formatDate(new Date()));
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
+        //step 5
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnFinish);
+        //step 6
+        await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnOK);
 
-         return true;
-     }
+        return true;
+    }
 }
 
 module.exports = new LmsEnrollmentWizardPage();

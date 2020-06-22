@@ -16,15 +16,15 @@ class LmsManageUserListPage {
         return this.driver_.findByTitle(locator.ManageUserList.title);
     }
 
-     async clickToAddUserButton(){
-       await this.driver_.findButtonAndClick(locator.ManageUserList.btnAdd_User);
-       return true;
-     }
+    async clickToAddUserButton(){
+        await this.driver_.findButtonAndClick(locator.ManageUserList.btnAdd_User);
+        return true;
+    }
 
-     async clickToSearchUserButton(){
-       await this.driver_.findButtonAndClick(locator.ManageUserList.btnSearch);
-       return true;
-     }
+    async clickToSearchUserButton(){
+        await this.driver_.findButtonAndClick(locator.ManageUserList.btnSearch);
+        return true;
+    }
 
     async fillSearchDialogBox(){
         //await this.driver_.findTextBoxAndWrite_("firstname", bp.cache.get(locator.cacheKey.firstName));
@@ -40,14 +40,14 @@ class LmsManageUserListPage {
     }
 
 
-     isDesiredResultsDisplay(){
-       let f = __cache.get(locator.cacheKey.firstName);
-       let l = __cache.get(locator.cacheKey.lastName);
-       this.driver_.findButtonAndClick_href(f);
-       console.info(f);
-       console.info(l);
-       return true;
-     }
+    isDesiredResultsDisplay(){
+        let f = __cache.get(locator.cacheKey.firstName);
+        let l = __cache.get(locator.cacheKey.lastName);
+        this.driver_.findButtonAndClick_href(f);
+        console.info(f);
+        console.info(l);
+        return true;
+    }
 
 }
 

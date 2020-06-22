@@ -15,8 +15,8 @@ class LcmsCoursePlayerPage {
     }
 
     async browserCheckAndModePage (){
-         await this.driver_.findButtonAndClick_span(locator.coursePlayerPage.btnContinue);
-         return true;
+        await this.driver_.findButtonAndClick_span(locator.coursePlayerPage.btnContinue);
+        return true;
     }
 
     async switchToCoursePlayWindow (){
