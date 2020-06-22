@@ -13,6 +13,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 const DriverWrapper = function() {
 
     const driver = new Builder().forBrowser("chrome").build();
+    driver.manage().window().maximize().then(r => {});
     let elementFindTimeout = 200000; //20 sec
 
     // visit a webPage
@@ -38,7 +39,7 @@ const DriverWrapper = function() {
         try {
             //const parent = await driver.getWindowHandle();
             let windows_ = await driver.getAllWindowHandles();
-            let parent = await windows_[0];
+            let parent = windows_[0];
             const coursePlayer = windows_[1];
             console.info("main window::"+parent);
             console.info("player window::"+coursePlayer);
@@ -69,7 +70,7 @@ const DriverWrapper = function() {
 
     // wait and find a specific element with it's title
     this.findByTitle = async function(title) {
-        return  await driver.wait(until.titleIs(title), elementFindTimeout);
+        return driver.wait(until.titleIs(title), elementFindTimeout, "verifying title");
     };
 
     // wait and find a specific element with it's name
@@ -92,6 +93,13 @@ const DriverWrapper = function() {
         return await this.write(a, value);
     };
 
+    this.findElementByIdAndClear = async function(Id) {
+        await driver.wait(until.elementLocated(By.id(Id)), elementFindTimeout, "Looking for element");
+        let clearField = await driver.findElement(By.id(Id));
+        driver.wait((until.elementIsVisible(clearField)), elementFindTimeout);
+        await clearField.clear();
+    };
+
     // wait and find a specific element with it's name
     this.findTextBoxAndWrite_ = async function(elemName, value) {
         await driver.wait(until.elementLocated(By.name(elemName)), elementFindTimeout, "Looking for element");
@@ -104,6 +112,13 @@ const DriverWrapper = function() {
         await driver.wait(until.elementLocated(By.className(elemId)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.className(elemId));
         return a.click();
+    };
+
+    this.findButtonAndClick_css = async function (cssElement) {
+        await driver.wait(until.elementLocated(By.css(cssElement)), elementFindTimeout, "looking for CSS element");
+        let cssEle = driver.findElement(By.css(cssElement));
+        await driver.wait(until.elementIsVisible(cssEle), elementFindTimeout);
+        return cssEle.click();
     };
 
     // wait and find a button click
@@ -127,7 +142,8 @@ const DriverWrapper = function() {
         let xp = "//a[text()='"+buttonTxt+"']";
         await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.xpath(xp));
-        return a.click();
+        //return a.click();
+        a.click();
     };
 
     this.findButtonAndClick_xpath = async function(element_xpath) {

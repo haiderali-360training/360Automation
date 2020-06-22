@@ -6,6 +6,22 @@ module.exports.cacheKey = {
     enrolledCourseBusinessKey: "enrolledCourseBusinessKey"
 };
 
+module.exports.addNewUser = {
+    firstName: "firstName",
+    lastName: "lastName",
+    email: "emailAddress",
+    userName: "userName",
+    passwordField: "password",
+    confirmPasswordField: "confirmPassword"
+};
+
+module.exports.userPrefix = {
+    learner: "ATC-L-",
+    customer: "ATC-C-",
+    reseller: "ATC-R-",
+    domain: "@mailinator.com"
+};
+
 module.exports.header = {
     planAndEnroll: "manager-plan-enroll",
     userAndGroups: "manager-users-groups",
@@ -26,7 +42,8 @@ module.exports.guidedTour = {
     logOutXpath: "//*[@id=\"footer\"]/div[2]/a",
     title: "LMS - Manager Mode",
     LearnerModePagetitle: "LMS - Learner Mode",
-    btnContinue: "Continue"
+    btnContinue: "Continue",
+    btnContinueClassName: "btn_normal"
 };
 
 module.exports.ManageUserList = {
@@ -100,11 +117,13 @@ module.exports.myCoursePage = {
 
 module.exports.coursePlayerPage = {
     title: "LCMS Course Player",
-    chkAcknowledge: ".acknowledgeCheckbox #Checkbox1",
-    btnNext: "#PlaybuttonAcknowledgeName",
+    chkAcknowledge: "Checkbox1",
+    //btnNext: "PlaybuttonEnText",
+    coursePlayerNextButton: "#PlaybuttonAcknowledgeName #PlaybuttonEnText",
     btnContinue: "Continue",
     btnAgree_Continue: "Agree and Continue",
-    btnPlayButton:"//*[@id=\"PlaybuttonEnText\"]",
+    //btnPlayButton:"//*[@id=\"PlaybuttonEnText\"]",
+    coursePlayerPlayButton: ".btn.ctrl #PlaybuttonEnText",
     btnBeginPostAssessment:"//*[@id=\"BeginPostAssessmentButton\"]",
     btnQuestion:"//*[@id=\"question\"]/div/div[2]/label/span",
     btnQuestionNext:"//*[@id=\"NextQuestionButtonEnText\"]",

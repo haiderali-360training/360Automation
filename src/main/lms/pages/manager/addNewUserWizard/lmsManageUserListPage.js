@@ -26,13 +26,13 @@ class LmsManageUserListPage {
        return true;
      }
 
-     async fillSearchDialogBox(){
-       await this.driver_.findTextBoxAndWrite_("firstname", __cache.get(locator.cacheKey.firstName));
-       await this.driver_.findTextBoxAndWrite_("lastname", __cache.get(locator.cacheKey.lastName));
-       await this.driver_.findTextBoxAndWrite_("emailaddress", __cache.get(locator.cacheKey.email));
-       await this.driver_.findButtonAndClick_span(locator.ManageUserList.btnSearch);
-       return true;
-     }
+    async fillSearchDialogBox(){
+        //await this.driver_.findTextBoxAndWrite_("firstname", bp.cache.get(locator.cacheKey.firstName));
+        //await this.driver_.findTextBoxAndWrite_("lastname", bp.cache.get(locator.cacheKey.lastName));
+        await this.driver_.findTextBoxAndWrite_("emailaddress", __cache.get(locator.cacheKey.email));
+        await this.driver_.findButtonAndClick_span(locator.ManageUserList.btnSearch);
+        return true;
+    }
 
     async clickLearnerNameToLaunchProfile() {
         //await this.driver_.findByIdChecked("chk1");
@@ -52,4 +52,3 @@ class LmsManageUserListPage {
 }
 
 module.exports = new LmsManageUserListPage();
-

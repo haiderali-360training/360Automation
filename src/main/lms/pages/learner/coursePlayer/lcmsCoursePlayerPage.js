@@ -20,23 +20,24 @@ class LcmsCoursePlayerPage {
     }
 
     async switchToCoursePlayWindow (){
-        return await this.driver_.switchCoursePlayWindow();
+        return this.driver_.switchCoursePlayWindow();
     }
 
     async checkAcknowledgmentButtonAndNext(){
-        await this.driver_.findElementAndClick_Css(locator.coursePlayerPage.chkAcknowledge);
-        await this.driver_.findElementAndClick_Css(locator.coursePlayerPage.btnNext);
-        return true;
+        await this.driver_.findCheckboxAndClick(locator.coursePlayerPage.chkAcknowledge);
+        //await this.driver_.findButtonAndClick_xpath("/html/body/form/div[8]/div[9]/div/div/div[5]/span[2]/a/span");
+        await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerNextButton);
+        //return true;
     }
 
     async TermsOfUseClick(){
         await this.driver_.findButtonAndClick_href(locator.coursePlayerPage.btnAgree_Continue);
-        return true;
+        //return true;
     }
 
     async clickNextCourseStartAndComplete(){
-        await this.driver_.findButtonAndClick_xpath(locator.coursePlayerPage.btnPlayButton);
-        await this.driver_.findButtonAndClick_xpath(locator.coursePlayerPage.btnPlayButton);
+        await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerPlayButton);
+        await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerPlayButton);
         await this.driver_.findButtonAndClick_xpath(locator.coursePlayerPage.btnBeginPostAssessment);
         await this.driver_.findButtonAndClick_xpath(locator.coursePlayerPage.btnQuestion);
         await this.driver_.findButtonAndClick_xpath(locator.coursePlayerPage.btnQuestionNext);
@@ -54,7 +55,7 @@ class LcmsCoursePlayerPage {
         console.info("coursePlayerSaveAndClose");
 
         //INCASE WE COUSER PLAY ENCOUNTER NETWORK ERROR
-        await this.driver_.findButtonAndClick_xpath("//*[@id=\"networkErrorContent\"]");
+        //await this.driver_.findButtonAndClick_xpath_nm("//*[@id=\"networkErrorContent\"]");
         console.info("Course Completed.......and delay 90000");
 
         await this.driver_.switchMainWindow();

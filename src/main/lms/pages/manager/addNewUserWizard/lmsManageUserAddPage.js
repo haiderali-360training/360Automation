@@ -14,17 +14,25 @@ class LmsManageUserAddPage {
     }
 
     async fillAddUserForm(){
-        __cache.set(locator.cacheKey.firstName, __faker.name.firstName());
-        __cache.set(locator.cacheKey.lastName, __faker.name.lastName());
-        let email = __faker.internet.email();
-        __cache.set(locator.cacheKey.email, email);
-        await this.driver_.findTextBoxAndWrite("firstName", locator.ManageUserAdd.preFixFirstName+__cache.get(locator.cacheKey.firstName));
-        await this.driver_.findTextBoxAndWrite("middleName", locator.ManageUserAdd.preFixMiddleName);
-        await this.driver_.findTextBoxAndWrite("lastName", __cache.get(locator.cacheKey.lastName));
-        await this.driver_.findTextBoxAndWrite("emailAddress", locator.ManageUserAdd.preFixEmail+__cache.get(locator.cacheKey.email));
-        await this.driver_.findElementByIdAndClear(locator.ManageUserAdd.userName);
-        await this.driver_.findTextBoxAndWrite("password", "password123!@#");
-        await this.driver_.findTextBoxAndWrite("confirmPassword", "password123!@#");
+
+        let today = new Date();
+        let currentDateTime = today.getFullYear() + "" + (today.getMonth() + 1) + "" + today.getDate() + "T" +
+            today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+        let uName = "LMS-ATC-L-" + currentDateTime + "@lms.com";
+
+        __cache.set(locator.cacheKey.email, uName);
+        __cache.set(locator.addNewUser.userName, uName);
+
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.firstName, __faker.name.firstName());
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.lastName, __faker.name.lastName());
+        await this.driver_.findTextBoxAndWrite("emailAddress", __cache.get(locator.cacheKey.email));
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.userName, __cache.get(locator.addNewUser.userName));
+        await this.driver_.findElementByIdAndClear(locator.addNewUser.userName);
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.userName, __cache.get(locator.addNewUser.userName));
+        console.info("New Learner User Name: "+ __cache.get(locator.addNewUser.userName));
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.passwordField, "password1");
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.confirmPasswordField, "password1");
+
         await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
         return true;
     }

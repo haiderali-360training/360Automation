@@ -19,8 +19,9 @@ class LmsGuidedTourPage  {
      }
 
      async clickToContinue(){
-       await this.driver_.findButtonAndClick(locator.guidedTour.btnContinue);
-       return true;
+       //await this.driver_.findButtonAndClick(locator.guidedTour.btnContinue);
+         await this.driver_.findButtonAndClick_className(locator.guidedTour.btnContinueClassName);
+       //return true;
      }
 
 }
