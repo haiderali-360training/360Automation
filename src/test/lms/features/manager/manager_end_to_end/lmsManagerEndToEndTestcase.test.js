@@ -33,7 +33,6 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     test("verify Guided tour window title", async () => {
         let x = await lmsGuidedTourPage.verifyPageTitle();
         await lmsGuidedTourPage.clickToContinue();
-        await  commonUtilsPage.getPageHeading("Addd user");
         expect(x).toBe(true);
     });
 
