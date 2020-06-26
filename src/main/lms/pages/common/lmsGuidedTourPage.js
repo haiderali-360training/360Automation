@@ -10,18 +10,21 @@ class LmsGuidedTourPage  {
 
     constructor(){ this.driver_ = bp.getDriver(); }
 
-     verifyPageTitle (){
-        return this.driver_.findByTitle(locator.guidedTour.title);
+
+     verifyGuidedTourPageTitle (){
+        return this.driver_.findByTitle(locator.guidedTour.learnerModePageTitle);
      }
 
-     verifyLearnerPageTitle (){
-        return this.driver_.findByTitle(locator.guidedTour.LearnerModePagetitle);
-     }
+    verifyGuidedTourPageTitleForManager(){
+        return this.driver_.findByTitle(locator.guidedTour.managerModePageTitle);
+    }
+
+    verifyGuidedTourPageHeading(){
+        return this.driver_.findElementAndClick_Css(locator.guidedTour.guidedTourPageHeading);
+    }
 
      async clickToContinue(){
-       //await this.driver_.findButtonAndClick(locator.guidedTour.btnContinue);
          await this.driver_.findButtonAndClick_className(locator.guidedTour.btnContinueClassName);
-       //return true;
      }
 
 }

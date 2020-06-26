@@ -31,9 +31,10 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     });
 
     test("verify Guided tour window title", async () => {
-        let x = await lmsGuidedTourPage.verifyPageTitle();
+        let guidedTourPageTitle = await lmsGuidedTourPage.verifyGuidedTourPageTitleForManager();
+        await lmsGuidedTourPage.verifyGuidedTourPageHeading();
         await lmsGuidedTourPage.clickToContinue();
-        expect(x).toBe(true);
+        expect(guidedTourPageTitle).toBe(true);
     });
 
     test("Verify Manage User Page & click Add User Button ", async () => {

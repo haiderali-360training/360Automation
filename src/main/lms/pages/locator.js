@@ -40,10 +40,11 @@ module.exports.loginPage = {
 
 module.exports.guidedTour = {
     logOutXpath: "//*[@id=\"footer\"]/div[2]/a",
-    title: "LMS - Manager Mode",
-    LearnerModePagetitle: "LMS - Learner Mode",
+    managerModePageTitle: "LMS - Manager Mode",
+    learnerModePageTitle: "LMS - Learner Mode",
     btnContinue: "Continue",
-    btnContinueClassName: "btn_normal"
+    btnContinueClassName: "btn_normal",
+    guidedTourPageHeading: "#content b"
 };
 
 module.exports.ManageUserList = {
@@ -106,13 +107,15 @@ module.exports.enrollmentWizard = {
 };
 
 module.exports.myCoursePage = {
-    title: "LMS - Learner Mode",
+    myCoursePageTitle: "LMS - Learner Mode",
     pageHeading: "My Courses",
-    pageHeadingClassName: "page-icon",
+    //pageHeadingClassName: "page-icon",
+    myCoursePageHeading: "page-heading",
     enrolledCourseClassName: "bodycourseTitle-ul",
     enrolledCourseXpath: "//*[@id=\"course-list-alt\"]/tbody/tr[2]/td[2]/a",
     courseStatus: "text-green",
     printCertificateClassName: "print-certificate",
+    myCoursePageDropdown: "#show option[value='enrolled']"
 };
 
 module.exports.coursePlayerPage = {
@@ -131,5 +134,15 @@ module.exports.coursePlayerPage = {
 //await this.driver_.findButtonAndClick_xpath("//*[@id=\"NextQuestionButtonEnText\"]");
 };
 
+module.exports.userLogout = {
+    learnerLogoutCssElement: ".log .log-out",
+    afterLogoutPageTitle: "Learner-My Courses Login"
+};
+
+
+module.exports.errorMessages = {
+    errorMessageElement: "//span[contains(text(),'Please type your Username & Password.')]",
+    loginScreenBlankCredentialsErrorMessage: "Please type your Username & Password."
+};
 
 

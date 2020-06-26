@@ -8,6 +8,7 @@ require("selenium-webdriver/chrome");
 require("selenium-webdriver/firefox");
 require("chromedriver");
 require("geckodriver");
+//require("selenium-webdriver/Select");
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 
 const DriverWrapper = function() {
@@ -59,8 +60,13 @@ const DriverWrapper = function() {
 
     // wait and find a specific element with it's id
     this.findById = async function(id) {
-        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
-        return await driver.findElement(By.id(id));
+        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element with ID");
+        return driver.findElement(By.id(id));
+    };
+
+    this.findByIdAndGetText = async function(id) {
+        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element with ID");
+        return driver.findElement(By.id(id)).getText();
     };
 
     this.findByIdChecked = async function(id) {
@@ -201,6 +207,29 @@ const DriverWrapper = function() {
         await driver.wait(until.elementLocated(By.id(Id)), elementFindTimeout, "Looking for element");
         await driver.findElement(By.id(Id)).clear();
     };
+
+
+
+    //TODO -----How to work with Dropdown in JEST
+    this.selectOptionFromDropdown = async function(dropdownCss) {
+        /*Select coursesDropdown = new Select(locator.myCoursePage.myCoursePageDropdown);
+        if (coursesDropdown.getFirstSelectedOption().getText().equalsIgnoreCase("Enrolled Courses")) {
+            logger.info("Enrolled Courses Option already selected");
+        } else {
+            coursesDropdown.selectByValue("enrolled");
+            logger.info("Selected Enrolled Courses Option from dropdown");
+        }*/
+
+        //await driver.wait((until.elementLocated(dropdownCss)), elementFindTimeout, "waiting for dropdown to visible");
+        await driver.findElement(By.css(dropdownCss)).click();
+    };
+
+    this.findErrorMessageAndGet = async function (errorMessageEle) {
+        await driver.wait(until.elementLocated(By.xpath(errorMessageEle)), elementFindTimeout);
+        let aa =  driver.findElement(By.xpath(errorMessageEle)).getText();
+        return aa;
+    };
+
 
 
     this.myexec = async function (scripts) {

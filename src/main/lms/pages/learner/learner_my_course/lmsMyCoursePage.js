@@ -12,11 +12,11 @@ class LmsMyCoursePage {
     constructor(){ this.driver_ = bp.getDriver(); }
 
     verifyPageTitle (){
-        return this.driver_.findByTitle(locator.myCoursePage.title);
+        return this.driver_.findByTitle(locator.myCoursePage.myCoursePageTitle);
     }
 
-    verifyPageHeading(){
-        return this.driver_.findById(locator.myCoursePage.pageHeadingClassName);
+    verifyMyCoursePageHeading(){
+        return this.driver_.findByIdAndGetText(locator.myCoursePage.myCoursePageHeading);
     }
 
     verifyCourseStatus(){
@@ -31,6 +31,14 @@ class LmsMyCoursePage {
         await this.driver_.findButtonAndClick_className(locator.myCoursePage.printCertificateClassName);
         return "";
     }
+
+    async selectShowEnrolledCoursesOptionFromDropdown(){
+        await this.driver_.selectOptionFromDropdown(locator.myCoursePage.myCoursePageDropdown);
+    }
+
+    /*async clickCourseToLaunchCoursePlayer(enrolledCourse){
+        await this.driver_.findCourseNameAndClick(locator.myCoursePage.enrolledCourseClassName);
+    }*/
 
 }
 
