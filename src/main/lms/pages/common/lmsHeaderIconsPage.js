@@ -26,6 +26,22 @@ class LmsHeaderIconsPage {
         await bp.headerIconsClick(locator.header.userAndGroups);
         return true;
     }
+
+    async verifyHeaderIcons(headerIconName){
+        let headerIcons = await this.driver_.findAllHeaderIcons(locator.header.learnerHeaderIcons);
+        const iterator = headerIcons.values();
+        for (let val of iterator) {
+            let menuName = await val.getText();
+            if (menuName.match(headerIconName)){
+                console.info(menuName);
+                return menuName;
+            }
+        }
+    }
+
+    async clickMyTranscriptsIcon(){
+        await this.driver_.findByIdChecked(locator.header.myTranscriptsIcon);
+    }
 }
 
 

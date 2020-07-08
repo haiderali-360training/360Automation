@@ -20,31 +20,32 @@ class LmsLoginPage {
         return this.driver_.findByTitle(locator.loginPage.title );
     }
 
-    enterCredentialsOnLogin (userName, password){
-        this.driver_.findTextBoxAndWrite(locator.loginPage.usernameId, userName);
-        this.driver_.findTextBoxAndWrite(locator.loginPage.password, password);
-        this.driver_.findButtonAndClick(locator.loginPage.btnLogin);
+    async enterCredentialsOnLogin (userName, password){
+        await this.driver_.findTextBoxAndWrite(locator.loginPage.usernameId, userName);
+        await this.driver_.findTextBoxAndWrite(locator.loginPage.password, password);
+        await this.driver_.findButtonAndClick(locator.loginPage.btnLogin);
         return true;
     }
 
 
-    userLoginUsingProvidedCredentials(uName, password){
-        this.driver_.findTextBoxAndWrite(locator.loginPage.usernameId, uName);
-        this.driver_.findTextBoxAndWrite(locator.loginPage.password, password);
-        this.driver_.findButtonAndClick(locator.loginPage.btnLogin);
+    async verifyLoginErrorMessageForBlankCredentials(){
+        console.info("Trying LMS Login with blank \"Username\" and blank \"Password\"");
+        let errorTextForBlankElement = await this.driver_.findErrorMessageAndGet(locator.errorMessages.errorMessageElement);
+        return errorTextForBlankElement.getText();
     }
 
 
-    verifyLoginErrorMessageForBlankCredentials(){
-        console.info("Trying LMS Login with blank \"Username\" and blank \"Password\"");
+    async verifyLmsLoginErrorMessageForSomeUserNameAndBlankPassword(){
+        console.info("Trying LMS Login with random \"Username\" and blank \"Password\"");
+        let errorTextForBlankPasswordElement = await this.driver_.findErrorMessageAndGet(locator.errorMessages.errorMessageElement);
+        return errorTextForBlankPasswordElement.getText();
+    }
 
-        return this.driver_.findErrorMessageAndGet(locator.errorMessages.errorMessageElement);
 
-
-        /*let ele = this.driver_.findByXpath(locator.errorMessages.errorMessageElement);
-        let x = ele.getText().trim();
-        console.info(x);*/
-
+    async verifyLmsLoginErrorMessageForBlankUserNameAndRandomPassword(){
+        console.info("Trying LMS Login with Blank \"Username\" and Random \"Password\"");
+        let errorTextForBlankUserNameElement = await this.driver_.findErrorMessageAndGet(locator.errorMessages.errorMessageElement);
+        return errorTextForBlankUserNameElement.getText();
     }
 }
 

@@ -11,6 +11,7 @@ const
 describe("Lms Learner Login Test", function () {
     describe("Login to LMS Using Valid LMS Learner Credentials", function LoginToLmsUsingValidLearnerCredentialsTest() {
 
+
         test("Navigate To Lms Page and Login to Lms", async () => {
             let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();
             expect(loginPageTitle).toBe(true);
@@ -21,6 +22,7 @@ describe("Lms Learner Login Test", function () {
             let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.LearnerUserName"), __appProperties.get("lms.LearnerPassword"));
             expect(a).toBe(true);
         });
+
 
         test("Logout Lms User", async () => {
             await lmsCommonActionPage.lmsUserLogout();
@@ -40,14 +42,51 @@ describe("Lms Learner Login Test", function () {
         });
 
 
-        //TODO  --------How to trim the Text which we get from the web element "blankErrorMessageTF"
         test("User Login Using Blank Credentials", async () => {
-            await lmsLoginPage.userLoginUsingProvidedCredentials("","");
+            await lmsLoginPage.enterCredentialsOnLogin("","");
             let blankErrorMessageTF = await lmsLoginPage.verifyLoginErrorMessageForBlankCredentials();
-            expect(blankErrorMessageTF).toEqual(" Please type your Username & Password.");
+            console.info("Error Message: " + blankErrorMessageTF);
+            expect(blankErrorMessageTF.trim()).toEqual("Please type your Username & Password.");
 
         });
     });
 
+
+
+    describe("Verify Login Error Message For Blank Password", function verifyLoginErrorMessageForBlankPassword(){
+
+        test("User Login into LMS with Blank Password", async () => {
+            let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();
+            expect(loginPageTitle).toBe(true);
+        });
+
+
+        test("User Login Using Blank Credentials", async () => {
+            await lmsLoginPage.enterCredentialsOnLogin(__faker.internet.userName(), "");
+            let blankErrorMessageTF = await lmsLoginPage.verifyLmsLoginErrorMessageForSomeUserNameAndBlankPassword();
+            console.info("Error Message: " + blankErrorMessageTF);
+            expect(blankErrorMessageTF.trim()).toEqual("Please type your Password.");
+        });
+    });
+
+
+
+
+
+    describe("Verify Login Error Message For Blank User Name", function verifyLoginErrorMessageForBlankUserName(){
+
+        test("User Login into LMS with Blank Password", async () => {
+            let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();
+            expect(loginPageTitle).toBe(true);
+        });
+
+
+        test("Verify Login Error Message For Blank User Name", async () => {
+            await lmsLoginPage.enterCredentialsOnLogin("", __faker.internet.password());
+            let blankErrorMessageTF = await lmsLoginPage.verifyLmsLoginErrorMessageForBlankUserNameAndRandomPassword();
+            console.info("Error Message: " + blankErrorMessageTF);
+            expect(blankErrorMessageTF.trim()).toEqual("Please type your Username.");
+            });
+    });
 
 });

@@ -14,6 +14,18 @@ class LcmsCoursePlayerPage {
         return this.driver_.findByTitle(locator.coursePlayerPage.title);
     }
 
+
+    async confirmCourseNameOnLcmsCoursePlayerPage(){
+        console.info("Switched Successfully to LCMS Course Player Page");
+        await this.driver_.waitUntilElementDisplayed(locator.coursePlayerPage.courseNameInLeftMenu);
+        let cName = await this.driver_.findElementByCss(locator.coursePlayerPage.courseNameInLeftMenu);
+        let courseName = await cName.getText();
+        console.info("Course Name Appear on Course Player: " + courseName);
+        return courseName;
+    }
+
+
+
     async browserCheckAndModePage (){
         await this.driver_.findButtonAndClick_span(locator.coursePlayerPage.btnContinue);
         return true;
@@ -60,6 +72,11 @@ class LcmsCoursePlayerPage {
 
         await this.driver_.switchMainWindow();
         return "";
+    }
+
+
+    async closeLcmsCoursePlayerWindowAndSwitchBackToLms(){
+        await this.driver_.switchMainWindow();
     }
 
 }

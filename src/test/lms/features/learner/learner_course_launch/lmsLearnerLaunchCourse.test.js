@@ -7,7 +7,9 @@ global.__basedir = process.cwd();
 const
     lmsLoginPage = require(__basedir + "/src/main/lms/pages/common/lmsLoginPage.js"),
     lmsGuidedTourPage = require(__basedir + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
-    lmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js");
+    lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js"),
+    lmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
+    lcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js");
 
 
 
@@ -37,16 +39,32 @@ const
             test("Verify My Course Page", async () => {
                 let myCoursePageTitle = await lmsMyCoursePage.verifyPageTitle();
                 expect(myCoursePageTitle).toBe(true);
-                let myCoursePageHeading = await lmsMyCoursePage.verifyMyCoursePageHeading();
+                let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
                 console.info("My Course Page Heading: " + myCoursePageHeading);
                 expect(myCoursePageHeading).toEqual("My Courses");
+        });
+
+
+            test("Select Show Enrolled Courses Option and Launch Enrolled Course", async () => {
+                await lmsMyCoursePage.selectShowEnrolledCoursesOptionFromDropdown();
+                await lmsMyCoursePage.clickCourseNameToLaunchCoursePlayer(__appProperties.get("lms.atc.new.learner.course"));
             });
 
 
-            test("Select Show Enrolled Courses Option and Verify Enrolled Course", async () => {
-                await lmsMyCoursePage.selectShowEnrolledCoursesOptionFromDropdown();
-                //await lmsMyCoursePage.clickCourseToLaunchCoursePlayer(__appProperties.get("lms.Course"));
+            test("Switch to Course Player Window and Verify Course Name", async () => {
+                await lcmsCoursePlayerPage.switchToCoursePlayWindow();
+                await lcmsCoursePlayerPage.verifyPageTitle();
+                let cName = await lcmsCoursePlayerPage.confirmCourseNameOnLcmsCoursePlayerPage();
+                expect(cName).toEqual(__appProperties.get("lms.atc.new.learner.course"));
+                await lcmsCoursePlayerPage.closeLcmsCoursePlayerWindowAndSwitchBackToLms();
+            });
 
+
+            test("Logout Lms User", async () => {
+                await lmsCommonUtilsPage.lmsUserLogout();
+                let afterLogoutTitle = await lmsCommonUtilsPage.verifyUserLogoutSuccessfully();
+                expect(afterLogoutTitle).toBe(true);
+                console.info("User Logout Successfully");
             });
 
         });

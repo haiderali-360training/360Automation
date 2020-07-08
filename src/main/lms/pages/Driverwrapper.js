@@ -8,7 +8,6 @@ require("selenium-webdriver/chrome");
 require("selenium-webdriver/firefox");
 require("chromedriver");
 require("geckodriver");
-//require("selenium-webdriver/Select");
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 
 const DriverWrapper = function() {
@@ -30,6 +29,8 @@ const DriverWrapper = function() {
             let parent = await windows_[0];
             let coursePlayer = await windows_[1];
             await driver.switchTo().window(coursePlayer);
+            console.info(coursePlayer);
+
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
@@ -64,11 +65,6 @@ const DriverWrapper = function() {
         return driver.findElement(By.id(id));
     };
 
-    this.findByIdAndGetText = async function(id) {
-        await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element with ID");
-        return driver.findElement(By.id(id)).getText();
-    };
-
     this.findByIdChecked = async function(id) {
         await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
         return await driver.findElement(By.id(id)).click();
@@ -79,16 +75,10 @@ const DriverWrapper = function() {
         return driver.wait(until.titleIs(title), elementFindTimeout, "verifying title");
     };
 
-    // wait and find a specific element with it's name
-    this.findByName = async function(name) {
-        await driver.wait(until.elementLocated(By.name(name)), elementFindTimeout, "Looking for element");
-        return await driver.findElement(By.name(name));
-    };
-
     //wait and find element by name
     this.findByName = async function(name) {
         await driver.wait(until.elementLocated(By.name(name)), elementFindTimeout, "Looking for element");
-        return await driver.findElement(By.name(name));
+        return driver.findElement(By.name(name));
     };
 
     // wait and find a specific element with it's name
@@ -189,7 +179,7 @@ const DriverWrapper = function() {
     // wait and find a specific element with it's name
     this.findByClassName = async function(name) {
         await driver.wait(until.elementLocated(By.className(name)), elementFindTimeout, "Looking for element");
-        return await driver.findElement(By.className(name));
+        return driver.findElement(By.className(name));
     };
 
     // wait and find a specific element with it's xpath
@@ -209,31 +199,61 @@ const DriverWrapper = function() {
     };
 
 
-
-    //TODO -----How to work with Dropdown in JEST
-    this.selectOptionFromDropdown = async function(dropdownCss) {
-        /*Select coursesDropdown = new Select(locator.myCoursePage.myCoursePageDropdown);
-        if (coursesDropdown.getFirstSelectedOption().getText().equalsIgnoreCase("Enrolled Courses")) {
-            logger.info("Enrolled Courses Option already selected");
-        } else {
-            coursesDropdown.selectByValue("enrolled");
-            logger.info("Selected Enrolled Courses Option from dropdown");
-        }*/
-
-        //await driver.wait((until.elementLocated(dropdownCss)), elementFindTimeout, "waiting for dropdown to visible");
-        await driver.findElement(By.css(dropdownCss)).click();
+    this.findAllHeaderIcons = async function (headerIconCss) {
+        return driver.findElements(By.css(headerIconCss));
     };
+
+
+    this.findAllWebElements = async function (allWebElements) {
+        return driver.findElements(By.css(allWebElements));
+    };
+
+
+    this.selectOptionFromDropdown = async function(dropdownCss, optionValue) {
+        await driver.wait(until.elementLocated(By.css(dropdownCss)), elementFindTimeout);
+        await driver.findElement(By.css(dropdownCss + " option[value='" + optionValue + "']")).click();
+    };
+
 
     this.findErrorMessageAndGet = async function (errorMessageEle) {
-        await driver.wait(until.elementLocated(By.xpath(errorMessageEle)), elementFindTimeout);
-        let aa =  driver.findElement(By.xpath(errorMessageEle)).getText();
-        return aa;
+        await driver.wait(until.elementLocated(By.css(errorMessageEle)), elementFindTimeout);
+        return driver.findElement(By.css(errorMessageEle));
+    };
+
+
+    this.findElementsList= async function (enrolledCoursesList) {
+        await driver.wait(until.elementsLocated(By.css(enrolledCoursesList)), elementFindTimeout, "Waiting for Enrolled course list to display");
+        return driver.findElements(By.css(enrolledCoursesList));
+    };
+
+
+    this.waitUntilElementDisplayed = async function (coursePlayerLeftMenu) {
+        await driver.wait(until.elementLocated(By.css(coursePlayerLeftMenu)), elementFindTimeout);
+        let waitToDisplayElement = await driver.findElement(By.css(coursePlayerLeftMenu));
+        await driver.wait(until.elementIsVisible(waitToDisplayElement), elementFindTimeout);
+    };
+
+
+    this.findElementByCss = async function (cssElement) {
+        await driver.wait(until.elementLocated(By.css(cssElement)), elementFindTimeout, "Looking for element with CSS");
+        return driver.findElement(By.css(cssElement));
+    };
+
+
+    this.findElementWithInElementByXpath = async function(childLocator, parentLocatorXpath) {
+        //await driver.wait(until.elementLocated(By.css(xpath_)), elementFindTimeout, "Looking for element");
+        return parentLocatorXpath.findElement(By.xpath(childLocator));
     };
 
 
 
-    this.myexec = async function (scripts) {
-        await driver.executeScript(scripts);
+    this.findAndGetCurrentUrl = async function() {
+        return driver.getCurrentUrl();
+    };
+
+
+    this.myexec = async function (scripts, args) {
+        await driver.executeScript(scripts, args);
     };
 
 

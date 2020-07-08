@@ -6,6 +6,12 @@ module.exports.cacheKey = {
     enrolledCourseBusinessKey: "enrolledCourseBusinessKey"
 };
 
+
+module.exports.commonElements = {
+    commonPageHeadingId: "page-heading"
+};
+
+
 module.exports.addNewUser = {
     firstName: "firstName",
     lastName: "lastName",
@@ -23,6 +29,8 @@ module.exports.userPrefix = {
 };
 
 module.exports.header = {
+    learnerHeaderIcons: "#learner-header #table-icons",
+    myTranscriptsIcon: "learner-my-transcripts",
     planAndEnroll: "manager-plan-enroll",
     userAndGroups: "manager-users-groups",
     manageAndReports: "manager-reports",
@@ -112,14 +120,32 @@ module.exports.myCoursePage = {
     //pageHeadingClassName: "page-icon",
     myCoursePageHeading: "page-heading",
     enrolledCourseClassName: "bodycourseTitle-ul",
+    enrollCourseClassName: "#content .bodycourseTitle-ul",
     enrolledCourseXpath: "//*[@id=\"course-list-alt\"]/tbody/tr[2]/td[2]/a",
     courseStatus: "text-green",
     printCertificateClassName: "print-certificate",
-    myCoursePageDropdown: "#show option[value='enrolled']"
+    //myCoursePageDropdown: "#show option[value='enrolled']",
+    myCoursePageDropdown: "#show"
 };
+
+
+module.exports.completedFilter = {
+    completedCourseStatus: "../..//span[@id='c23']"
+};
+
+
+module.exports.availableFilter = {
+    availableFilterCourseGroupsHeading: "#browse-content-heading .browse-content-table-heading div",
+    availableFilterCoursesHeading: "coursegroup-courses-title",
+    availableCourseGroups: "#browse-group-name.browse-name",
+    availableCourseGroupsCoursesHeading: "//div[contains(text(),'ATC Courses')]"
+};
+
+
 
 module.exports.coursePlayerPage = {
     title: "LCMS Course Player",
+    courseNameInLeftMenu: ".left-menu.menu-wrapper #coursetitle",
     chkAcknowledge: "Checkbox1",
     //btnNext: "PlaybuttonEnText",
     coursePlayerNextButton: "#PlaybuttonAcknowledgeName #PlaybuttonEnText",
@@ -141,8 +167,31 @@ module.exports.userLogout = {
 
 
 module.exports.errorMessages = {
-    errorMessageElement: "//span[contains(text(),'Please type your Username & Password.')]",
+    //errorMessageElement: "//span[contains(text(),'Please type your Username & Password.')]",
+    errorMessageElement: "#errorMessage>span",
     loginScreenBlankCredentialsErrorMessage: "Please type your Username & Password."
+};
+
+
+module.exports.learnerMyTranscriptsReports = {
+    //learnerMyTranscriptsLeftMenu: ".band_text>div"
+    learnerMyTranscriptsLeftMenu: "#left-navigation [title]",
+    learnerExecuteReportButton: "btn_normal",
+    learnerPerformanceByCourseReportGrid: "reportDataContainer",
+    learnerPerformanceByCourseReportColumns: ".row_1",
+    PerformanceByCourseReportName: "Performance by Course",
+    PerformanceByCourseTranscriptReportName: "Performance by Course (Transcript)",
+    PerformanceByTrainingPlanReportName: "Performance by Training Plan",
+    PerformanceSummaryAllCourseGroupsReportName: "Performance Summary (All Course Groups)",
+    PerformanceSummaryAllCoursesReportName: "Performance Summary (All Courses)",
+    PerformanceSummaryAllTrainingPlansReportName: "Performance Summary (All Training Plans)",
+    PerformanceSummaryByCourseGroup: "Performance Summary by Course Group"
+};
+
+
+module.exports.printCertificate = {
+    printCertificateTitle: "atc_smoke",
+    printCertificateLink: "../div/a[starts-with(@href, 'javascript:printCertificate')]"
 };
 
 
