@@ -20,7 +20,7 @@ class LmsEnrollIndexPage {
         return this.driver_.findById(locator.planAndEnroll.pageHeadingClassName);
     }
 
-     async clickPlanAndEnrollButton(){
+     async clickEnrollUsersByCourse(){
        await this.driver_.findButtonAndClick(locator.planAndEnroll.btnEnrollUserByCourse);
        return true;
      }

@@ -54,6 +54,43 @@ const DriverWrapper = function() {
         }
     };
 
+
+    this.switchToFrame = async function () {
+        try{
+            console.info("Before Switching");
+            await driver.switchTo().frame("course");
+            console.info("After Switching on Iframe");
+
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
+    };
+
+
+
+    this.switchToAlert = async function () {
+        //await driver.wait(until.alertIsPresent());
+        let tr = await driver.switchTo().alert();
+        await tr.accept();
+        /*try{
+            //driver.wait(until.alertIsPresent());
+            await driver.switchTo().alert().accept();
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }*/
+    };
+
+
+    this.switchToDefaultContent = async function () {
+        try{
+            await driver.switchTo().defaultContent();
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
+    };
+
+
+
     // quit current session
     this.quit = async function() {
         // return await driver.quit();
@@ -122,6 +159,7 @@ const DriverWrapper = function() {
         let xp = "//div[text()='"+buttonTxt+"']";
         await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.xpath(xp));
+        //TODO remove return ask haider bhai
         return a.click();
     };
 
@@ -185,7 +223,8 @@ const DriverWrapper = function() {
     // wait and find a specific element with it's xpath
     this.findByXpath = async function(xpath_) {
         await driver.wait(until.elementLocated(By.xpath(xpath_)), elementFindTimeout, "Looking for element");
-        return await driver.findElement(By.xpath(xpath_));
+        return driver.findElement(By.xpath(xpath_));
+
     };
 
     // fill input web elements

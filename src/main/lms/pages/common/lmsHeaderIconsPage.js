@@ -3,13 +3,9 @@
  * @type {any}
  */
 
-/**
- * Developed By: Haider Ali
- * @type {any}
- */
-
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+
 
 class LmsHeaderIconsPage {
 
@@ -18,13 +14,13 @@ class LmsHeaderIconsPage {
     }
 
     async clickPlanAndEnroll() {
-        await bp.headerIconsClick(locator.header.planAndEnroll);
-        return true;
+        let planAndEnrollButton = await this.driver_.findById(locator.header.planAndEnroll);
+        planAndEnrollButton.click();
     }
 
     async clickUserAndGroup() {
-        await bp.headerIconsClick(locator.header.userAndGroups);
-        return true;
+        let userAndGroupButton = await this.driver_.findById(locator.header.userAndGroups);
+        userAndGroupButton.click();
     }
 
     async verifyHeaderIcons(headerIconName){
@@ -42,6 +38,14 @@ class LmsHeaderIconsPage {
     async clickMyTranscriptsIcon(){
         await this.driver_.findByIdChecked(locator.header.myTranscriptsIcon);
     }
+
+    async clickMyProfile(){
+        let myProfileButton = await this.driver_.findById(locator.header.learnerMyProfile);
+        myProfileButton.click();
+    }
+
+
+
 }
 
 

@@ -16,7 +16,9 @@ const
     lmsEnrollIndexPage = require(__basedir + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollIndexPage.js"),
     lmsEnrollmentWizardPage = require(__basedir + "/src/main/lms/pages/manager/enrollmentWizard/lmsEnrollmentWizardPage.js"),
     lmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
-    lcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js");
+    lcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js"),
+    lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js"),
+    locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
 
@@ -38,15 +40,15 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
     });
 
     test("Verify Manage User Page & click Add User Button ", async () => {
-        await lmsManageUserListPage.verifyPageTitle();
-        let d = await lmsManageUserListPage.clickToAddUserButton();
-        expect(d).toBe(true);
+        let managerTitle = await lmsManageUserListPage.verifyPageTitle();
+        await lmsManageUserListPage.clickToAddUserButton();
+        expect(managerTitle).toBe(true);
     });
 
 
     test("Verify Add User Page & fill-Up form & submit ", async () => {
-        let c = await lmsManageUserAddPage.fillAddUserForm();
-        expect(c).toBe(true);
+        let newLearnerUserName = await lmsManageUserAddPage.fillAddUserForm();
+        expect(newLearnerUserName).toEqual(__cache.get(locator.addNewUser.userName));
     });
 
 
@@ -70,16 +72,17 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
         expect(xc).toBe(true);
     });
 
-    test("Verify Plan & enroll page ", async () => {
+    test("Verify Manager Page Headers Menu And Click Plan Enroll Button", async () => {
         await lmsHeaderIconsPage.clickPlanAndEnroll();
         await lmsEnrollIndexPage.verifyPageHeading();
-        let cs = await lmsEnrollIndexPage.clickPlanAndEnrollButton();
+        let cs = await lmsEnrollIndexPage.clickEnrollUsersByCourse();
         expect(cs).toBe(true);
     });
 
     test("Verify learner enrollment wizard ", async () => {
-        await lmsEnrollmentWizardPage.verifyPageHeading();
-    let z = await lmsEnrollmentWizardPage.clickEnrollmentByCourse_wizard();
+        let enrollmentWizardPageTitle = await lmsCommonUtilsPage.verifyPageHeading();
+        expect(enrollmentWizardPageTitle).toEqual("Enroll Learners");
+        let z = await lmsEnrollmentWizardPage.clickEnrollmentByCourse_wizard();
         expect(z).toBe(true);
     });
 

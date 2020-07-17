@@ -52,7 +52,7 @@ class LmsCommonActionPage {
             if (txt.match(stringToMatch)) {
                 let childWebElement = await this.driver_.findElementWithInElementByXpath(childLocator, elementList[i]);
                 if (doClick) {
-                    console.info("clicking on print certificate link of course: " + txt);
+                    console.info("clicking on link: " + txt);
                     await this.driver_.myexec("document.querySelector(\"#scrollable\").scrollTo(0,document.querySelector(\"#scrollable\").scrollHeight)");
                     await childWebElement.click();
                 }
@@ -97,8 +97,26 @@ class LmsCommonActionPage {
     }
 
 
+    //This method return length of login user header icon and help to recongnise the user
+    async verifyLoginUserHeaderIcons(iconsLocator){
+        let headerIcons =  await this.driver_.findElementsList(iconsLocator);
+        return headerIcons.length;
+    }
 
 
+    async enrollmentDateRange(){
+        let currentDate = new Date();
+        let startDate = await currentDate.toLocaleDateString("en-US");
+
+        let curentDate = new Date();
+        let currentDatePlus100Days = 10;
+        curentDate.setTime(currentDate.getTime() + (currentDatePlus100Days * 24 *60 * 60 * 1000));
+        let endDate = await curentDate.toLocaleDateString("en-US");
+
+        return {
+            startDate, endDate
+        };
+    }
 
 
 

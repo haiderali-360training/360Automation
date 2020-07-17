@@ -6,6 +6,7 @@
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
 class LmsEnrollmentWizardPage {
 
@@ -15,9 +16,10 @@ class LmsEnrollmentWizardPage {
         return this.driver_.findByTitle(locator.planAndEnroll.title);
     }
 
-    verifyPageHeading(){
+    //TODO Remove this method after running complete Testcases
+    /*verifyPageHeading(){
         return this.driver_.findById("page-icon");
-    }
+    }*/
 
     async clickEnrollmentByCourse_wizard(){
 
@@ -48,14 +50,20 @@ class LmsEnrollmentWizardPage {
         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
 
         //step 4
+        let dateValues = await lmsCommonUtilsPage.enrollmentDateRange();
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, dateValues.startDate);
+        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, dateValues.endDate);
+        //await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, bp.formatDate(new Date()));
+        //await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, bp.formatDate(new Date()));
 
-        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentStartDate, bp.formatDate(new Date()));
-        await this.driver_.findTextBoxAndWrite(locator.enrollmentWizard.enrollmentEndDate, bp.formatDate(new Date()));
+
+
         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnNext);
         //step 5
         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnFinish);
         //step 6
         await this.driver_.findButtonAndClick(locator.enrollmentWizard.btnOK);
+        console.info("Enrollment Done");
 
         return true;
     }

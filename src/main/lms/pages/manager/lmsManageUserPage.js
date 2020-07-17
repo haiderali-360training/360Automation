@@ -1,3 +1,4 @@
+/*
 const { By, until } = require('selenium-webdriver');
 const chai = require('chai');
 const expect = chai.expect;
@@ -73,7 +74,7 @@ class LmsManageUserPage
 
     confirmUserAddedSuccessfully(localVar, done)
     {
-        page_driver.findElements(By.xpath("//*[@id='searchResult']//tr/td[4]"))
+        page_driver.findElements(By.xpath("//!*[@id='searchResult']//tr/td[4]"))
         .then(function(eleArray)
         {         
             var splitValues = [];
@@ -105,4 +106,4 @@ class LmsManageUserPage
         });
     }
 }
-module.exports = LmsManageUserPage;
+module.exports = LmsManageUserPage;*/

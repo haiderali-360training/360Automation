@@ -19,8 +19,9 @@ class LmsGuidedTourPage  {
         return this.driver_.findByTitle(locator.guidedTour.managerModePageTitle);
     }
 
-    verifyGuidedTourPageHeading(){
-        return this.driver_.findElementAndClick_Css(locator.guidedTour.guidedTourPageHeading);
+    async verifyGuidedTourPageHeading(){
+        let guidedTourHeading = await this.driver_.findElementByCss(locator.guidedTour.guidedTourPageHeading);
+        return guidedTourHeading.getText();
     }
 
      async clickToContinue(){

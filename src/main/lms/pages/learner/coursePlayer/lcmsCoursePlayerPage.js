@@ -14,6 +14,11 @@ class LcmsCoursePlayerPage {
         return this.driver_.findByTitle(locator.coursePlayerPage.title);
     }
 
+    async verifyScormPageTitle(){
+        await this.driver_.switchToAlert();
+        //return this.driver_.findByTitle(locator.coursePlayerPage.scormTitle);
+    }
+
 
     async confirmCourseNameOnLcmsCoursePlayerPage(){
         console.info("Switched Successfully to LCMS Course Player Page");
@@ -22,6 +27,19 @@ class LcmsCoursePlayerPage {
         let courseName = await cName.getText();
         console.info("Course Name Appear on Course Player: " + courseName);
         return courseName;
+    }
+
+    async switchToScormPlayerWindow(){
+        await this.driver_.switchToFrame();
+
+    }
+
+    async verifyScormCoursePageHeading(){
+        await this.driver_.switchToDefaultContent();
+        let scormContentHeading = await this.driver_.findElementByCss(locator.coursePlayerPage.scormCourseContentHeading);
+        let scormPageHeading = await scormContentHeading.getText();
+        console.info(scormPageHeading);
+        return scormPageHeading;
     }
 
 

@@ -1,3 +1,4 @@
+/*
 const { By, until } = require('selenium-webdriver');
 const chai = require('chai');
 const expect = chai.expect;
@@ -39,4 +40,4 @@ class LmsManagerPageHeadersPage
         });        
     }
 }
-module.exports = LmsManagerPageHeadersPage;
+module.exports = LmsManagerPageHeadersPage;*/

@@ -22,6 +22,7 @@ class LmsManageUserAddPage {
 
         __cache.set(locator.cacheKey.email, uName);
         __cache.set(locator.addNewUser.userName, uName);
+        __cache.set(locator.addNewUser.passwordField, "password1");
 
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.firstName, __faker.name.firstName());
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.lastName, __faker.name.lastName());
@@ -30,11 +31,11 @@ class LmsManageUserAddPage {
         await this.driver_.findElementByIdAndClear(locator.addNewUser.userName);
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.userName, __cache.get(locator.addNewUser.userName));
         console.info("New Learner User Name: "+ __cache.get(locator.addNewUser.userName));
-        await this.driver_.findTextBoxAndWrite(locator.addNewUser.passwordField, "password1");
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.passwordField, __cache.get(locator.addNewUser.passwordField));
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.confirmPasswordField, "password1");
 
         await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
-        return true;
+        return __cache.get(locator.addNewUser.userName);
     }
 
     async clickLoginAsLearner(){

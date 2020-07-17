@@ -18,7 +18,6 @@ class LmsManageUserListPage {
 
     async clickToAddUserButton(){
         await this.driver_.findButtonAndClick(locator.ManageUserList.btnAdd_User);
-        return true;
     }
 
     async clickToSearchUserButton(){
@@ -48,6 +47,24 @@ class LmsManageUserListPage {
         console.info(l);
         return true;
     }
+
+
+    async confirmUserAddedSuccessfully(){
+        let searchResultRow = await this.driver_.findAllWebElements(locator.ManageUserGroup.searchResultGrid);
+        let searchResultData = await searchResultRow[3].getText();
+        console.info(searchResultData);
+        return searchResultData;
+    }
+
+    async clickManageEnrollments(){
+        let managerEnrollmentLink = await this.driver_.findById(locator.manageUserLeftMenuItems.manageEnrollmentMenu);
+        managerEnrollmentLink.click();
+    }
+
+
+
+
+
 
 }
 

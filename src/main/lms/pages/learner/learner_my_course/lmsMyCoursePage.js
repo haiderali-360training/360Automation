@@ -31,6 +31,10 @@ class LmsMyCoursePage {
         return "";
     }
 
+    async selectShowRecentlyAccessedCoursesOptionFromDropdown() {
+        await this.driver_.selectOptionFromDropdown(locator.myCoursePage.myCoursePageDropdown, "recent");
+    }
+
     async selectShowEnrolledCoursesOptionFromDropdown() {
         await this.driver_.selectOptionFromDropdown(locator.myCoursePage.myCoursePageDropdown, "enrolled");
     }
@@ -42,6 +46,10 @@ class LmsMyCoursePage {
 
     async selectAvailableCoursesOptionFromDropdown(){
         await this.driver_.selectOptionFromDropdown(locator.myCoursePage.myCoursePageDropdown, "coursecatalog");
+    }
+
+    async selectExpiredCoursesOptionFromDropdown(){
+        await this.driver_.selectOptionFromDropdown(locator.myCoursePage.myCoursePageDropdown, "expiredCourses");
     }
 
 
@@ -74,6 +82,21 @@ class LmsMyCoursePage {
         return childElement.getText();
     }
 
+    async clickCourseDescriptionForCourseGroupCourse(courseGroupsCoursesName){
+        await lmsCommonUtilsPage.findMatchingItemAndClickChildItemOrReturnElement(locator.availableFilter.availableCourseGroupsCoursesName, locator.availableFilter.availableCourseDescription, courseGroupsCoursesName, true);
+    }
+
+
+    async clickMoreDetailsLinkOfDesireCourse(moreDetailCourseName){
+        await lmsCommonUtilsPage.findMatchingItemAndClickChildItemOrReturnElement(locator.myCoursePage.enrollCourseClassName, locator.myCoursePage.myCourseMoreDetailLink, moreDetailCourseName, true);
+    }
+
+    async getLastAccessedDateFromCourse(courseNameForLastAccessedDate){
+        let lastAccessedDate = await lmsCommonUtilsPage.findMatchingItemAndClickChildItemOrReturnElement(locator.myCoursePage.enrollCourseClassName, locator.myCoursePage.myCourseLastAccessedDate, courseNameForLastAccessedDate, false);
+        let lastAccessedDateString = await lastAccessedDate.getText();
+        return lastAccessedDateString.substring(15,28);
+    }
+
     async verifyAvailableFilterCourseGroupsHeading(){
         let courseGroupsHeading = await this.driver_.findElementByCss(locator.availableFilter.availableFilterCourseGroupsHeading);
         return courseGroupsHeading.getText();
@@ -88,6 +111,37 @@ class LmsMyCoursePage {
         let coursesHeadingAfterClick = await this.driver_.findByXpath(locator.availableFilter.availableCourseGroupsCoursesHeading);
         return coursesHeadingAfterClick.getText();
     }
+
+    async verifyCourseNameOnCourseDescriptionPopup(){
+        let courseDescriptionHeading = await this.driver_.findElementByCss(locator.availableFilter.availableCourseDescriptionHeading);
+        return courseDescriptionHeading.getText();
+    }
+
+    async closeCourseDescriptionPopup(){
+        let courseDescriptionClose =  await this.driver_.findElementByCss(locator.availableFilter.availableCourseDescriptionPopupClose);
+        courseDescriptionClose.click();
+    }
+
+    async verifyBreadCrumb(){
+        let breadCrumb = await this.driver_.findById(locator.availableFilter.availableCourseBreadcrumb);
+        return breadCrumb.getText();
+    }
+
+    async verifyExpiredCourses(){
+        let expiredCourseExpiry = await this.driver_.findElementsList(locator.expiredFilter.expiredCourseExpiryDate);
+        return expiredCourseExpiry[0].getText();
+    }
+
+    async verifyNoCoursesShouldBeDisplayedInRecentAccessedCourseFilter(){
+        let recentAccessedCourseList = await this.driver_.findByXpath(locator.recentlyAccessedCourseFilter.emptyGrid);
+        return recentAccessedCourseList.isDisplayed();
+    }
+
+    async verifyCoursesNameShouldBeDisplayedInRecentAccessedCourse(recentlyAccessedCourse){
+        return lmsCommonUtilsPage.findMatchingItemAndClick(locator.recentlyAccessedCourseFilter.recentlyAccessedCoursesList, recentlyAccessedCourse, false);
+    }
+
+
 
 
 

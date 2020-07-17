@@ -22,7 +22,7 @@ class BasePage {
        return a.click();
    }
 
-   //Header menu bar
+   //TODO NO User Of This Method Need To Remove
    static  async headerIconsClick(id)  {
        let a = await this.driver_.findById(id);
        return a.click();
