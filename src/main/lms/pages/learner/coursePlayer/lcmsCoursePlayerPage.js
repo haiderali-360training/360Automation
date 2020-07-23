@@ -14,7 +14,7 @@ class LcmsCoursePlayerPage {
         return this.driver_.findByTitle(locator.coursePlayerPage.title);
     }
 
-    async verifyScormPageTitle(){
+    async removeAlert(){
         await this.driver_.switchToAlert();
         //return this.driver_.findByTitle(locator.coursePlayerPage.scormTitle);
     }
@@ -30,12 +30,13 @@ class LcmsCoursePlayerPage {
     }
 
     async switchToScormPlayerWindow(){
-        await this.driver_.switchToFrame();
+        await this.driver_.switchToFrame(locator.coursePlayerPage.iframeOne);
 
     }
 
     async verifyScormCoursePageHeading(){
-        await this.driver_.switchToDefaultContent();
+        //await this.driver_.switchToDefaultContent();
+        await this.driver_.switchToFrame(locator.coursePlayerPage.iframeTwo);
         let scormContentHeading = await this.driver_.findElementByCss(locator.coursePlayerPage.scormCourseContentHeading);
         let scormPageHeading = await scormContentHeading.getText();
         console.info(scormPageHeading);

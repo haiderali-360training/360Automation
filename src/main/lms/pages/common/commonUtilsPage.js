@@ -8,6 +8,10 @@ class LmsCommonActionPage {
         this.driver_ = bp.getDriver();
     }
 
+    async verifyTitle(pageTitle){
+        return this.driver_.findByTitle(pageTitle);
+    }
+
     async verifyPageHeading(){
         let pageHeadingElement = await this.driver_.findById(locator.commonElements.commonPageHeadingId);
         return pageHeadingElement.getText();
@@ -97,26 +101,47 @@ class LmsCommonActionPage {
     }
 
 
-    //This method return length of login user header icon and help to recongnise the user
-    async verifyLoginUserHeaderIcons(iconsLocator){
+    //TODO Remove this Method
+    /*async verifyLoginUserHeaderIcons(iconsLocator){
         let headerIcons =  await this.driver_.findElementsList(iconsLocator);
         return headerIcons.length;
-    }
+    }*/
 
 
-    async enrollmentDateRange(){
+    enrollmentDateRange(){
         let currentDate = new Date();
-        let startDate = await currentDate.toLocaleDateString("en-US");
+        let startDate = this.formatDate(currentDate).toString();
 
-        let curentDate = new Date();
         let currentDatePlus100Days = 10;
-        curentDate.setTime(currentDate.getTime() + (currentDatePlus100Days * 24 *60 * 60 * 1000));
-        let endDate = await curentDate.toLocaleDateString("en-US");
+        currentDate.setTime(currentDate.getTime() + (currentDatePlus100Days * 24 *60 * 60 * 1000));
+        let endDate = this.formatDate(currentDate).toString();
 
         return {
             startDate, endDate
         };
     }
+
+
+    formatDate(date)  {
+        let d = new Date(date),
+            month = "" + (d.getUTCMonth() + 1),
+            day = "" + (d.getUTCDate()),
+            year = d.getUTCFullYear();
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+        //return [year, month, day].join("-");
+        return [month, day, year].join("/");
+    }
+
+
+
+    async clickButtonByDivContainText(){}
+
+    async clickButtonBySpanContainText(){}
+
+    async clickButtonByATagContainText(){}
+
+
 
 
 

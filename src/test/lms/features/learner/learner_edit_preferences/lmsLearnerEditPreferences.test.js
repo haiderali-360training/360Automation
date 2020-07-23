@@ -9,7 +9,6 @@ const
     lmsGuidedTourPage = require(__basedir + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
     lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js"),
     lmsHeaderIconsPage = require(__basedir + "/src/main/lms/pages/common/lmsHeaderIconsPage.js"),
-    lmsMyProfilePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_profile/lmsMyProfilePage.js"),
     lmsMyPreferencesPage = require(__basedir + "/src/main/lms/pages/learner/learner_my_profile/lmsMyPreferencesPage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
@@ -31,9 +30,10 @@ describe("Verify Learner Edit Preferences Test", function () {
         await lmsGuidedTourPage.clickToContinue();
     });
 
-    test("Verify Header Icons and Click on My Profile Icon", async () => {
-        let headerIconLength = await lmsCommonUtilsPage.verifyLoginUserHeaderIcons(locator.header.headerIcons);
-        expect(headerIconLength).toEqual(4);
+
+    test("Verify My Course Page and Click My Profile Icon", async () => {
+        let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
+        expect(myCoursePageHeading).toEqual("My Courses");
         await lmsHeaderIconsPage.clickMyProfile();
     });
 

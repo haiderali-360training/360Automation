@@ -61,12 +61,13 @@ module.exports.licenseAgreementPage = {
 
 
 module.exports.guidedTour = {
+    guidedTourPageHeading: "#content b",
+    guidedTourPageHeadingText: "GUIDED TOUR",
     logOutXpath: "//*[@id=\"footer\"]/div[2]/a",
     managerModePageTitle: "LMS - Manager Mode",
     learnerModePageTitle: "LMS - Learner Mode",
     btnContinue: "Continue",
     btnContinueClassName: "btn_normal",
-    guidedTourPageHeading: "#content b",
     guidedTourUserType: "#user-type-table img"
 };
 
@@ -174,13 +175,18 @@ module.exports.completedFilter = {
 module.exports.availableFilter = {
     availableFilterCourseGroupsHeading: "#browse-content-heading .browse-content-table-heading div",
     availableFilterCoursesHeading: "coursegroup-courses-title",
+    availableCourseGroupsCoursesTitle: "#coursegroup-courses #coursegroup-courses-title",
     availableCourseGroups: "#browse-group-name.browse-name",
     availableCourseGroupsCoursesHeading: "//div[contains(text(),'ATC Courses')]",
     availableCourseGroupsCoursesName: "#coursegroup-courses div[id*='course-title-']",
     availableCourseDescription: "../div/div",
     availableCourseDescriptionHeading: "#overlay-header td[nowrap]",
     availableCourseDescriptionPopupClose: "#overlay td>div#overlay-close",
-    availableCourseBreadcrumb: "crumb-0"
+    availableCourseBreadcrumb: "crumb-0",
+    availableFirstCourseGroups: "browse-group-name",
+    availableFilterSubGroupsOfCourseGroup: "column-1",
+    availableTrainingPlanSubCourseGroups: "#column-1 #table-browse #browse-group-name",
+    trainingPlanSubCourseGroups: "ATC_TrainingPlan Courses"
 };
 
 
@@ -197,7 +203,9 @@ module.exports.recentlyAccessedCourseFilter = {
 module.exports.coursePlayerPage = {
     title: "LCMS Course Player",
     scormTitle: "Course Launch",
-    scormCourseContentHeading: "html>body>h1",
+    iframeOne: "course",
+    iframeTwo: "contentFrame",
+    scormCourseContentHeading: "iframe#course iframe#contentFrame h1",
     courseNameInLeftMenu: ".left-menu.menu-wrapper #coursetitle",
     chkAcknowledge: "Checkbox1",
     //btnNext: "PlaybuttonEnText",
@@ -231,6 +239,7 @@ module.exports.learnerMyTranscriptsReports = {
     learnerMyTranscriptsLeftMenu: "#left-navigation [title]",
     learnerExecuteReportButton: "btn_normal",
     learnerPerformanceByCourseReportGrid: "reportDataContainer",
+    learnerPerformanceByCourseGridData: "#reportDataContainer tbody tr :nth-child(1)",
     learnerPerformanceByCourseReportColumns: ".row_1",
     PerformanceByCourseReportName: "Performance by Course",
     PerformanceByCourseTranscriptReportName: "Performance by Course (Transcript)",
@@ -255,8 +264,19 @@ module.exports.learnerMyProfile = {
     profilePasswordTextBox: "[name='password']",
     profileConfirmPasswordTextBox: "[name='confirmpassword']",
     profileLeftMenu: "#table-bands #manageUsers",
-    profileLeftMenuMyPreferences: "My Preferences"
+    profileLeftMenuMyPreferences: "My Preferences",
+    profileReportingFields: ".content-Block .row_text",
+    dateReportingFieldLabel: "ATCDate",
+    dateReportingFieldTextBox: "../../td[3]/span/input",
+    dateReportingField: "creditReportingField0",
+    chooseMenuReportingFieldLabel: "ATCChooseMenu",
+    chooseMenuReportingFieldTextBox: "#creditReportingField1>option",
+    SSNReportingFieldLabel: "ATCSSN",
+    SSNReportingFieldTextBox: "../../td[3]/input",
+    SSNReportingField: "creditReportingField2"
 };
+
+
 
 module.exports.myPreferences = {
     myPreferencesHeadingText: "Preferences",
@@ -275,6 +295,20 @@ module.exports.myPreferences = {
 module.exports.printCertificate = {
     printCertificateTitle: "atc_smoke",
     printCertificateLink: "../div/a[starts-with(@href, 'javascript:printCertificate')]"
+};
+
+
+module.exports.scormCloud = {
+    scormCloudPageTitle: "SCORM Cloud - Log in securely to your account",
+    scormCloudUserNameField: "email",
+    scormCloudPasswordField: "password",
+    scormCloudSubmitButton: "input[value='Submit']",
+    scormCloudHomePageLogo: "navbar-logo",
+    scormCloudLibraryOption: ".navLibrary.navCourse.navCourseUploads",
+    scormCloudLibraryPageHeading: "h1:nth-child(1)",
+    scormCloudLibraryPageHeadingText: "Your Course Library",
+    scormCloudCoursesList: "tr>td>a:nth-child(1)",
+    scormCloudResitProgressButtonText: "Reset Progress"
 };
 
 

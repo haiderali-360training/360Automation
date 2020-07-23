@@ -34,12 +34,12 @@ describe("Lms Learner My Courses Test", function () {
         });
 
 
-        test("Enter Login Credentials and Login Manager", async () => {
+        test("Enter Login Credentials and Login  Manager", async () => {
             let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.ManagerUserName"), __appProperties.get("lms.ManagerPassword"));
             expect(a).toBe(true);
         });
 
-        test("Verify Guided Tour Page and Title", async () => {
+        test("Verify Guided Tour Page and  Title ", async () => {
             let guidedTourPageTitle = await lmsGuidedTourPage.verifyGuidedTourPageTitleForManager();
             await lmsGuidedTourPage.verifyGuidedTourPageHeading();
             await lmsGuidedTourPage.clickToContinue();
@@ -79,9 +79,9 @@ describe("Lms Learner My Courses Test", function () {
             expect(confirmUserAdded).toEqual(__cache.get(locator.addNewUser.userName));
         });
 
-        test("Verify Manager Page Headers Menu And Click Plan Enroll Button", async () => {
-            let managerHeaderIconLength =  await lmsCommonUtilsPage.verifyLoginUserHeaderIcons(locator.header.headerIcons);
-            expect(managerHeaderIconLength).toEqual(5);
+        test("Verify Manage Page Heading And Click Plan & Enroll Button", async () => {
+            let manageUserPageHeading = await lmsCommonUtilsPage.verifyPageHeading();
+            expect(manageUserPageHeading).toEqual("Manage Users");
             await lmsHeaderIconsPage.clickPlanAndEnroll();
         });
 
@@ -127,8 +127,12 @@ describe("Lms Learner My Courses Test", function () {
 
 
 
+
+
+
+
         //New Learner Login
-        test("Enter Login Credentials and Login Learner", async () => {
+        test("Enter Login Credential and Login Learner", async () => {
             let a = await lmsLoginPage.enterCredentialsOnLogin(__cache.get(locator.addNewUser.userName), __cache.get(locator.addNewUser.passwordField));
             expect(a).toBe(true);
         });
@@ -146,7 +150,7 @@ describe("Lms Learner My Courses Test", function () {
         });
 
 
-        test("Verify License Agreement Page and Click Agree Button", async () => {
+        test("Verify License Agreement Page And Click Agree Button", async () => {
             let licenseAgreementPageHeading = await lmsLicenseAgreementPage.verifyLicenseAgreementPage();
             expect(licenseAgreementPageHeading).toEqual("License Agreement!");
             await lmsLicenseAgreementPage.clickButtonIAgree();
@@ -263,6 +267,8 @@ describe("Lms Learner My Courses Test", function () {
 
             let courseGroupsCoursesHeading = await lmsMyCoursePage.verifyCoursesHeadingAfterClickCourseGroup();
             expect(courseGroupsCoursesHeading).toEqual("ATC COURSES");
+
+
         });
     });
 

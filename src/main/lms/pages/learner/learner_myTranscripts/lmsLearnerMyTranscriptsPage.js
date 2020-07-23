@@ -5,6 +5,9 @@
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
+
+
 
 class LmsLearnerMyTranscriptsPage {
 
@@ -52,6 +55,14 @@ class LmsLearnerMyTranscriptsPage {
     async verifyReport(){
         let performanceByCourseReportColumns = await this.driver_.findAllWebElements(locator.learnerMyTranscriptsReports.learnerPerformanceByCourseReportColumns);
         return (performanceByCourseReportColumns.length === 10);
+    }
+
+
+    async verifyPerformanceByCourseReportGridData(enrolledCourse){
+        return lmsCommonUtilsPage.findMatchingItemAndClick(locator.learnerMyTranscriptsReports.learnerPerformanceByCourseGridData, enrolledCourse, false);
+
+
+
     }
 
 }

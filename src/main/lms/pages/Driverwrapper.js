@@ -18,7 +18,7 @@ const DriverWrapper = function() {
 
     // visit a webPage
     this.visit = async function(theUrl) {
-        return await driver.get(theUrl);
+        return driver.get(theUrl);
     };
 
     //switch to course play window
@@ -55,35 +55,49 @@ const DriverWrapper = function() {
     };
 
 
-    this.switchToFrame = async function () {
+    this.switchToFrame = async function (iFrame) {
         try{
             console.info("Before Switching");
-            await driver.switchTo().frame("course");
+            await driver.switchTo().frame(iFrame);
             console.info("After Switching on Iframe");
 
         }catch (e) {
+            await this.switchToAlert();
             console.info("ERROR::::"+e.toString());
+
         }
     };
 
 
+    this.switchToFrameTwo = async function (iFrameTwo) {
+        try{
+
+            console.info("Before Switching");
+            await driver.switchTo().frame(iFrameTwo);
+            console.info("After Switching on Iframe");
+
+        }catch (e) {
+            //await this.switchToAlert();
+            console.info("ERROR:Switchframe2:::"+e.toString());
+
+        }
+    };
+
 
     this.switchToAlert = async function () {
-        //await driver.wait(until.alertIsPresent());
+
         let tr = await driver.switchTo().alert();
-        await tr.accept();
-        /*try{
-            //driver.wait(until.alertIsPresent());
-            await driver.switchTo().alert().accept();
-        }catch (e) {
-            console.info("ERROR::::"+e.toString());
-        }*/
+        await tr.accept().then(function () {
+            console.info("switching back to active content");
+        }).catch(function (err) {
+            console.info(err);
+        });
     };
 
 
     this.switchToDefaultContent = async function () {
         try{
-            await driver.switchTo().defaultContent();
+            await driver.switchTo().activeElement();
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
@@ -154,7 +168,7 @@ const DriverWrapper = function() {
         return cssEle.click();
     };
 
-    // wait and find a button click
+    // wait and find a button click clickButtonByDivText()
     this.findButtonAndClick = async function(buttonTxt) {
         let xp = "//div[text()='"+buttonTxt+"']";
         await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");

@@ -37,9 +37,10 @@ describe("Lms Learner Edit Profile Test", function () {
             await lmsGuidedTourPage.clickToContinue();
         });
 
-        test("Verify Header Icons and Click on My Profile Icon", async () => {
-            let headerIconLength = await lmsCommonUtilsPage.verifyLoginUserHeaderIcons(locator.header.headerIcons);
-            expect(headerIconLength).toEqual(4);
+        test("Verify My Course Page and Click My Profile Icon", async () => {
+            let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
+            expect(myCoursePageHeading).toEqual("My Courses");
+
             await lmsHeaderIconsPage.clickMyProfile();
         });
 
@@ -147,14 +148,9 @@ describe("Lms Learner Edit Profile Test", function () {
             await lmsLicenseAgreementPage.clickButtonIAgree();
         });
 
-        test("Verify My Course Page", async () => {
+        test("Verify My Course Page and Click My Profile Icon", async () => {
             let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
             expect(myCoursePageHeading).toEqual("My Courses");
-        });
-
-        test("Verify Header Icons and Click on My Profile Icon", async () => {
-            let headerIconLength = await lmsCommonUtilsPage.verifyLoginUserHeaderIcons(locator.header.headerIcons);
-            expect(headerIconLength).toEqual(4);
             await lmsHeaderIconsPage.clickMyProfile();
         });
 
@@ -264,15 +260,12 @@ describe("Lms Learner Edit Profile Test", function () {
         test("Verify My Course Page", async () => {
             let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
             expect(myCoursePageHeading).toEqual("My Courses");
-        });
-
-        test("Verify Header Icons and Click on My Profile Icon", async () => {
-            let headerIconLength = await lmsCommonUtilsPage.verifyLoginUserHeaderIcons(locator.header.headerIcons);
-            expect(headerIconLength).toEqual(4);
             await lmsHeaderIconsPage.clickMyProfile();
         });
 
         test("Change New User Password and Verify Success Message", async () => {
+            let myProfilePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
+            expect(myProfilePageHeading).toEqual("Profile");
             await lmsMyProfilePage.enterPasswordAndConfirmPasswordValuesAndClickSave();
 
             let updateSuccessMsgTF = await lmsMyProfilePage.verifySuccessMessageAfterUpdateLearnerFirstAndLastName();

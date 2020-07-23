@@ -4,7 +4,6 @@
  */
 
 const driverWrapper = require(__basedir+"/src/main/lms/pages/Driverwrapper.js");
-const locator = require(__basedir+"/src/main/lms/pages/locator.js");
 
 class BasePage {
 
@@ -16,32 +15,5 @@ class BasePage {
         return this.driver_;
     }
 
-    static async logoutMe()  {
-       await this.driver_.findByTitle(locator.guidedTour.title);
-       let a = await this.driver_.findByXpath(locator.guidedTour.logOutXpath);
-       return a.click();
-   }
-
-   //TODO NO User Of This Method Need To Remove
-   static  async headerIconsClick(id)  {
-       let a = await this.driver_.findById(id);
-       return a.click();
-   }
-
-   static async formatDate(date)  {
-       let d = new Date(date),
-           month = "" + (d.getUTCMonth() + 1),
-           day = "" + (d.getUTCDate()),
-           year = d.getUTCFullYear();
-       if (month.length < 2) month = "0" + month;
-       if (day.length < 2) day = "0" + day;
-       //return [year, month, day].join("-");
-       return [month, day, year].join("/");
-   }
-
 }
-
-
 module.exports = BasePage;
-//module.exports.faker = fakers;
-//module.exports.cache = cache;

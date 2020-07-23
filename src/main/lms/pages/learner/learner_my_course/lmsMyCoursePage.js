@@ -57,6 +57,10 @@ class LmsMyCoursePage {
         await lmsCommonUtilsPage.findMatchingItemAndClick(locator.myCoursePage.enrollCourseClassName, enrolledCourse, true);
     }
 
+    async clickOnAvailableCourseNameToLaunchCoursePlayer(availableCourse) {
+        await lmsCommonUtilsPage.findMatchingItemAndClick(locator.availableFilter.availableCourseGroupsCoursesName, availableCourse, true);
+    }
+
 
     async verifyEnrolledCourseNameDisplayedOnEnrolledCourseListing(enrollCourseName){
         return lmsCommonUtilsPage.findMatchingItemAndClick(locator.myCoursePage.enrollCourseClassName, enrollCourseName, false);
@@ -65,6 +69,10 @@ class LmsMyCoursePage {
 
     async verifyCompletedCourseNameDisplayedAndCompletedStatus(completedCourseName){
         return lmsCommonUtilsPage.findMatchingItemAndClick(locator.myCoursePage.enrollCourseClassName, completedCourseName, false);
+    }
+
+    async clickOnTrainingPlanSubCourseGroup(subCourseGroupTP){
+        return lmsCommonUtilsPage.findMatchingItemAndClick(locator.availableFilter.availableTrainingPlanSubCourseGroups, subCourseGroupTP, true);
     }
 
 
@@ -110,6 +118,16 @@ class LmsMyCoursePage {
     async verifyCoursesHeadingAfterClickCourseGroup(){
         let coursesHeadingAfterClick = await this.driver_.findByXpath(locator.availableFilter.availableCourseGroupsCoursesHeading);
         return coursesHeadingAfterClick.getText();
+    }
+
+    async verifySubGroupsOfTrainingPlanSection(){
+        let subGroupsVisible = await this.driver_.findById(locator.availableFilter.availableFilterSubGroupsOfCourseGroup);
+        return subGroupsVisible.isDisplayed();
+    }
+
+    async verifyTrainingPlanCoursesGridHeading(){
+        let subGroupsHeading = await this.driver_.findById(locator.availableFilter.availableCourseGroupsCoursesTitle);
+        return subGroupsHeading.getText();
     }
 
     async verifyCourseNameOnCourseDescriptionPopup(){
