@@ -8,16 +8,27 @@ class LmsCommonActionPage {
         this.driver_ = bp.getDriver();
     }
 
+    /*
+    * Common Page Titles
+    * */
     async verifyTitle(pageTitle){
         return this.driver_.findByTitle(pageTitle);
     }
 
+
+    /*
+    * Common Page Headings
+    * */
     async verifyPageHeading(){
         let pageHeadingElement = await this.driver_.findById(locator.commonElements.commonPageHeadingId);
         return pageHeadingElement.getText();
     }
 
 
+
+    /*
+    * Common Looping on My Course Page and Some Other Pages
+    * */
     async findMatchingItemAndClick(locator, stringToMatch, doClick){
 
         let elementList = await this.driver_.findElementsList(locator);
@@ -47,6 +58,9 @@ class LmsCommonActionPage {
 
 
 
+    /*
+    * Special Common Looping on Child Elements
+    * */
     async findMatchingItemAndClickChildItemOrReturnElement(parentLocator, childLocator, stringToMatch, doClick) {
         let elementList = await this.driver_.findElementsList(parentLocator);
         console.info(elementList.length);
@@ -74,7 +88,9 @@ class LmsCommonActionPage {
 
 
 
-
+    /*
+    * Common loop to cover most of the looping needs
+    * */
     async findMatchingItemAndClicks(locator, stringToMatch, doClick){
 
         let elementList = await this.driver_.findElementsList(locator);
@@ -101,13 +117,32 @@ class LmsCommonActionPage {
     }
 
 
-    //TODO Remove this Method
-    /*async verifyLoginUserHeaderIcons(iconsLocator){
-        let headerIcons =  await this.driver_.findElementsList(iconsLocator);
-        return headerIcons.length;
-    }*/
 
 
+
+    async customWaitFunctionInMilliSeconds(waitMilliSeconds){
+
+        console.time("Before SetTime Start");
+
+        await new Promise(resolve => {
+
+            setTimeout(() => {
+
+                console.info("resolve.....");
+
+                resolve();
+
+            }, waitMilliSeconds);
+        });
+        console.timeEnd("Before SetTime Start");
+    }
+
+
+
+
+    /*
+    * Common Date Function
+    * */
     enrollmentDateRange(){
         let currentDate = new Date();
         let startDate = this.formatDate(currentDate).toString();
@@ -135,16 +170,9 @@ class LmsCommonActionPage {
 
 
 
-    async clickButtonByDivContainText(){}
-
-    async clickButtonBySpanContainText(){}
-
-    async clickButtonByATagContainText(){}
-
-
-
-
-
+    /*
+    * Common Logout
+    * */
     async lmsUserLogout() {
         await this.driver_.findElementAndClick_Css(locator.userLogout.learnerLogoutCssElement);
     }

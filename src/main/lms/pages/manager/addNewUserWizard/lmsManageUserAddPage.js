@@ -17,7 +17,7 @@ class LmsManageUserAddPage {
 
         let today = new Date();
         let currentDateTime = today.getFullYear() + "" + (today.getMonth() + 1) + "" + today.getDate() + "T" +
-            today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+            today.getHours() + "" + today.getMinutes() + "" + today.getSeconds() + "" + today.getMilliseconds();
         let uName = "LMS-ATC-L-" + currentDateTime + "@lms.com";
 
         __cache.set(locator.cacheKey.email, uName);

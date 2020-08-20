@@ -14,7 +14,7 @@ class LmsCourseCertificatePage{
 
 
     async switchToCourseCertificateWindow(){
-        await this.driver_.switchCoursePlayWindow();
+        await this.driver_.switchToWindow();
     }
 
     async verifyCourseCompletionCertificate(){

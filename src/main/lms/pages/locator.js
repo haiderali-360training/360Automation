@@ -205,7 +205,7 @@ module.exports.coursePlayerPage = {
     scormTitle: "Course Launch",
     iframeOne: "course",
     iframeTwo: "contentFrame",
-    scormCourseContentHeading: "iframe#course iframe#contentFrame h1",
+    scormCourseContentHeading: "html>body>h1",
     courseNameInLeftMenu: ".left-menu.menu-wrapper #coursetitle",
     chkAcknowledge: "Checkbox1",
     //btnNext: "PlaybuttonEnText",
@@ -217,8 +217,8 @@ module.exports.coursePlayerPage = {
     btnBeginPostAssessment:"//*[@id=\"BeginPostAssessmentButton\"]",
     btnQuestion:"//*[@id=\"question\"]/div/div[2]/label/span",
     btnQuestionNext:"//*[@id=\"NextQuestionButtonEnText\"]",
-    btnReview:"//*[@id=\"AnswerReviewButtons\"]/div/button"
-//await this.driver_.findButtonAndClick_xpath("//*[@id=\"NextQuestionButtonEnText\"]");
+    btnReview:"//*[@id=\"AnswerReviewButtons\"]/div/button",
+    aiccScormCloudCourseName: "LMSSmokeTestCourse"
 };
 
 module.exports.userLogout = {
@@ -308,7 +308,45 @@ module.exports.scormCloud = {
     scormCloudLibraryPageHeading: "h1:nth-child(1)",
     scormCloudLibraryPageHeadingText: "Your Course Library",
     scormCloudCoursesList: "tr>td>a:nth-child(1)",
-    scormCloudResitProgressButtonText: "Reset Progress"
+    scormCloudResitProgressButton: "//div[contains(text(),'Reset Progress')]",
+    scormCloudCheckZeroProgress: ".card.sandbox-card .sandbox-value",
+    scormCloudTotalTime: "0s",
+    scormCloudLaunchCourseButton: ".btn.btn-success.btn-lg.clickable.right",
+    scormCloudStartButton: ".footer_text a"
+};
+
+
+module.exports.forgotPassword ={
+    forgotPasswordButton: "btn_fp_normal",
+    radioIDontKnowMyPassword: "rdoForgetPassword",
+    radioForgetTypeSelection: "input[name='rdoForgetTypeSelection']",
+    continueButtonText: "Continue",
+    radioEnterYourEmailAddress: "rdoByEmailAddress",
+    enterYourEmailAddressTextbox: "#divEmailSelection>input",
+    submitButtonText: "Submit",
+    successMessageTextElement: "b5",
+    successMessageFirstLineText: "An email with your login information has been sent to you."
+};
+
+module.exports.mailinator = {
+    mailinatorInboxTextField: "addOverlay",
+    mailinatorGoButton: "go-to-public",
+    mailinatorInboxPane: "inboxpane",
+    mailinatorEmailField: "inbox_field",
+    mailinatorEmailMessages: "a.ng-binding",
+    mailinatorEmailForgotPasswordSubject: "Forgot your password?",
+    mailinatorEmailMessageSubject: "#msgpane b.ng-binding",
+    mailinatorInboxFrame: "msg_body",
+    mailinatorResitLink: "a",
+    lmsResitPasswordPageHeading: "b5",
+    lmsResitPasswordHeadingText: "Reset Password",
+    lmsResitPasswordField: "newPassword",
+    lmsResitConfirmPasswordField: "confirmPassword",
+    resitPassword: "12345678a",
+    lmsResitPageContinueButton: "Continue",
+    lmsResitPasswordSuccessful: "#b5 b",
+    lmsResitPasswordSuccessMessage: "Success!",
+    lmsResitPasswordPageContinueSignInBtnText: "CONTINUE TO SIGN IN"
 };
 
 

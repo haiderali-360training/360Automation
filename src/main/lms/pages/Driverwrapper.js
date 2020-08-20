@@ -13,7 +13,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 const DriverWrapper = function() {
 
     const driver = new Builder().forBrowser("chrome").build();
-    driver.manage().window().maximize().then(r => {});
+    driver.manage().window().maximize().then(() => {});
     let elementFindTimeout = 200000; //20 sec
 
     // visit a webPage
@@ -21,20 +21,43 @@ const DriverWrapper = function() {
         return driver.get(theUrl);
     };
 
+
     //switch to course play window
-    this.switchCoursePlayWindow = async function() {
+    this.switchToWindow = async function() {
         try {
-            //const parent = await driver.getWindowHandle();
             let windows_ = await driver.getAllWindowHandles();
             let parent = await windows_[0];
             let coursePlayer = await windows_[1];
             await driver.switchTo().window(coursePlayer);
+            console.info(parent);
             console.info(coursePlayer);
 
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
     };
+
+
+    /*
+    * For move to third window
+    * */
+    this.switchThirdWindow = async function() {
+        try {
+            let windows_ = await driver.getAllWindowHandles();
+            let parent = windows_[0];
+            let child = windows_[1];
+            let subChild = windows_[2];
+            await driver.switchTo().window(child);
+            __cache.set("parentWindowId", parent);
+            console.info(parent);
+            console.info(child);
+            console.info(subChild);
+
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
+    };
+
 
     //switch to main lms window
     this.switchMainWindow = async function() {
@@ -55,6 +78,23 @@ const DriverWrapper = function() {
     };
 
 
+
+    this.switchToSubChildWindowAndClose = async function (parentWindowId) {
+        try {
+            let handles = await driver.getAllWindowHandles();
+            let parent = handles[0];
+            let child = handles[1];
+            if (parent.match(parentWindowId)){
+                console.info("Switching to Sub-Child Window " + child);
+                driver.switchTo().window(child);
+                driver.close();
+            }
+        }catch (e) {
+            console.info("ERROR::::"+e.toString());
+        }
+    };
+
+
     this.switchToFrame = async function (iFrame) {
         try{
             console.info("Before Switching");
@@ -62,7 +102,7 @@ const DriverWrapper = function() {
             console.info("After Switching on Iframe");
 
         }catch (e) {
-            await this.switchToAlert();
+            //await this.switchToAlert();
             console.info("ERROR::::"+e.toString());
 
         }
@@ -86,12 +126,14 @@ const DriverWrapper = function() {
 
     this.switchToAlert = async function () {
 
-        let tr = await driver.switchTo().alert();
+        await driver.switchTo().alert().accept();
+
+        /*let tr = await driver.switchTo().alert();
         await tr.accept().then(function () {
             console.info("switching back to active content");
         }).catch(function (err) {
             console.info(err);
-        });
+        });*/
     };
 
 
@@ -103,6 +145,15 @@ const DriverWrapper = function() {
         }
     };
 
+
+
+    this.maximizeWindow = async function () {
+        await driver.manage().window().maximize();
+    };
+
+    this.closeWindow = async function () {
+        await driver.close();
+    };
 
 
     // quit current session

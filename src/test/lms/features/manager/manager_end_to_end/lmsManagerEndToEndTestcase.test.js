@@ -127,8 +127,8 @@ describe("Lms Manager End To End Test", function lmsManagerEndToEndTest() {
         expect(a);
     });
 
-    it("Verify to launch certificate", async () => {
-        let a = await lmsMyCoursePage.printCertificate();
+    test("Verify to launch certificate", async () => {
+        let a = await lmsMyCoursePage.printCourseCertificate();
         expect(a);
     });
 

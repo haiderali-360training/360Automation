@@ -1,3 +1,4 @@
+/*
 const { By, until } = require('selenium-webdriver');
 const chai = require('chai');
 const expect = chai.expect;
@@ -15,7 +16,7 @@ class LcmsCoursePlayerClosePage
 
 
 
-    /* verifyCoursePlayerClosePage(callback)
+    /!* verifyCoursePlayerClosePage(callback)
     {
         console.log("Inside Close Function");
         setTimeout(function()
@@ -50,7 +51,7 @@ class LcmsCoursePlayerClosePage
             page_driver.findElement(By.id("modal-trigger-save-2")).click();
             done();
         });
-    } */
+    } *!/
 
 
 
@@ -113,4 +114,4 @@ class LcmsCoursePlayerClosePage
 
 
 }
-module.exports = LcmsCoursePlayerClosePage;
+module.exports = LcmsCoursePlayerClosePage;*/

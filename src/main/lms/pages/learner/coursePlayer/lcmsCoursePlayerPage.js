@@ -10,13 +10,16 @@ class LcmsCoursePlayerPage {
 
     constructor(){ this.driver_ = bp.getDriver();}
 
+    async maximizeCoursePlayerWindow(){
+        await this.driver_.maximizeWindow();
+    }
+
     verifyPageTitle (){
         return this.driver_.findByTitle(locator.coursePlayerPage.title);
     }
 
     async removeAlert(){
         await this.driver_.switchToAlert();
-        //return this.driver_.findByTitle(locator.coursePlayerPage.scormTitle);
     }
 
 
@@ -35,10 +38,8 @@ class LcmsCoursePlayerPage {
     }
 
     async verifyScormCoursePageHeading(){
-        //await this.driver_.switchToDefaultContent();
-        await this.driver_.switchToFrame(locator.coursePlayerPage.iframeTwo);
-        let scormContentHeading = await this.driver_.findElementByCss(locator.coursePlayerPage.scormCourseContentHeading);
-        let scormPageHeading = await scormContentHeading.getText();
+        let scormContentHeading = await this.driver_.findAllWebElements(locator.coursePlayerPage.scormCourseContentHeading);
+        let scormPageHeading = await scormContentHeading[0].getText();
         console.info(scormPageHeading);
         return scormPageHeading;
     }
@@ -51,19 +52,16 @@ class LcmsCoursePlayerPage {
     }
 
     async switchToCoursePlayWindow (){
-        return this.driver_.switchCoursePlayWindow();
+        return this.driver_.switchToWindow();
     }
 
     async checkAcknowledgmentButtonAndNext(){
         await this.driver_.findCheckboxAndClick(locator.coursePlayerPage.chkAcknowledge);
-        //await this.driver_.findButtonAndClick_xpath("/html/body/form/div[8]/div[9]/div/div/div[5]/span[2]/a/span");
         await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerNextButton);
-        //return true;
     }
 
     async TermsOfUseClick(){
         await this.driver_.findButtonAndClick_href(locator.coursePlayerPage.btnAgree_Continue);
-        //return true;
     }
 
     async clickNextCourseStartAndComplete(){
@@ -96,6 +94,12 @@ class LcmsCoursePlayerPage {
 
     async closeLcmsCoursePlayerWindowAndSwitchBackToLms(){
         await this.driver_.switchMainWindow();
+    }
+
+
+    async closeLcmsPlayerAndSwitchSubChildWindow(){
+        await this.driver_.closeWindow();
+        await this.driver_.switchToSubChildWindowAndClose(__cache.get("parentWindowId"));
     }
 
 }

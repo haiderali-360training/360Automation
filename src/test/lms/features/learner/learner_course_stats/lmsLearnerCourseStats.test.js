@@ -59,6 +59,8 @@ describe("Lms Learner Check Course Statistics Test", function () {
             expect(statisticsSectionsHeading).toBe(true);
 
             let lastAccessedDateFromCourseStatistics = await lmsCoursesStatisticsPage.verifyLastAccessedDateIsDisplayingInCourseStatisticsPage();
+            console.info("Date from Enrolled Page: " + lastAccessedFromCourse);
+            console.info("Date from Course Statistic Page: " + lastAccessedDateFromCourseStatistics);
             expect(lastAccessedFromCourse).toEqual(lastAccessedDateFromCourseStatistics);
         });
     });

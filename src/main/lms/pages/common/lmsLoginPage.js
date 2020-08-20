@@ -10,8 +10,8 @@ class LmsLoginPage {
 
     constructor(){ this.driver_ = bp.getDriver(); }
 
-    openUrl(){
-        this.driver_.visit(__lmsUrl);
+    async openUrl(url){
+        await this.driver_.visit(url);
         return true;
     }
 

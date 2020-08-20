@@ -16,11 +16,6 @@ class LmsEnrollmentWizardPage {
         return this.driver_.findByTitle(locator.planAndEnroll.title);
     }
 
-    //TODO Remove this method after running complete Testcases
-    /*verifyPageHeading(){
-        return this.driver_.findById("page-icon");
-    }*/
-
     async clickEnrollmentByCourse_wizard(){
 
         //Enrollment Method Selection

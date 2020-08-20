@@ -33,9 +33,43 @@ class AiccScormCloudHomePage {
     }
 
     async resetAICCCourseProgress(){
-        await this.driver_.findButtonAndClick(locator.scormCloud.scormCloudResitProgressButtonText);
-        //await this.driver_.switchToAlert();
+        let resitProgressBtnElement =  await this.driver_.findByXpath(locator.scormCloud.scormCloudResitProgressButton);
+        await resitProgressBtnElement.click();
+        await this.driver_.switchToAlert();
     }
+
+    async verifyCourseProgressResitSuccessful(totalTime){
+        return lmsCommonUtilsPage.findMatchingItemAndClicks(locator.scormCloud.scormCloudCheckZeroProgress, totalTime, false);
+    }
+
+    async clickCourseLaunchButton(){
+        let courseLaunchBtnElement = await this.driver_.findElementByCss(locator.scormCloud.scormCloudLaunchCourseButton);
+        await courseLaunchBtnElement.click();
+    }
+
+    async switchToScormCloudWindowAndClickStartToLaunchCourse(){
+        //TODO discuss time with Haider bhai
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(10000);
+
+        await this.driver_.switchToWindow();
+
+        let pageUrl = await this.driver_.findAndGetCurrentUrl();
+        if (pageUrl.includes("aicc.do")){
+            await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
+            let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+            await clickStartToLaunchCourse.click();
+        }
+    }
+
+    async switchToThirdWindow(){
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(12000);
+        await this.driver_.switchThirdWindow();
+    }
+
+    async scormCloudSignOut(){
+
+    }
+
 
 }
 module.exports = new AiccScormCloudHomePage();

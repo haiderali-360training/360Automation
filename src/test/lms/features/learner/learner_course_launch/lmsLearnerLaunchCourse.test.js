@@ -78,7 +78,7 @@ describe("Lms Learner Launch Course From My Course Page Test", function () {
 
 
 
-//TODO Need to complete
+
     describe("Learner Launch Enrolled Scorm Course From My Courses Page Test", function lmsLearnerLaunchEnrolledScormCourseFromMyCoursesPageTest() {
 
         test("Verify Login Page Title", async () => {
@@ -88,7 +88,7 @@ describe("Lms Learner Launch Course From My Course Page Test", function () {
 
 
         test("Enter Login Credentials and Login Learner", async () => {
-            let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.LearnerUserName"), __appProperties.get("lms.LearnerPassword"));
+            let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.scorm.course.lunch.user"), __appProperties.get("lms.scorm.course.lunch.user.password"));
             expect(a).toBe(true);
         });
 
@@ -108,25 +108,17 @@ describe("Lms Learner Launch Course From My Course Page Test", function () {
 
         test("Select Show Enrolled Courses Option and Launch Enrolled Course", async () => {
             await lmsMyCoursePage.selectShowEnrolledCoursesOptionFromDropdown();
-
-
-            //TODO Continue Code from Here
-            //await lmsMyCoursePage.clickCourseNameToLaunchCoursePlayer(__appProperties.get("lms.atc.test.scorm.course"));
+            await lmsMyCoursePage.clickCourseNameToLaunchCoursePlayer(__appProperties.get("lms.atc.test.scorm.course"));
         });
 
-
-        /*test("Switch to Scorm Course Player and Verify Course Name", async () => {
+        test("Switch to Scorm Course Player and Verify Course Name", async () => {
             await lcmsCoursePlayerPage.switchToCoursePlayWindow();
-
-            //await lcmsCoursePlayerPage.removeAlert();
-
             await lcmsCoursePlayerPage.switchToScormPlayerWindow();
 
-
             let scormCourseContentHeading = await lcmsCoursePlayerPage.verifyScormCoursePageHeading();
-            expect(scormCourseContentHeading).toEqual("Play of the game");
+            expect(scormCourseContentHeading).toEqual("this is test scorm package");
             await lcmsCoursePlayerPage.closeLcmsCoursePlayerWindowAndSwitchBackToLms();
-        });*/
+        });
 
         test("Logout Lms User", async () => {
             await lmsCommonUtilsPage.lmsUserLogout();

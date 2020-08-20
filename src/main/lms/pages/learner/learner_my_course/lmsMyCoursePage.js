@@ -26,7 +26,7 @@ class LmsMyCoursePage {
         await this.driver_.findButtonAndClick_className(locator.myCoursePage.enrolledCourseClassName);
     }
 
-    async printCertificate() {
+    async printCourseCertificate() {
         await this.driver_.findButtonAndClick_className(locator.myCoursePage.printCertificateClassName);
         return "";
     }

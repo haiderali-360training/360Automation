@@ -13,13 +13,13 @@ class AiccScormCloudLoginPage {
     }
 
 
-    async openUrl(url){
+    /*async openUrl(url){
         await this.driver_.visit(url);
         return true;
-    }
+    }*/
 
 
-    async enterCredentialsOnLogin (userName, password){
+    async enterLoginCredentialsForAICCScorm (userName, password){
         await this.driver_.findTextBoxAndWrite(locator.scormCloud.scormCloudUserNameField, userName);
         await this.driver_.findTextBoxAndWrite(locator.scormCloud.scormCloudPasswordField, password);
         await this.driver_.findElementAndClick_Css(locator.scormCloud.scormCloudSubmitButton);

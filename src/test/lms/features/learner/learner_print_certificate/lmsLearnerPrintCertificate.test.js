@@ -28,10 +28,8 @@ describe("Lms Learner Print Certificate Test", function () {
 
 
     test("Verify Guided Tour Page and Title", async () => {
-        let guidedTourPageTitle = await lmsGuidedTourPage.verifyGuidedTourPageTitle();
         await lmsGuidedTourPage.verifyGuidedTourPageHeading();
         await lmsGuidedTourPage.clickToContinue();
-        expect(guidedTourPageTitle).toBe(true);
     });
 
 
