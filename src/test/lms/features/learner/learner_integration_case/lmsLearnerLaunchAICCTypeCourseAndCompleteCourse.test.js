@@ -1,7 +1,8 @@
-/**
+/*
+/!**
  * Created by asadullah.qazi
  * On 7/22/2020}
- **/
+ **!/
 
 global.__basedir = process.cwd();
 const
@@ -72,4 +73,4 @@ describe("Lms Learner AICC Type Course Launch and Course Completion Test", funct
     });
 
 
-});
+});*/
