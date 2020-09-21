@@ -15,11 +15,13 @@ class MailinatorInboxPage {
     }
 
     async verifyMailinatorInboxPage(){
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(500);
         let inboxEmailField = await this.driver_.findById(locator.mailinator.mailinatorEmailField);
         return inboxEmailField.isDisplayed();
     }
 
     async verifyEmailMessagePane(){
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(500);
         let emailMessagePane = await this.driver_.findById(locator.mailinator.mailinatorInboxPane);
         return emailMessagePane.isDisplayed();
     }

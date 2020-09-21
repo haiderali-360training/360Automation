@@ -5,6 +5,7 @@
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
 class LmsManageUserAddPage {
     constructor(){ this.driver_ = bp.getDriver();}
@@ -32,7 +33,8 @@ class LmsManageUserAddPage {
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.userName, __cache.get(locator.addNewUser.userName));
         console.info("New Learner User Name: "+ __cache.get(locator.addNewUser.userName));
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.passwordField, __cache.get(locator.addNewUser.passwordField));
-        await this.driver_.findTextBoxAndWrite(locator.addNewUser.confirmPasswordField, "password1");
+        await this.driver_.findTextBoxAndWrite(locator.addNewUser.confirmPasswordField, __cache.get(locator.addNewUser.passwordField));
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(200);
 
         await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnNext);
         return __cache.get(locator.addNewUser.userName);

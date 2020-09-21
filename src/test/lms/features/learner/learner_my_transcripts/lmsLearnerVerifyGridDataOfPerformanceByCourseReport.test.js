@@ -26,6 +26,12 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
+
+
+
 describe("Verify Grid Data Of Performance By Course Report Test", function verifyGridDataOfPerformanceByCourseReportTest() {
     test("Verify Login Page Title", async () => {
         let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();

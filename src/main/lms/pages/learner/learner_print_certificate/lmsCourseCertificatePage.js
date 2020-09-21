@@ -4,6 +4,7 @@
  **/
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
 
 class LmsCourseCertificatePage{
@@ -30,9 +31,9 @@ class LmsCourseCertificatePage{
     }
 
 
-
-
-
+    async switchToLmsWindow(){
+        await this.driver_.switchToWindow();
+    }
 
 }
 module.exports = new LmsCourseCertificatePage();

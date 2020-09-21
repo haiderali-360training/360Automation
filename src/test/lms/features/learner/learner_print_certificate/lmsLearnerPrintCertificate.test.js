@@ -11,7 +11,9 @@ const
     lmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
     lmsCourseCertificatePage = require(__basedir + "/src/main/lms/pages/learner/learner_print_certificate/lmsCourseCertificatePage.js");
 
-
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 describe("Lms Learner Print Certificate Test", function () {
 

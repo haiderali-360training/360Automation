@@ -15,6 +15,11 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
+
+
 describe("Lms Learner Forgot Password Then Reset Password Test", function lmsLearnerForgotPasswordThenResetPasswordTest() {
 
     test("Navigate To Lms Page", async () => {

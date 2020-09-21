@@ -44,6 +44,7 @@ class AiccScormCloudHomePage {
 
     async clickCourseLaunchButton(){
         let courseLaunchBtnElement = await this.driver_.findElementByCss(locator.scormCloud.scormCloudLaunchCourseButton);
+        console.info("clicking course launch button");
         await courseLaunchBtnElement.click();
     }
 
@@ -52,17 +53,31 @@ class AiccScormCloudHomePage {
         await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(10000);
 
         await this.driver_.switchToWindow();
+        console.info("switching to scorm cloud window to launch lcms course player");
+
+        let courseNames = await this.driver_.findElementsList(locator.scormCloud.scormCloudCoursesList);
+        for (const cName of courseNames) {
+            if (cName.isDisplayed()){
+                await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
+                let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+                console.info("clicking start button");
+                await clickStartToLaunchCourse.click();
+                break;
+            }
+        }
 
         let pageUrl = await this.driver_.findAndGetCurrentUrl();
-        if (pageUrl.includes("aicc.do")){
+        /*if (pageUrl.includes("aicc.do")){
             await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
             let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+            console.info("clicking start button");
             await clickStartToLaunchCourse.click();
-        }
+        }*/
     }
 
     async switchToThirdWindow(){
-        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(12000);
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(30000);
+        console.info("switching to course player");
         await this.driver_.switchThirdWindow();
     }
 

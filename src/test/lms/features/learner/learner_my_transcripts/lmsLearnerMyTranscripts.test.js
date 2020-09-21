@@ -15,6 +15,10 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
+
 describe("Verify Learner Reports in My Transcripts", function () {
     describe("Verify Learner Performance By Course Report in My Transcripts", function verifyPerformanceByCourseReportInLearnerMyTranscripts() {
 

@@ -3,9 +3,11 @@ global.__basedir = process.cwd();
 
 const
     lmsLoginPage = require(__basedir + "/src/main/lms/pages/common/lmsLoginPage.js"),
-    lmsCommonActionPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
+    lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
-
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 
 describe("Lms Learner Login Test", function () {
@@ -25,8 +27,8 @@ describe("Lms Learner Login Test", function () {
 
 
         test("Logout Lms User", async () => {
-            await lmsCommonActionPage.lmsUserLogout();
-            let afterLogoutTitle = await lmsCommonActionPage.verifyUserLogoutSuccessfully();
+            await lmsCommonUtilsPage.lmsUserLogout();
+            let afterLogoutTitle = await lmsCommonUtilsPage.verifyUserLogoutSuccessfully();
             expect(afterLogoutTitle).toBe(true);
             console.info("User Logout Successful");
         });

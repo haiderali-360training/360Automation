@@ -3,7 +3,7 @@
  * @type {DriverWrapper}
  */
 
-const { Builder, By, until } = require("selenium-webdriver");
+/*const { Builder, By, until } = require("selenium-webdriver");
 require("selenium-webdriver/chrome");
 require("selenium-webdriver/firefox");
 require("chromedriver");
@@ -13,7 +13,35 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 const DriverWrapper = function() {
 
     const driver = new Builder().forBrowser("chrome").build();
-    driver.manage().window().maximize().then(() => {});
+    driver.manage().window().maximize().then(() => {});*/
+
+
+//const { Builder, By, until } = require("selenium-webdriver");
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
+
+const webdriver = require("selenium-webdriver"),
+    chrome = require("selenium-webdriver/chrome"),
+    chromeDriver = require("chromedriver"),
+    By = webdriver.By,
+    until = webdriver.until,
+    options = new chrome.Options();
+
+//options.addArguments("--headless");
+options.addArguments("test-type=browser");
+options.addArguments("disable-plugins");
+options.addArguments("disable-extensions");
+options.addArguments("--window-size=1366,768");
+
+chrome.setDefaultService(new chrome.ServiceBuilder(chromeDriver.path).build());
+
+
+let driver = new webdriver.Builder()
+    .forBrowser("chrome")
+    .withCapabilities(options.toCapabilities())
+    .build();
+
+const DriverWrapper = function() {
+
     let elementFindTimeout = 200000; //20 sec
 
     // visit a webPage
@@ -26,8 +54,8 @@ const DriverWrapper = function() {
     this.switchToWindow = async function() {
         try {
             let windows_ = await driver.getAllWindowHandles();
-            let parent = await windows_[0];
-            let coursePlayer = await windows_[1];
+            let parent =  windows_[0];
+            let coursePlayer =  windows_[1];
             await driver.switchTo().window(coursePlayer);
             console.info(parent);
             console.info(coursePlayer);
@@ -49,9 +77,9 @@ const DriverWrapper = function() {
             let subChild = windows_[2];
             await driver.switchTo().window(child);
             __cache.set("parentWindowId", parent);
-            console.info(parent);
-            console.info(child);
-            console.info(subChild);
+            console.info("parent window: " + parent);
+            console.info("child Window: " + child);
+            console.info("sub child window: " + subChild);
 
         }catch (e) {
             console.info("ERROR::::"+e.toString());
@@ -157,8 +185,8 @@ const DriverWrapper = function() {
 
 
     // quit current session
-    this.quit = async function() {
-        // return await driver.quit();
+    this.quitWindowDriver = async function() {
+        await driver.quit();
     };
 
     // wait and find a specific element with it's id

@@ -19,6 +19,11 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
+
+
 describe("Lms Learner Edit Profile Test", function () {
     describe("Verify Existing Learner Update Profile Test", function verifyExistingLearnerUpdateProfileTest() {
 
@@ -89,7 +94,7 @@ describe("Lms Learner Edit Profile Test", function () {
         });
 
 
-        test("Verify Add User Page & fill-Up form & submit ", async () => {
+        test("Verify Add New User Page and Add The New User", async () => {
             let newLearnerUserName = await lmsManageUserAddPage.fillAddUserForm();
             expect(newLearnerUserName).toEqual(__cache.get(locator.addNewUser.userName));
         });

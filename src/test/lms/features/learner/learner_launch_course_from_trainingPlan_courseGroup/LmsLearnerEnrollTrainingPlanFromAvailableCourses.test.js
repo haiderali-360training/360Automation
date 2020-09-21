@@ -19,7 +19,9 @@ const
     lcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
-
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 
 describe("Learner Self Enroll In Training Plan Course from Available Course and Manager Verify Enrollment Test", function lmsLearnerSelfEnrollInTrainingPlanCoursefromAvailableCourseAndManagerVerifyEnrollmentTest(){

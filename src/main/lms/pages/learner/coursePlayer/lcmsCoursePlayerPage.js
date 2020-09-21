@@ -5,10 +5,14 @@
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
 class LcmsCoursePlayerPage {
 
-    constructor(){ this.driver_ = bp.getDriver();}
+    constructor()
+    {
+        this.driver_ = bp.getDriver();
+    }
 
     async maximizeCoursePlayerWindow(){
         await this.driver_.maximizeWindow();
@@ -56,7 +60,12 @@ class LcmsCoursePlayerPage {
     }
 
     async checkAcknowledgmentButtonAndNext(){
-        await this.driver_.findCheckboxAndClick(locator.coursePlayerPage.chkAcknowledge);
+        //await this.driver_.findCheckboxAndClick(locator.coursePlayerPage.chkAcknowledge);
+        //await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerNextButton);
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(3000);
+        let acknowledgmentCheckbox = await this.driver_.findById(locator.coursePlayerPage.chkAcknowledge);
+        acknowledgmentCheckbox.isDisplayed();
+        acknowledgmentCheckbox.click();
         await this.driver_.findButtonAndClick_css(locator.coursePlayerPage.coursePlayerNextButton);
     }
 
@@ -99,7 +108,7 @@ class LcmsCoursePlayerPage {
 
     async closeLcmsPlayerAndSwitchSubChildWindow(){
         await this.driver_.closeWindow();
-        await this.driver_.switchToSubChildWindowAndClose(__cache.get("parentWindowId"));
+        //await this.driver_.switchToSubChildWindowAndClose(__cache.get("parentWindowId"));
     }
 
 }

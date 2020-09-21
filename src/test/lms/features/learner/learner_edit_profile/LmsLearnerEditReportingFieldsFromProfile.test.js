@@ -12,6 +12,9 @@ const
     lmsMyProfilePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_profile/lmsMyProfilePage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 describe("Learner Edit Reporting Fields From My Profile Test", function () {
 

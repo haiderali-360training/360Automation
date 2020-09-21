@@ -12,6 +12,9 @@ const
     lmsMyPreferencesPage = require(__basedir + "/src/main/lms/pages/learner/learner_my_profile/lmsMyPreferencesPage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 describe("Verify Learner Edit Preferences Test", function () {
 

@@ -12,6 +12,9 @@ const
     lmsCoursesStatisticsPage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsCoursesStatisticsPage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 describe("Lms Learner Check Course Statistics Test", function () {
 
@@ -80,7 +83,7 @@ describe("Lms Learner Check Course Statistics Test", function () {
 
         test("Go Back to My Course and Click on Scrom Course", async () => {
 
-            lmsCoursesStatisticsPage.backToMyCoursesPage();
+            await lmsCoursesStatisticsPage.backToMyCoursesPage();
 
             let myCoursePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
             expect(myCoursePageHeading).toEqual("My Courses");

@@ -312,7 +312,8 @@ module.exports.scormCloud = {
     scormCloudCheckZeroProgress: ".card.sandbox-card .sandbox-value",
     scormCloudTotalTime: "0s",
     scormCloudLaunchCourseButton: ".btn.btn-success.btn-lg.clickable.right",
-    scormCloudStartButton: ".footer_text a"
+    scormCloudStartButton: ".footer_text a",
+    scormCloudListCourse: "tr td:nth-child(1)"
 };
 
 

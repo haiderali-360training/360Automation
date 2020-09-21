@@ -169,6 +169,16 @@ class LmsCommonActionPage {
     }
 
 
+    async closeDriver(){
+        await this.driver_.closeWindow();
+    }
+
+
+    async quitWindow(){
+        await this.driver_.quitWindowDriver();
+    }
+
+
 
     /*
     * Common Logout

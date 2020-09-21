@@ -23,6 +23,10 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
+
 
 describe("Lms Learner My Courses Test", function () {
 
