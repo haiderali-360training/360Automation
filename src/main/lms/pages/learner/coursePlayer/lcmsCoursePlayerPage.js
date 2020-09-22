@@ -43,6 +43,12 @@ class LcmsCoursePlayerPage {
 
     async verifyScormCoursePageHeading(){
         let scormContentHeading = await this.driver_.findAllWebElements(locator.coursePlayerPage.scormCourseContentHeading);
+        let value0 = await scormContentHeading[0].getText();
+        let value1 = await scormContentHeading[1].getText();
+        let value2 = await scormContentHeading[2].getText();
+        console.info("Scorm Title 0 "+value0);
+        console.info("Scorm Title 1 "+value1);
+        console.info("Scorm Title 2 "+value2);
         let scormPageHeading = await scormContentHeading[0].getText();
         console.info(scormPageHeading);
         return scormPageHeading;

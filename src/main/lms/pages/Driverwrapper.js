@@ -215,14 +215,14 @@ const DriverWrapper = function() {
     this.findTextBoxAndWrite = async function(elemId, value) {
         await driver.wait(until.elementLocated(By.id(elemId)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.id(elemId));
-        driver.wait(until.elementIsVisible(a), elementFindTimeout);
+        await driver.wait(until.elementIsVisible(a), elementFindTimeout);
         return await this.write(a, value);
     };
 
     this.findElementByIdAndClear = async function(Id) {
         await driver.wait(until.elementLocated(By.id(Id)), elementFindTimeout, "Looking for element");
         let clearField = await driver.findElement(By.id(Id));
-        driver.wait((until.elementIsVisible(clearField)), elementFindTimeout);
+        await driver.wait((until.elementIsVisible(clearField)), elementFindTimeout);
         await clearField.clear();
     };
 
@@ -242,7 +242,7 @@ const DriverWrapper = function() {
 
     this.findButtonAndClick_css = async function (cssElement) {
         await driver.wait(until.elementLocated(By.css(cssElement)), elementFindTimeout, "looking for CSS element");
-        let cssEle = driver.findElement(By.css(cssElement));
+        let cssEle = await driver.findElement(By.css(cssElement));
         await driver.wait(until.elementIsVisible(cssEle), elementFindTimeout);
         return cssEle.click();
     };
@@ -252,8 +252,7 @@ const DriverWrapper = function() {
         let xp = "//div[text()='"+buttonTxt+"']";
         await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
         let a = await driver.findElement(By.xpath(xp));
-        //TODO remove return ask haider bhai
-        return a.click();
+        await a.click();
     };
 
     // wait and find a button click
@@ -292,7 +291,7 @@ const DriverWrapper = function() {
     this.findPageHeading = async function(text) {
         let xp = "//div[text()='"+text+"']";
         await driver.wait(until.elementLocated(By.xpath(xp)), elementFindTimeout, "Looking for element");
-        driver.findElement(By.xpath(xp)).innerText;
+        await driver.findElement(By.xpath(xp)).innerText;
     };
 
     // wait and find checkbox and click
@@ -332,11 +331,13 @@ const DriverWrapper = function() {
 
 
     this.findAllHeaderIcons = async function (headerIconCss) {
+        await driver.wait(until.elementsLocated(By.css(headerIconCss)), elementFindTimeout);
         return driver.findElements(By.css(headerIconCss));
     };
 
 
     this.findAllWebElements = async function (allWebElements) {
+        await driver.wait(until.elementsLocated(By.css(allWebElements)), elementFindTimeout);
         return driver.findElements(By.css(allWebElements));
     };
 

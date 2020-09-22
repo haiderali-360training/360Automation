@@ -75,7 +75,7 @@ describe("Lms Learner Edit Profile Test", function () {
 
     describe("Verify New Learner Update First Name and Last Name fields Profile Test", function verifyNewLearnerUpdateFirstNameAndLastNameProfileTest() {
 
-        test("Enter Login Credentials and Login Manager", async () => {
+        test("Enter Login Credentials and Login Manager ", async () => {
             let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.ManagerUserName"), __appProperties.get("lms.ManagerPassword"));
             expect(a).toBe(true);
         });
@@ -129,8 +129,8 @@ describe("Lms Learner Edit Profile Test", function () {
 
 
         //New Learner Login
-        test("Enter Login Credentials and Login Learner", async () => {
-            let a = await lmsLoginPage.enterCredentialsOnLogin(__cache.get(locator.addNewUser.userName), __cache.get(locator.addNewUser.passwordField));
+        test("Enter New Learner Login Credentials and Login Learner", async () => {
+            let a = await lmsLoginPage.enterCredentialsOnLogin(__cache.get(locator.addNewUser.userName), "password1");// __cache.get(locator.addNewUser.passwordField));
             expect(a).toBe(true);
         });
 
