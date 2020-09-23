@@ -13,19 +13,18 @@
       [
         "jest-html-reporters",
         {
-          "includeFailureMsg": true,
           "publicPath": "./html-report",
-          "filename": "jest-html-reporters.html",
+          "filename": "tests-report.html",
           "pageTitle": "360 Test Report",
-          "logoImgPath": "360logo.png",
-          "hideIcon": false,
-          "expand": false
+          "logoImgPath": "./360logo.png",
+          "hideIcon": true,
+          "expand": true
         }
       ]
     ]
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --maxWorkers=50%"
   },
   "author": "Haider Ali",
   "license": "ISC",
@@ -39,10 +38,11 @@
     "selenium-webdriver": "^3.6.0"
   },
   "dependencies": {
-    "chromedriver": "^83.0.0",
+    "chromedriver": "^85.0.0",
     "dotenv": "^8.2.0",
     "faker": "^4.1.0",
     "geckodriver": "^1.19.1",
+    "log4js": "^6.3.0",
     "node-cache": "^5.1.0",
     "properties-reader": "^1.0.0"
   }
