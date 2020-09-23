@@ -15,6 +15,8 @@ class LmsManageUserAddPage {
     }
 
     async fillAddUserForm(){
+        await this.driver_.waitForPageLoad();
+        console.info("page is loaded....");
 
         let today = new Date();
         let currentDateTime = today.getFullYear() + "" + (today.getMonth() + 1) + "" + today.getDate() + "T" +
@@ -32,7 +34,7 @@ class LmsManageUserAddPage {
         await this.driver_.findElementByIdAndClear(locator.addNewUser.userName);
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.userName, __cache.get(locator.addNewUser.userName));*/
         console.info("New Learner User Name: "+ __cache.get(locator.addNewUser.userName));
-        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(3000);
+        //await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(3000);
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.passwordField, __cache.get(locator.addNewUser.passwordField));
         await this.driver_.findTextBoxAndWrite(locator.addNewUser.confirmPasswordField, __cache.get(locator.addNewUser.passwordField));
 
@@ -42,7 +44,7 @@ class LmsManageUserAddPage {
     }
 
     async clickLoginAsLearner(){
-        this.driver_.findButtonAndClick(locator.ManageUserAdd.btnLoginAsLearner);
+        await this.driver_.findButtonAndClick(locator.ManageUserAdd.btnLoginAsLearner);
         return true;
     }
 
