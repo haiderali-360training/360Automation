@@ -50,7 +50,7 @@ class AiccScormCloudHomePage {
 
     async switchToScormCloudWindowAndClickStartToLaunchCourse(){
         //TODO discuss time with Haider bhai
-        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(10000);
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(5000);
 
         await this.driver_.switchToWindow();
         console.info("switching to scorm cloud window to launch lcms course player");
@@ -76,13 +76,18 @@ class AiccScormCloudHomePage {
     }
 
     async switchToThirdWindow(){
-        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(30000);
+        await this.driver_.waitForPageLoad();
+        //await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(30000);
         console.info("switching to course player");
         await this.driver_.switchThirdWindow();
     }
 
     async scormCloudSignOut(){
-
+        await this.driver_.waitForPageLoad();
+        //await this.driver_.switchToWindow();
+        console.info("Step: Logging out from Scorm Cloud Website!!");
+        let scormCloudSignOutBtn = await this.driver_.findElementByCss(locator.scormCloud.scormCloudSignOutButton);
+        await scormCloudSignOutBtn.click();
     }
 
 

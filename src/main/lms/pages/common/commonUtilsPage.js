@@ -67,7 +67,7 @@ class LmsCommonActionPage {
 
         for (let i = 0; i < elementList.length; i++) {
             let txt = await elementList[i].getText();
-            console.info("Found text this: " +txt+ " compare text is: "+stringToMatch);
+            console.info("Found text this: " + txt + " compare text is: " + stringToMatch);
             if (txt.match(stringToMatch)) {
                 let childWebElement = await this.driver_.findElementWithInElementByXpath(childLocator, elementList[i]);
                 if (doClick) {
@@ -107,6 +107,36 @@ class LmsCommonActionPage {
                 }
                 else {
                     return true;
+                }
+                break;
+            }
+            else {
+                if(i === elementList.length - 1) //this condition ensures that elements have been checked
+                    return false;
+            }
+        }
+    }
+
+
+
+
+
+    async compareMatchingItemAndClickChildItemOrReturnElement(parentLocator, childLocator, stringToMatch, doClick) {
+        let elementList = await this.driver_.findElementsList(parentLocator);
+        console.info(elementList.length);
+
+        for (let i = 0; i < elementList.length; i++) {
+            let txt = await elementList[i].getText();
+            console.info("Found text this: " + txt + " compare text is: " + stringToMatch);
+            if (txt.includes(stringToMatch)) {
+                let childWebElement = await this.driver_.findElementWithInElementByXpath(childLocator, elementList[i]);
+                if (doClick) {
+                    console.info("clicking on link: " + txt);
+                    await this.driver_.myexec("document.querySelector(\"#scrollable\").scrollTo(0,document.querySelector(\"#scrollable\").scrollHeight)");
+                    await childWebElement.click();
+                }
+                else {
+                    return childWebElement;
                 }
                 break;
             }

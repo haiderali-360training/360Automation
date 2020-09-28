@@ -75,7 +75,7 @@ const DriverWrapper = function() {
             let parent = windows_[0];
             let child = windows_[1];
             let subChild = windows_[2];
-            await driver.switchTo().window(child);
+            await driver.switchTo().window(subChild);
             __cache.set("parentWindowId", parent);
             console.info("parent window: " + parent);
             console.info("child Window: " + child);
@@ -107,16 +107,19 @@ const DriverWrapper = function() {
 
 
 
-    this.switchToSubChildWindowAndClose = async function (parentWindowId) {
+    this.switchToSubChildWindowAndClose = async function () {
         try {
             let handles = await driver.getAllWindowHandles();
             let parent = handles[0];
             let child = handles[1];
-            if (parent.match(parentWindowId)){
+            console.info("Parent window:: "+ parent);
+            console.info("Child window:: "+ child);
+            if (parent.match(__cache.get("parentWindowId"))){
                 console.info("Switching to Sub-Child Window " + child);
-                driver.switchTo().window(child);
-                driver.close();
+                await driver.switchTo().window(child);
+                await driver.close();
             }
+            await driver.switchTo().window(__cache.get("parentWindowId"));
         }catch (e) {
             console.info("ERROR::::"+e.toString());
         }
@@ -389,9 +392,14 @@ const DriverWrapper = function() {
         await driver.executeScript(scripts, args);
     };
 
+    this.switchToRequireWindow = async function () {
+        await driver.switchTo().window(__cache.get("parentWindowId"));
+    };
+
 
     this.waitForPageLoad = async function () {
         await driver.wait(function () {
+            console.info("waiting for Page to Load...");
             return driver.executeScript("return document.readyState").then(function(readyState) {
                 return readyState === "complete";
             });

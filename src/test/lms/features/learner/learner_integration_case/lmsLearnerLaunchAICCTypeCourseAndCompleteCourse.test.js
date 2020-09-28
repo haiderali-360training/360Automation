@@ -1,8 +1,7 @@
-/*
-/!**
+/**
  * Created by asadullah.qazi
  * On 7/22/2020}
- **!/
+ **/
 
 global.__basedir = process.cwd();
 const
@@ -10,12 +9,18 @@ const
     lmsLoginPage = require(__basedir + "/src/main/lms/pages/common/lmsLoginPage.js"),
     scormCloudHomePage = require(__basedir + "/src/main/lms/pages/learner/learner_integration_cases/aiccScormCloudHomePage.js"),
     lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js"),
+    lmsGuidedTourPage = require(__basedir + "/src/main/lms/pages/common/lmsGuidedTourPage.js"),
     lmsMyCoursePage = require(__basedir + "/src/main/lms/pages/learner/learner_my_course/lmsMyCoursePage.js"),
     lmsManageUserListPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserListPage.js"),
     lmsManageUserAddPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserAddPage.js"),
     lmsManageUserGroupPage = require(__basedir + "/src/main/lms/pages/manager/addNewUserWizard/lmsManageUserGroupPage.js"),
     lcmsCoursePlayerPage = require(__basedir + "/src/main/lms/pages/learner/coursePlayer/lcmsCoursePlayerPage.js"),
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
+
+
+afterAll (async () => {
+    await lmsCommonUtilsPage.quitWindow();
+});
 
 
 describe("Lms Learner AICC Type Course Launch and Course Completion Test", function LmsLearnerAICCTypeCourseLaunchAndCourseCompletionTest() {
@@ -68,10 +73,55 @@ describe("Lms Learner AICC Type Course Launch and Course Completion Test", funct
         await lcmsCoursePlayerPage.closeLcmsPlayerAndSwitchSubChildWindow();
     });
 
-    test("Sign-Out From Scorm Cloud", async () => {
+    test("Switch to Cloud Scorm and Sign-Out ", async () => {
         await scormCloudHomePage.scormCloudSignOut();
     });
 
+    test("Navigate To Lms Page", async () => {
+        let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();
+        expect(loginPageTitle).toBe(true);
+    });
 
+    test("Enter Login Credentials and Login Learner", async () => {
+        let a = await lmsLoginPage.enterCredentialsOnLogin(__appProperties.get("lms.ManagerAICCUserName"), __appProperties.get("lms.ManagerAICCPassword"));
+        expect(a).toBe(true);
+    });
+
+    test("Verify Guided Tour Page and Title", async () => {
+        await lmsGuidedTourPage.verifyGuidedTourPageHeading();
+        await lmsGuidedTourPage.clickToContinue();
+    });
+
+    /*test("Search AICC Manager and Click On First Name", async () => {
+        await lmsManageUserListPage.clickToSearchUserButton();
+        await lmsManageUserListPage.enterFirstNameInSearchDialogBoxAndClick(locator.ManageUserList.searchUserByEmail, locator.ManageUserList.aiccManagerFirstName);
+        await lmsManageUserListPage.clickUserFirstNameInSearchGrid(locator.ManageUserList.userSearchResultGrid, locator.ManageUserList.aiccManagerFirstName, true);
+    });
+
+    test("Verify Searched Result and Launch Learner Profile & and launch Dashboard", async () => {
+        //await lmsManageUserListPage.clickLearnerNameToLaunchProfile();
+        let p = await lmsManageUserAddPage.clickLoginAsLearner();
+        expect(p).toBe(true);
+    });*/
+
+    test("Choose Completed Courses Option From Dropdown on My Courses Page", async () => {
+        await lmsMyCoursePage.selectCompletedCoursesOptionFromDropdown();
+    });
+
+    test("Verify the Course Status is Completed", async () => {
+        let lastAccessedFromCourse = await lmsMyCoursePage.getLastAccessedDateOfCurrentCompletedCourse(locator.completedFilter.lastAccesstDate);
+        console.info("Last Accessed Date " + lastAccessedFromCourse);
+        expect(lastAccessedFromCourse).toBe(true);
+
+        /*let completedStatus = await lmsMyCoursePage.verifyCompletedStatusForTodaysCompletedCourse(lastAccessedFromCourse);
+        expect(completedStatus).toBe(true);*/
+    });
+
+
+    test("Logout Lms User", async () => {
+        await lmsCommonUtilsPage.lmsUserLogout();
+        let afterLogoutTitle = await lmsCommonUtilsPage.verifyUserLogoutSuccessfully();
+        expect(afterLogoutTitle).toBe(true);
+        console.info("User Logout Successfully");
+    });
 });
-*/

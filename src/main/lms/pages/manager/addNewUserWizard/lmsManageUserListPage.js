@@ -6,6 +6,7 @@
 
 const bp = require(__basedir + "/src/main/lms/pages/BasePage.js");
 const locator = require(__basedir + "/src/main/lms/pages/locator.js");
+const lmsCommonUtilsPage = require(__basedir + "/src/main/lms/pages/common/commonUtilsPage.js");
 
 
 class LmsManageUserListPage {
@@ -33,9 +34,18 @@ class LmsManageUserListPage {
         return true;
     }
 
+    async enterFirstNameInSearchDialogBoxAndClick(emailAddressLocator, userFirstName){
+        await this.driver_.findTextBoxAndWrite_(emailAddressLocator, userFirstName);
+        await this.driver_.findButtonAndClick_span(locator.ManageUserList.btnSearch);
+    }
+
     async clickLearnerNameToLaunchProfile() {
         //await this.driver_.findByIdChecked("chk1");
         await this.driver_.findButtonAndClick_xpath(locator.ManageUserList.linkFoundFirstLearnerXpath);
+    }
+
+    async clickUserFirstNameInSearchGrid(userSearchResults, userFirstName, t){
+        await lmsCommonUtilsPage.findMatchingItemAndClicks(userSearchResults, userFirstName, t);
     }
 
 

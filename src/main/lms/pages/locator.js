@@ -75,7 +75,10 @@ module.exports.ManageUserList = {
     title: "Manage Users",
     btnAdd_User: "Add User",
     btnSearch: "Search",
-    linkFoundFirstLearnerXpath: "//*[@id=\"searchResult\"]/table/tbody/tr[2]/td[2]/a"
+    searchUserByEmail: "emailaddress",
+    linkFoundFirstLearnerXpath: "//*[@id=\"searchResult\"]/table/tbody/tr[2]/td[2]/a",
+    aiccManagerFirstName: "Rida",
+    userSearchResultGrid: "#searchResult a:nth-child(1)"
 };
 
 module.exports.ManageUserAdd = {
@@ -168,7 +171,9 @@ module.exports.moreDetailsCourseStats = {
 
 
 module.exports.completedFilter = {
-    completedCourseStatus: "../..//span[@id='c23']"
+    completedCourseStatus: "../..//span[@id='c23']",
+    lastAccesstDate: "span#c12"
+
 };
 
 
@@ -313,7 +318,9 @@ module.exports.scormCloud = {
     scormCloudTotalTime: "0s",
     scormCloudLaunchCourseButton: ".btn.btn-success.btn-lg.clickable.right",
     scormCloudStartButton: ".footer_text a",
-    scormCloudListCourse: "tr td:nth-child(1)"
+    scormCloudListCourse: "tr td:nth-child(1)",
+    scormCloudSignOutButton: "p a:nth-child(2)",
+    scormCourseNameInLms: "LMSSmokeTestCourse"
 };
 
 

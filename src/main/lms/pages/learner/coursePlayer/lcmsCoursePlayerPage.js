@@ -114,7 +114,7 @@ class LcmsCoursePlayerPage {
 
     async closeLcmsPlayerAndSwitchSubChildWindow(){
         await this.driver_.closeWindow();
-        //await this.driver_.switchToSubChildWindowAndClose(__cache.get("parentWindowId"));
+        await this.driver_.switchToSubChildWindowAndClose();
     }
 
 }
