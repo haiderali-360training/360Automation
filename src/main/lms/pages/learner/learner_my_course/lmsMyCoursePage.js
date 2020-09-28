@@ -121,9 +121,9 @@ class LmsMyCoursePage {
 
     async getLastAccessedDateOfCurrentCompletedCourse(lastAccessDateElement){
         let currentDt = await new Date().getUTCDate();
-        let completedCourseStatus = await lmsCommonUtilsPage.compareMatchingItemAndClickChildItemOrReturnElement(lastAccessDateElement, locator.completedFilter.completedCourseStatus, currentDt, false);
-        let cStatus = await completedCourseStatus.getText();
-        console.info("Completed Course Status: " + cStatus);
+        return lmsCommonUtilsPage.compareMatchingItemAndClickChildItemOrReturnElement(lastAccessDateElement, locator.completedFilter.completedCourseStatus, currentDt, false);
+        //let cStatus = await completedCourseStatus.getText();
+        //console.info("Completed Course Status: " + cStatus);
         /*let lastAccessedDateString = await lastAccessedDate.getText();
         let dt = await lastAccessedDateString.slice(15, 28).split(",");
         console.info("Last Accessed Date 1: " + dt[0]);

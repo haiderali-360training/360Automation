@@ -32,10 +32,11 @@ class LmsCommonActionPage {
     async findMatchingItemAndClick(locator, stringToMatch, doClick){
 
         let elementList = await this.driver_.findElementsList(locator);
-        console.info(elementList.length);
+        console.info("Total number of Elements found: " + elementList.length);
 
         for (let i = 0; i < elementList.length; i++) {
             let txt = await elementList[i].getText();
+            console.info("Found text this: " + txt + "compare text is: " + stringToMatch);
             if (txt.match(stringToMatch)) {
                 if (doClick) {
                     console.info("clicking on course name: " + txt);
@@ -129,7 +130,7 @@ class LmsCommonActionPage {
             let txt = await elementList[i].getText();
             console.info("Found text this: " + txt + " compare text is: " + stringToMatch);
             if (txt.includes(stringToMatch)) {
-                let childWebElement = await this.driver_.findElementWithInElementByXpath(childLocator, elementList[i]);
+                /*let childWebElement = await this.driver_.findElementWithInElementByXpath(childLocator, elementList[i]);
                 if (doClick) {
                     console.info("clicking on link: " + txt);
                     await this.driver_.myexec("document.querySelector(\"#scrollable\").scrollTo(0,document.querySelector(\"#scrollable\").scrollHeight)");
@@ -137,8 +138,9 @@ class LmsCommonActionPage {
                 }
                 else {
                     return childWebElement;
-                }
-                break;
+                }*/
+                return true;
+                //break;
             }
             else {
                 if(i === elementList.length - 1) //this condition ensures that elements have been checked
