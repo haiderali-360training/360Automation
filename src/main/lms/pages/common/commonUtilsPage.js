@@ -37,7 +37,7 @@ class LmsCommonActionPage {
         for (let i = 0; i < elementList.length; i++) {
             let txt = await elementList[i].getText();
             console.info("Found text this: " + txt + "compare text is: " + stringToMatch);
-            if (txt.match(stringToMatch)) {
+            if (txt !== "" && txt.match(stringToMatch)) {
                 if (doClick) {
                     console.info("clicking on course name: " + txt);
                     //TODO Genrnalize
