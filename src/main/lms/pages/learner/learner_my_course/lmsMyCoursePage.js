@@ -72,6 +72,7 @@ class LmsMyCoursePage {
 
 
     async verifyEnrolledCourseNameDisplayedOnEnrolledCourseListing(enrollCourseName){
+        await this.driver_.waitForPageLoad();
         return lmsCommonUtilsPage.findMatchingItemAndClick(locator.myCoursePage.enrollCourseClassName, enrollCourseName, false);
     }
 
@@ -120,8 +121,10 @@ class LmsMyCoursePage {
 
 
     async getLastAccessedDateOfCurrentCompletedCourse(lastAccessDateElement){
+        await this.driver_.waitForPageLoad();
         let currentDt = await new Date().getUTCDate();
-        return lmsCommonUtilsPage.compareMatchingItemAndClickChildItemOrReturnElement(lastAccessDateElement, locator.completedFilter.completedCourseStatus, currentDt, false);
+        return lmsCommonUtilsPage.compareMatchingItemAndReturnElement(lastAccessDateElement, currentDt, false);
+
         //let cStatus = await completedCourseStatus.getText();
         //console.info("Completed Course Status: " + cStatus);
         /*let lastAccessedDateString = await lastAccessedDate.getText();
@@ -137,22 +140,6 @@ class LmsMyCoursePage {
         }
 
         return false;*/
-    }
-
-
-    async verifyCompletedStatusForTodaysCompletedCourse(lastAccessDate){
-        let currentDt = await new Date().getUTCDate();
-
-        if (lastAccessDate.contains(currentDt)){
-            console.info("current date: " + currentDt);
-            console.info("current date: " + lastAccessDate);
-            return true;
-        }
-        else {
-            console.info("current date: " + currentDt);
-            console.info("current date: " + lastAccessDate);
-            return false;
-        }
     }
 
 

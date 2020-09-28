@@ -113,8 +113,6 @@ describe("Lms Learner AICC Type Course Launch and Course Completion Test", funct
         console.info("Last Accessed Date " + lastAccessedFromCourse);
         expect(lastAccessedFromCourse).toBe(true);
 
-        /*let completedStatus = await lmsMyCoursePage.verifyCompletedStatusForTodaysCompletedCourse(lastAccessedFromCourse);
-        expect(completedStatus).toBe(true);*/
     });
 
 

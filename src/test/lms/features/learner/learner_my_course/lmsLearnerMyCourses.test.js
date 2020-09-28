@@ -23,7 +23,7 @@ const
     locator = require(__basedir + "/src/main/lms/pages/locator.js");
 
 
-afterAll (async () => {
+afterAll(async () => {
     await lmsCommonUtilsPage.quitWindow();
 });
 
@@ -129,12 +129,6 @@ describe("Lms Learner My Courses Test", function () {
         });
 
 
-
-
-
-
-
-
         //New Learner Login
         test("Enter Login Credential and Login Learner", async () => {
             let a = await lmsLoginPage.enterCredentialsOnLogin(__cache.get(locator.addNewUser.userName), __cache.get(locator.addNewUser.passwordField));
@@ -203,8 +197,8 @@ describe("Lms Learner My Courses Test", function () {
 
 
 
-    describe("Verify Enrolled Course are Listed in Enrolled Courses Filter", function verifyEnrolledCoursesFilterOnMyCourses() {
 
+    describe("Verify Enrolled Course are Listed For Existing User in Enrolled Courses Filter", function verifyEnrolledCoursesFilterOnMyCourses() {
 
         test("Verify Login Page Title", async () => {
             let loginPageTitle = await lmsLoginPage.verifyLmsLoginPageTitle();
@@ -246,12 +240,7 @@ describe("Lms Learner My Courses Test", function () {
     });
 
 
-
-
-
-
-
-    describe("Verify Available Courses are Listed in Available Courses Filter", function verifyAvailableCoursesFilterOnMyCourses() {
+    describe("Verify Available Courses are Listed For Existing User in Available Courses Filter", function verifyAvailableCoursesFilterOnMyCourses() {
 
         test("Choose Available Courses Option From Dropdown on My Courses Page", async () => {
             await lmsMyCoursePage.selectAvailableCoursesOptionFromDropdown();
@@ -277,9 +266,6 @@ describe("Lms Learner My Courses Test", function () {
     });
 
 
-
-
-
     describe("Verify Course Description Under Available Courses Filter", function verifyCourseDescriptionUnderAvailableCoursesFilterOnMyCourses() {
 
         test("Verify Course Description Under Available Courses Filter", async () => {
@@ -293,9 +279,6 @@ describe("Lms Learner My Courses Test", function () {
     });
 
 
-
-
-
     describe("Verify Breadcrumbs In Available Courses Filter", function verifyBreadcrumbsInAvailableCoursesFilterOnMyCourses() {
 
         test("Verify Breadcrumbs in Available Courses Filter", async () => {
@@ -307,12 +290,7 @@ describe("Lms Learner My Courses Test", function () {
     });
 
 
-
-
-
-
-
-    describe("Verify Completed Courses are Listed in Completed Courses Filter", function verifyCompletedCoursesFilterOnMyCourses() {
+    describe("Verify Completed Courses  are Listed For Existing User in Completed Courses Filter", function verifyCompletedCoursesFilterOnMyCourses() {
 
         test("Choose Completed Courses Option From Dropdown on My Courses Page", async () => {
             await lmsMyCoursePage.selectCompletedCoursesOptionFromDropdown();
@@ -330,11 +308,7 @@ describe("Lms Learner My Courses Test", function () {
     });
 
 
-
-
-
-
-    describe("Verify Expired Courses are Listed in Expired Courses Filter", function verifyExpiredCoursesFilterOnMyCourses() {
+    describe("Verify Expired Courses are Listed For Existing User in Expired Courses Filter", function verifyExpiredCoursesFilterOnMyCourses() {
 
         test("Choose Expired Courses Option From Dropdown on My Courses Page", async () => {
             await lmsMyCoursePage.selectExpiredCoursesOptionFromDropdown();
@@ -344,7 +318,6 @@ describe("Lms Learner My Courses Test", function () {
             let expiredCourseExpiryText = await lmsMyCoursePage.verifyExpiredCourses();
             console.info(expiredCourseExpiryText);
             expect(expiredCourseExpiryText).toContain("Expired On");
-
         });
     });
 
