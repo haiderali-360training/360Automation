@@ -62,6 +62,7 @@ class LmsMyCoursePage {
 
 
     async clickCourseNameToLaunchCoursePlayer(enrolledCourse) {
+        await this.driver_.waitForPageLoad();
         await lmsCommonUtilsPage.findMatchingItemAndClick(locator.myCoursePage.enrollCourseClassName, enrolledCourse, true);
     }
 

@@ -50,21 +50,25 @@ class AiccScormCloudHomePage {
 
     async switchToScormCloudWindowAndClickStartToLaunchCourse(){
         //TODO discuss time with Haider bhai
-        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(5000);
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(7000);
 
         await this.driver_.switchToWindow();
         console.info("switching to scorm cloud window to launch lcms course player");
 
-        let courseNames = await this.driver_.findElementsList(locator.scormCloud.scormCloudCoursesList);
+        //let courseNames = await this.driver_.findElementsList(locator.scormCloud.scormCloudCoursesList);
+        let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+        await clickStartToLaunchCourse.click();
+
+/*
         for (const cName of courseNames) {
             if (cName.isDisplayed()){
                 await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
-                let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+
                 console.info("clicking start button");
-                await clickStartToLaunchCourse.click();
                 break;
             }
         }
+*/
 
         let pageUrl = await this.driver_.findAndGetCurrentUrl();
         /*if (pageUrl.includes("aicc.do")){

@@ -56,9 +56,9 @@ const DriverWrapper = function() {
             let windows_ = await driver.getAllWindowHandles();
             let parent =  windows_[0];
             let coursePlayer =  windows_[1];
-            await driver.switchTo().window(coursePlayer);
             console.info(parent);
             console.info(coursePlayer);
+            await driver.switchTo().window(coursePlayer);
 
         }catch (e) {
             console.info("ERROR::::"+e.toString());
@@ -246,9 +246,12 @@ const DriverWrapper = function() {
     this.findButtonAndClick_css = async function (cssElement) {
         await driver.wait(until.elementLocated(By.css(cssElement)), elementFindTimeout, "looking for CSS element");
         let cssEle = await driver.findElement(By.css(cssElement));
-        await driver.wait(until.elementIsVisible(cssEle), elementFindTimeout);
-        return cssEle.click();
+        await driver.wait(until.elementIsVisible(cssEle), elementFindTimeout).then(function(cssEle){
+            cssEle.click();
+        });
+        //return cssEle.click();
     };
+
 
     // wait and find a button click clickButtonByDivText()
     this.findButtonAndClick = async function(buttonTxt) {
