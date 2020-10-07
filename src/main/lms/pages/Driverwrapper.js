@@ -198,6 +198,13 @@ const DriverWrapper = function() {
         return driver.findElement(By.id(id));
     };
 
+    this.findCompletionPageHeading = async function(id) {
+        await driver.wait(until.elementLocated(By.id(id)), 2000, "Looking for element");
+        let pHeading = await driver.findElement(By.id(id));
+        return driver.wait(until.elementIsVisible(pHeading), 1000);
+    };
+
+
     this.findByIdChecked = async function(id) {
         await driver.wait(until.elementLocated(By.id(id)), elementFindTimeout, "Looking for element");
         return await driver.findElement(By.id(id)).click();

@@ -43,6 +43,7 @@ describe("Learner Edit Reporting Fields From My Profile Test", function () {
         });
 
         test("Verify My Profile Page and Verify Reporting Fields Section", async () => {
+            await lmsMyProfilePage.waitUntilPageLoad();
             let myProfilePageHeading = await lmsCommonUtilsPage.verifyPageHeading();
             expect(myProfilePageHeading).toEqual("Profile");
 

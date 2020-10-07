@@ -13,82 +13,76 @@ class AiccScormCloudHomePage {
         this.driver_ = bp.getDriver();
     }
 
-    async verifyScormCloudHomePage(){
+    async verifyScormCloudHomePage() {
         let homePageLogoDisplayed = await this.driver_.findByClassName(locator.scormCloud.scormCloudHomePageLogo);
         return homePageLogoDisplayed.isDisplayed();
     }
 
-    async clickOnLibraryOptionInLeftMenu(){
+    async clickOnLibraryOptionInLeftMenu() {
         let libraryOption = await this.driver_.findElementByCss(locator.scormCloud.scormCloudLibraryOption);
         await libraryOption.click();
     }
 
-    async verifyScormCloudLibraryPage(){
+    async verifyScormCloudLibraryPage() {
         let libraryPageHeading = await this.driver_.findElementByCss(locator.scormCloud.scormCloudLibraryPageHeading);
         return libraryPageHeading.getText();
     }
 
-    async clickOnAiccCourseNameInTheGrid(aiccScormCourseName){
+    async clickOnAiccCourseNameInTheGrid(aiccScormCourseName) {
         await lmsCommonUtilsPage.findMatchingItemAndClicks(locator.scormCloud.scormCloudCoursesList, aiccScormCourseName, true);
     }
 
-    async resetAICCCourseProgress(){
-        let resitProgressBtnElement =  await this.driver_.findByXpath(locator.scormCloud.scormCloudResitProgressButton);
+    async resetAICCCourseProgress() {
+        let resitProgressBtnElement = await this.driver_.findByXpath(locator.scormCloud.scormCloudResitProgressButton);
         await resitProgressBtnElement.click();
         await this.driver_.switchToAlert();
     }
 
-    async verifyCourseProgressResitSuccessful(totalTime){
+    async verifyCourseProgressResitSuccessful(totalTime) {
         return lmsCommonUtilsPage.findMatchingItemAndClicks(locator.scormCloud.scormCloudCheckZeroProgress, totalTime, false);
     }
 
-    async clickCourseLaunchButton(){
+    async clickCourseLaunchButton() {
         let courseLaunchBtnElement = await this.driver_.findElementByCss(locator.scormCloud.scormCloudLaunchCourseButton);
         console.info("clicking course launch button");
         await courseLaunchBtnElement.click();
     }
 
-    async switchToScormCloudWindowAndClickStartToLaunchCourse(){
-        //TODO discuss time with Haider bhai
+    async switchToScormCloudWindowAndClickStartToLaunchCourse() {
         await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(7000);
 
         await this.driver_.switchToWindow();
         console.info("switching to scorm cloud window to launch lcms course player");
 
-        //let courseNames = await this.driver_.findElementsList(locator.scormCloud.scormCloudCoursesList);
-        let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
-        await clickStartToLaunchCourse.click();
-
-/*
-        for (const cName of courseNames) {
-            if (cName.isDisplayed()){
-                await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
-
-                console.info("clicking start button");
-                break;
-            }
-        }
-*/
-
-        let pageUrl = await this.driver_.findAndGetCurrentUrl();
-        /*if (pageUrl.includes("aicc.do")){
-            await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
+        /*let completionPageHeading = await this.driver_.findCompletionPageHeading(locator.commonElements.commonPageHeadingId);
+        if (completionPageHeading.isDisplayed()) {
+            console.info("Course Completions of Scorm Course are visible");
             let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
-            console.info("clicking start button");
+            //Adding scrolling because if "Start" button in the bottom of page is hide then it will scroll to end of page.
+            await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
             await clickStartToLaunchCourse.click();
+        } else {
+            console.info("Course Completions of Scorm Course are NOT visible");
         }*/
+
+        let clickStartToLaunchCourse = await this.driver_.findElementByCss(locator.scormCloud.scormCloudStartButton);
+
+        //Adding scrolling because if "Start" button in the bottom of page is hide then it will scroll to end of page.
+        await this.driver_.myexec("window.scrollTo(0, document.body.scrollHeight);");
+
+        //try to code
+        await clickStartToLaunchCourse.click();
     }
 
-    async switchToThirdWindow(){
+
+    async switchToThirdWindow() {
         await this.driver_.waitForPageLoad();
-        //await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(30000);
         console.info("switching to course player");
         await this.driver_.switchThirdWindow();
     }
 
-    async scormCloudSignOut(){
+    async scormCloudSignOut() {
         await this.driver_.waitForPageLoad();
-        //await this.driver_.switchToWindow();
         console.info("Step: Logging out from Scorm Cloud Website!!");
         let scormCloudSignOutBtn = await this.driver_.findElementByCss(locator.scormCloud.scormCloudSignOutButton);
         await scormCloudSignOutBtn.click();
@@ -96,4 +90,5 @@ class AiccScormCloudHomePage {
 
 
 }
+
 module.exports = new AiccScormCloudHomePage();

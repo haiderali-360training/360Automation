@@ -15,6 +15,11 @@ class LmsMyProfilePage {
     }
 
 
+    async waitUntilPageLoad(){
+        await this.driver_.waitForPageLoad();
+    }
+
+
     async verifyFirstNameFieldShouldBeDisabled(){
         let learnerFN = await this.driver_.findElementByCss(locator.learnerMyProfile.learnerFirstName);
         return learnerFN.isEnabled();
@@ -112,15 +117,18 @@ class LmsMyProfilePage {
         let currentValue = await SSNReportingFieldElement.getAttribute("value");
 
         if (currentValue.toString().match("222-22-2222")){
-        await SSNReportingFieldElement.clear();
-        await SSNReportingFieldElement.sendKeys("333-33-3333");
-            console.info("SSN entered from if block: ");
+            await SSNReportingFieldElement.clear();
+            await SSNReportingFieldElement.sendKeys("333333333");
+            let val = await SSNReportingFieldElement.getAttribute("value");
+            console.info("SSN entered from if block: " + val);
         }
         else {
             await SSNReportingFieldElement.clear();
-            await SSNReportingFieldElement.sendKeys("222-22-2222");
-            console.info("SSN entered from else block: ");
+            await SSNReportingFieldElement.sendKeys("222222222");
+            let valElse = await SSNReportingFieldElement.getAttribute("value");
+            console.info("SSN entered from else block: " + valElse);
         }
+        await lmsCommonUtilsPage.customWaitFunctionInMilliSeconds(500);
         return currentValue;
     }
 
@@ -145,6 +153,7 @@ class LmsMyProfilePage {
 
 
    async verifyUpdatedDateField(previousDateValue){
+        await this.driver_.waitForPageLoad();
         let dateFieldTextBoxElement = await this.driver_.findById(locator.learnerMyProfile.dateReportingField);
         let currentDateFieldValue = await dateFieldTextBoxElement.getAttribute("value");
         if (currentDateFieldValue.match(previousDateValue)){
@@ -158,6 +167,7 @@ class LmsMyProfilePage {
 
 
     async verifyUpdatedSSNField(previousSSNValue){
+        await this.driver_.waitForPageLoad();
         let ssnFieldTextBoxElement = await this.driver_.findById(locator.learnerMyProfile.SSNReportingField);
         let currentSSNFieldValue = await ssnFieldTextBoxElement.getAttribute("value");
         if (currentSSNFieldValue.match(previousSSNValue)){
