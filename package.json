@@ -8,6 +8,7 @@
     "setupFiles": [
       "./setupFile.js"
     ],
+    "testSequencer": "./src/test/testSequencer.js",
     "reporters": [
       "default",
       [
@@ -45,6 +46,7 @@
     "log4js": "^6.3.0",
     "node-cache": "^5.1.0",
     "nodemailer": "^6.4.11",
-    "properties-reader": "^1.0.0"
+    "properties-reader": "^1.0.0",
+    "@jest/test-sequencer": "latest"
   }
 }
