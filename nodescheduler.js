@@ -1,96 +1,74 @@
 
 /**
  * Haider Ali
+ * @Date:
  * @type {{schedule: (function(string, Function, Object): ScheduledTask), validate: validate}}
  */
 
+const log4js = require("log4js");
 const crons = require("node-cron");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
 
+log4js.configure({
+    appenders: { scheduler: { type: "file", filename: "scheduler.log" } },
+            categories: { default: { appenders: ["scheduler"], level: "ALL" } }
+});
+const logger = log4js.getLogger("scheduler");
 
-crons.schedule("* * * * *", function() {
 
-    let path = "./html-report/tests-report.html";
+let tran = {
+    host: "smtp-mail.outlook.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: "asadullah.qazi@360training.com",
+        pass: "360Training.com",
+    },
+};
 
+let opt = {
+    from: "asadullah.qazi@360training.com",
+    to: "haider.ali@360training.com",
+    subject: "Learner Mode - LMS Learner Mode ATC Report "+(new Date()).toDateString(),
+    html: "Learner Mode - LMS Learner Mode ATC Report: ",
+    attachments: {
+        filename: "tests-report.html",
+        path: "./html-report/tests-report.html"
+    },
+};
+let mailSent=false;
+
+let task = crons.schedule("* * * * *", function() {
+
+    logger.info("scheduler Started." );
+    let reportName = "./html-report/tests-report.html";
     try {
-        if (fs.existsSync(path)) {
+        if (fs.existsSync(reportName)) {
 
-            let transporter =  nodemailer.createTransport({
-                host: "smtp-mail.outlook.com",
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                    user: "asadullah.qazi@360training.com",
-                    pass: "360Training.com",
-                },
+            let transporter = nodemailer.createTransport(tran);
+            let info = transporter.sendMail(opt, function () {
+
+                let reportPathName = reportName+"_"+Date.now();
+
+                //rename generated file.
+                fs.renameSync(reportName, reportPathName);
+                logger.debug("Report rename to :"+reportPathName);
+                mailSent=true;
+
             });
-
-            //let vu= "<img src=data:image/png;base64,"+imgFile+" alt='test'/>";
-
-            let info =  transporter.sendMail({
-                from: "asadullah.qazi@360training.com",
-                to: "haider.ali@360training.com",
-                bcc: "asadullah.qazi@360training.com",
-                subject: "Learner Mode - LMS Learner Mode ATC Report ",
-                html: "Unavailable Course Found in the following domain: ",
-                attachments: {
-                    filename: "tests-report.html",
-                    path: "./html-report/tests-report.html"
-                },
-            });
+        }else {
+            if(mailSent){
+                task.stop();
+                logger.debug("scheduler stopped." );
+            }else {
+                logger.debug("scheduler running:  report not found...");
+            }
         }
 
     } catch(err) {
-        console.error(err);
+        task.stop();
+        logger.error(err);
     }
 
-    fs.renameSync(path, path+".").then(function() {
-        console.info("done");
-    });
-
-
-
- /*   fs.access(path, fs.F_OK, (err) => {
-        if(err) {
-            console.error(err);
-        }else {
-
-            let transporter =  nodemailer.createTransport({
-                host: "smtp-mail.outlook.com",
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                auth: {
-                    user: "asadullah.qazi@360training.com",
-                    pass: "360Training.com",
-                },
-            });
-
-            //let vu= "<img src=data:image/png;base64,"+imgFile+" alt='test'/>";
-
-            let info =  transporter.sendMail({
-                from: "asadullah.qazi@360training.com",
-                to: "haider.ali@360training.com",
-                bcc: "asadullah.qazi@360training.com",
-                subject: "Learner Mode - LMS Learner Mode ATC Report ",
-                html: "Unavailable Course Found in the following domain: ",
-                attachments: {
-                    filename: "tests-report.html",
-                    path: "./html-report/tests-report.html"
-                },
-
-            });
-
-
-            fs.rename(path, path+".", () => {
-                if ( err ) console.log("ERROR: " + err);
-            });
-
-
-            }
-
-    });*/
-
 });
-
-//app.listen(3000);
